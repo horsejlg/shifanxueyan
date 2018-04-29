@@ -26,6 +26,7 @@ showfilelist('${name}');
 <input class="easyui-filebox" id="file" name="file" buttonText="上传" style="width:100%" data-options="onChange:fileupload"/ >
 </form></div>
 <div data-options="region:'center',border:false">
+<textarea id="txt_row"  rows="2" style="width:95%" ></textarea>
 <table id="attachments" title="${label}" class="easyui-datagrid"
 			data-options="ingleSelect:true,emptyMsg:'暂无数据',fit:true,value:[]">
 		<thead>
@@ -42,7 +43,7 @@ showfilelist('${name}');
 	</div>
 <script>
 function option_formater(value,row,index){
-return '<button type="button" onclick="deleteFile('+index+')">删除</button>';
+	return '<button type="button" onclick="deleteFile('+index+')">删除</button>';
 }
 
 
@@ -70,8 +71,17 @@ function reload(id){
 	window.updatefiles = $("#"+id);
 	if(window.updatefiles.val()){
 	var list = $.parseJSON(window.updatefiles.val());
-		list = {rows:list,total:list.length}
+	var list1=[];
+	for(var i=0;i<list.length;i++){
+		if(list[i].path){
+			list1.push(list[i]);
+		}else{
+			$("#txt_row").val(list[i].label);
+		}
+	}
+		list = {rows:list1,total:list1.length};
 		$("#attachments").datagrid({data:list});
+		
 	}else{
 	$("#attachments").datagrid({data:{rows:[],total:0}});
 	}
@@ -83,14 +93,24 @@ function fileListSubmit(){
 	var list = $("#attachments").datagrid("getData");
 	var list_div=$("#"+window.updatefiles.attr("id")+"_list");
 	list_div.empty();
-	if(list){
-		window.updatefiles.val(JSON.stringify(list.rows));
-		$(list.rows).each(function(){
-		list_div.append('<a href="'+this.path+'" style="margin-right:10px;" target="_blank">'+this.label+'</a>');
+	list = list.rows.slice(0);
+	var txt = $("#txt_row").val();
+	if(txt){
+		list.push({"label":txt});
+	}
+	if(list && list.length > 0){
+		window.updatefiles.val(JSON.stringify(list));
+		$(list).each(function(){
+		if(this.path){
+			list_div.append('<a href="'+this.path+'" style="margin-right:10px;" target="_blank">'+this.label+'</a>');
+		}else{
+			list_div.append('<span style="margin-right:10px;" >'+this.label+'</span>');
+		}
 		});
 		}else{
 		window.updatefiles.val("");
 		}
+		$("#txt_row").val("");
 		$("#filesuploadWindow").dialog("close");
 		delete window.updatefiles;
 	}
