@@ -1,0 +1,9 @@
+derby.log
+.gradle
+.settings
+bin
+files
+var
+.freemarker-ide.xml
+.project
+.springBeans

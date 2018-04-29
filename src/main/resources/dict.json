@@ -1,0 +1,17 @@
+[
+{"code":"type","label":"字典类型","type":"type"},
+{"code":"specialty","label":"专业类型","type":"type"},
+{"code":"grade","label":"年级类型","type":"type"},
+{"code":"class","label":"班级类型","type":"type"},
+{"code":"year","label":"年度类型","type":"type"},
+{"code":"politics","label":"政治面貌类型","type":"type"},
+{"code":"job","label":"职务类型","type":"type"},
+{"code":"xinli","label":"心理学（师范类）","type":"specialty"},
+{"code":"l_2015","label":"2015级","type":"grade"},
+{"code":"c_xinben","label":"心本","type":"class"},
+{"code":"2015-2016","label":"2015-2016学年","type":"year"},
+{"code":"people","label":"群众","type":"politics"},
+{"code":"student","label":"学生","type":"job"},
+{"code":"nation", "label":"民族","type":"type"},
+{"code":"mz01", "label":"汉族","type":"nation"}
+]
