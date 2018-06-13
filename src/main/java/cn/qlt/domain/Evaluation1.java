@@ -154,9 +154,9 @@ public class Evaluation1 extends Evaluation{
 	
 
 	/**
-	 * 发展评测总分
+	 * 发展评测总分(开发环境要屏蔽columnDefinition)
 	 */
-	@Column(name="growEvaluationSorce", columnDefinition="float(10,2) default '0.00'")
+	@Column(name="growEvaluationSorce")//, columnDefinition="float(10,2) default '0.00'")
 	private float growEvaluationSorce;
 	
 	@Column(name="growEvaluation")
