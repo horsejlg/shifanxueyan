@@ -1,6 +1,8 @@
 derby.log
 .gradle
 .settings
+.classpath
+.project
 bin
 files
 var

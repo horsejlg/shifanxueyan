@@ -13,7 +13,6 @@ import cn.qlt.dao.UserDao;
 import cn.qlt.domain.Awards;
 import cn.qlt.domain.Sociogram;
 import cn.qlt.domain.Student;
-import cn.qlt.domain.User;
 
 @Service
 public class StudentService {
