@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 import cn.qlt.utils.ManagedIdentityDomainObject;
 
 @Entity
@@ -24,8 +26,8 @@ public class TopicLog extends ManagedIdentityDomainObject<TopicLog>{
 	@Column(name="opuserName", nullable=false, length=256)
 	private String opuserName;
 	
-	@Lob
-	@Column(name="content",columnDefinition="TEXT", length=256)
+	@Type(type="text")
+	@Column(name="content")
 	private String content;
 	
 	@Column(name="optime", nullable=false)
