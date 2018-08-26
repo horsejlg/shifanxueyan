@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.qlt.dao.TopicDao;
 import cn.qlt.dao.TopicLogDao;
@@ -11,6 +12,8 @@ import cn.qlt.domain.Topic;
 import cn.qlt.domain.TopicLog;
 import cn.qlt.domain.User;
 import cn.qlt.utils.CompareUtils;
+import cn.qlt.utils.SQLUtils.PageInfo;
+import cn.qlt.utils.SQLUtils.PageResult;
 
 /**
  * @author zp
@@ -39,6 +42,19 @@ public class TopicService {
 	
 	public Topic getTopicByid(String id){
 		return topicDao.load(id);
+	}
+	
+	@Transactional
+	public PageResult find(Map<String,String> params, PageInfo page) {
+		PageResult result = new PageResult();
+		result.find(page, "from Topic t where 1=1 /~id: and t.id={id}~/"
+				+ "/~title: and t.title like '%[title]%'~/"
+				+ "/~promiseTime: and t.promiseTime between {promiseTimeBegin} and {promiseTimeEnd}~/"
+				+ "/~endTime: and t.promiseTime between {endTimeBegin} and {endTimeEnd}~/"
+				+ "/~publish: and t.publish = {publish} ~/"
+				+ "/~author_id: and t.author.id = {author_id} ~/", 
+				params, topicDao);
+		return result;
 	}
 	
 	/**
