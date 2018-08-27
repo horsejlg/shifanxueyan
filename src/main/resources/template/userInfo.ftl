@@ -38,7 +38,8 @@
     </div>
     </#if>
     <div style="text-align:center;padding:5px 0">
-            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#userInfoView').panel('close');$('#userInfoEdit').panel('open');" style="width:100px">修改个人信息</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#userInfoView').panel('close');$('#userInfoEdit').panel('open');" style="width:100px">修改帐户信息</a>
+            <a href="${base}/student/show/${user.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">查看人员信息</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#passwordEdit').window('open');" style="width:100px">修改密码</a>
     </div>
 </div>

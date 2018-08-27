@@ -58,6 +58,26 @@ public class Role extends DomainObject<Role>{
 		this.users = users;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == this)
+			return true;
+		if(obj instanceof Role){
+			if(obj.hashCode() == this.hashCode()){
+				return true;
+			}
+			
+			if(this.code.equals(((Role)obj).getCode())){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.code.hashCode();
+	}
 	
 	
 }

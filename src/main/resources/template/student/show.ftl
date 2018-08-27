@@ -70,8 +70,8 @@
 		<td width="120" align="right" >入党时间</td>
 		<td width="160" align="left" ><#if student.joinParty??>${student.joinParty?string("yyyy年MM月dd日")}</#if></td>
 		<td width="117" align="right" >入团时间</td>
-		<td width="158" align="left" ><#if student.joinUs??>${student.joinUs?string("yyyy年MM月dd日")}</#if></td>
-		<td width="118" align="right" >性别</td>
+		<td width="160" align="left" ><#if student.joinUs??>${student.joinUs?string("yyyy年MM月dd日")}</#if></td>
+		<td width="120" align="right" >性别</td>
 		<td width="160" align="left" >${student.sex}</td>
 	</tr>
 </table>
@@ -81,7 +81,7 @@
 		<td width="120" align="center" rowspan="${student.sociograms?size + 1}" style="border-top: 0px;">主要社会关系</td>
 		<td width="160" align="center" style="border-top: 0px;">姓名</td>
 		<td width="200" align="center" style="border-top: 0px;">与本人关系</td>
-		<td width="200" align="center" style="border-top: 0px;">工作单位</td>
+		<td width="204" align="center" style="border-top: 0px;">工作单位</td>
 		<td width="160" align="center" style="border-top: 0px;">联系方式</td>
 	</tr>
 	<#list student.sociograms as sociogram>
@@ -93,13 +93,29 @@
 	</tr>
 	</#list>
 </table>
+<#else>
+<table class="infotable" align="center">
+	<tr>
+		<td width="120" align="center" rowspan="2" style="border-top: 0px;">主要社会关系</td>
+		<td width="160" align="center" style="border-top: 0px;">姓名</td>
+		<td width="200" align="center" style="border-top: 0px;">与本人关系</td>
+		<td width="204" align="center" style="border-top: 0px;">工作单位</td>
+		<td width="160" align="center" style="border-top: 0px;">联系方式</td>
+	</tr>
+	<tr>
+		<td align="center" >&nbsp;</td>
+		<td align="center" >&nbsp;</td>
+		<td align="center" >&nbsp;</td>
+		<td align="center" >&nbsp;</td>
+	</tr>
+</table>
 </#if>
 <#if student.awards?? && student.awards?size gt 0>
 <table class="infotable" align="center">
 <tr>
 <td width="287" align="center" style="border-top: 0px;">奖励情况</td>
-<td width="282" align="center" style="border-top: 0px;">级别</td>
-<td width="285" align="center" style="border-top: 0px;">获奖时间</td>
+<td width="284" align="center" style="border-top: 0px;">级别</td>
+<td width="287" align="center" style="border-top: 0px;">获奖时间</td>
 </tr>
 <#list student.awards as award>
 <tr>
@@ -108,5 +124,18 @@
 	<td align="center" ><#if award.timed??>${award.timed?string("yyyy年MM月dd日")}</#if></td>
 </tr>
 </#list>
+</table>
+<#else>
+<table class="infotable" align="center">
+<tr>
+<td width="287" align="center" style="border-top: 0px;">奖励情况</td>
+<td width="284" align="center" style="border-top: 0px;">级别</td>
+<td width="287" align="center" style="border-top: 0px;">获奖时间</td>
+</tr>
+<tr>
+	<td align="center" >&nbsp;</td>
+	<td align="center" >&nbsp;</td>
+	<td align="center" >&nbsp;</td>
+</tr>
 </table>
 </#if>

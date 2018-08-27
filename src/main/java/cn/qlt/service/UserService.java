@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.NoResultException;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ public class UserService {
 	
 	@Transactional
 	public User login(String loginname, String password) throws Exception{
+		try{
 		User loadUser = userDao.findSingle("loginname", loginname);
 		if(loadUser==null)
 			throw new Exception("用户不存在");
@@ -45,6 +47,9 @@ public class UserService {
 			return loadUser;
 		}else{
 			throw new Exception("密码错误");
+		}
+		}catch (NoResultException e) {
+			throw new Exception("用户不存在");
 		}
 	}
 	
@@ -73,6 +78,17 @@ public class UserService {
 		}else{
 			system = roleDao.findSingle("code", "master");
 		}
+		Role stuRole = null;
+		try{
+		stuRole= roleDao.findSingle("code", "student");
+		}catch (Exception e) {}
+		if(stuRole==null){
+			Role role = new Role();
+			role.setCode("student");
+			role.setLabel("学生");
+			roleDao.save(role);
+		}
+			
 		//如果一个都没,就自动建一个
 		if(!this.checkUser("administrator")){
 			User user = new User();

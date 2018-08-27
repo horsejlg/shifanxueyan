@@ -75,6 +75,7 @@ public class BaseRepositoryImpl<T,ID extends Serializable> extends SimpleJpaRepo
 		return (T) entityManager.find(currntType(), id);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T findSingle(String column, Object value) {
 		return (T) entityManager.createQuery(String.format("from %s where %s = ?", currntType().getSimpleName(),column)).setParameter(0, value).getSingleResult();

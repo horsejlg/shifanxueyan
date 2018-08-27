@@ -1,6 +1,7 @@
 package cn.qlt.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ import cn.qlt.domain.Awards;
 import cn.qlt.domain.Sociogram;
 import cn.qlt.domain.Student;
 import cn.qlt.domain.User;
+import cn.qlt.utils.SQLUtils.PageInfo;
+import cn.qlt.utils.SQLUtils.PageResult;
 
 @Service
 public class StudentService {
@@ -46,5 +49,10 @@ public class StudentService {
 		return student;
 	}
 	
+	public PageResult find(Map<String,String> params, PageInfo page) {
+		PageResult result = new PageResult();
+		result.find(page, "select user from Student where 1=1 /~userId: and user.id = {userId}~//~name: and user.nickName like '%[name]%'~//~grade: and user.grade.code = {grade} ~//~specialty: and user.specialty.code = {specialty} ~//~classes: and user.classes.code = {classes} ~//~year: and user.code = {year} ~/", params, studentDao);
+		return result;
+	}
 	
 }
