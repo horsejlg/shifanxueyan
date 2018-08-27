@@ -8,12 +8,15 @@ import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.qlt.dao.RoleDao;
+import cn.qlt.dao.TopicDao;
 import cn.qlt.dao.UserDao;
 import cn.qlt.domain.Role;
 import cn.qlt.domain.Topic;
@@ -39,6 +42,9 @@ public class TopicTest {
 	
 	@Autowired
 	private RoleDao roleDao;
+	
+	@Autowired
+	private TopicDao topicDao;
 	
 	@Test
 	@Transactional
@@ -74,7 +80,21 @@ public class TopicTest {
 		par.clear();
 		par.put("author_id", author.getId());
 		topics = topicService.find(par,pageinfo);//查询作者
-		System.out.println(topics.getRows());
+		
+		Topic topicNew = new Topic();
+		BeanUtils.copyProperties((Topic) topics.getRows().get(0), topicNew);
+		
+		topicNew.setTitle("测试专题1-"+new Date().getTime());//这里用查出来的直接set会触发update
+		
+		topicService.updateTopic(topicNew, author);
+		
+		//下面的会报无权限
+		/*User u = new User();
+		u.setId("123");
+		topicService.updateTopic(topicNew, u);*/
+		
+		List loglist = topicService.getTopicLogByTopicId(topicNew.getId());
+		System.out.println(loglist);//输出修改记录
 	}
 	
 	private User addUser(){

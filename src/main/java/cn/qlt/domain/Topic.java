@@ -7,7 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -16,7 +15,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
-import cn.qlt.utils.DomainObject;
 import cn.qlt.utils.ManagedIdentityDomainObject;
 
 @Entity
@@ -51,6 +49,14 @@ public class Topic extends ManagedIdentityDomainObject<Topic>{
 	 */
 	@Column(name="publish",nullable=true)
 	private int publish = 0;
+	
+	/**
+	 * 是否作业类型主题 0:否,1:是 
+	 * 是作业类型的,每个参与人员需要交一篇作业
+	 * 否的话,参与人员可以共同编辑专题内容
+	 */
+	@Column(name="homework",nullable=true)
+	private int homework = 0;
 	
 	/**
 	 * 地点
@@ -99,14 +105,6 @@ public class Topic extends ManagedIdentityDomainObject<Topic>{
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
 	private List<User> visibleUsers;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public Date getCreateTime() {
 		return createTime;
@@ -205,7 +203,8 @@ public class Topic extends ManagedIdentityDomainObject<Topic>{
 		return "Topic [createTime=" + createTime + ", title=" + title + ", promiseTime=" + promiseTime + ", endTime="
 				+ endTime + ", publish=" + publish + ", location=" + location + ", participants=" + participants
 				+ ", content=" + content + ", remark=" + remark + ", author=" + author + ", visibleUsers="
-				+ visibleUsers + "]";
+				+ visibleUsers + ", id=" + id + "]";
 	}
+
 	
 }

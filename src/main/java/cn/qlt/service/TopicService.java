@@ -1,7 +1,11 @@
 package cn.qlt.service;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,16 +69,29 @@ public class TopicService {
 	 * @return
 	 * @throws Exception
 	 */
+	@Transactional
 	public Topic updateTopic(Topic topic,User opUser) throws Exception{
 		
 		//效验是否是作者或者是共建人
-		Topic topicOld = topicDao.load(topic.getId());
+		Topic topicOld = topicDao.findOne(topic.getId());
 		
-		if(topicOld.getAuthor().getId().equals(opUser.getId())||topicOld.getParticipants().contains(opUser)){
-			topicDao.save(topic);
+		if(topicOld.getAuthor().getId().equals(opUser.getId())){//作者,什么都能改
 			//记录个修改记录
 			TopicLog log = saveTopicLog(topic, opUser, topicOld);
 			topicLogDao.save(log);
+			
+			topicDao.save(topic);
+			
+		}else if(topicOld.getParticipants().contains(opUser)){//参与者只能改内容
+			
+			Topic old = new Topic();
+			BeanUtils.copyProperties(topicOld, old);
+			topicOld.setContent(topic.getContent());
+			TopicLog log = saveTopicLog(topicOld, opUser, old);//造一条只修改了个内容的log
+
+			topicDao.save(topicOld);
+			topicLogDao.save(log);
+			
 		}else{
 			throw new Exception("您无权修改该主题!");
 		}
@@ -83,13 +100,55 @@ public class TopicService {
 	}
 
 	private TopicLog saveTopicLog(Topic topic, User opUser, Topic topicOld) {
-		Map<String,Object> m = CompareUtils.getModifyContent(topicOld, opUser);
+		Map<String,Object> m = CompareUtils.getModifyContent(topicOld, topic);
 		
 		TopicLog log = new TopicLog();
+		log.setTopicId(topicOld.getId());
 		log.setId(topic.getId());
 		log.setOpuserId(opUser.getId());
 		log.setOpuserName(opUser.getNickName());
-		log.setContent(m.toString());//TODO 这里要翻译下字段名
+		log.setContent(transform(m,topicOld));
 		return log;
+	}
+
+	private String transform(Map<String, Object> m, Topic topicOld) {
+		Map<String,Object> nm = new HashMap();
+		if(m.containsKey("title")){
+			nm.put("标题", topicOld.getTitle()+"==>"+m.get("title"));
+		}
+		
+		if(m.containsKey("content")){
+			nm.put("内容", topicOld.getTitle()+"==>"+m.get("content"));
+		}
+		
+		if(m.containsKey("topic_visible_user")){
+			nm.put("可见人员", topicOld.getVisibleUsers()+"==>"+m.get("topic_visible_user"));
+		}
+		
+		if(m.containsKey("remark")){
+			nm.put("备注", topicOld.getRemark()+"==>"+m.get("remark"));
+		}
+		
+		if(m.containsKey("participants")){
+			nm.put("参与人员", topicOld.getParticipants()+"==>"+m.get("participants"));
+		}
+		
+		if(m.containsKey("location")){
+			nm.put("地点", topicOld.getLocation()+"==>"+m.get("location"));
+		}
+		
+		StringBuffer sb = new StringBuffer();
+		Iterator i = nm.keySet().iterator();
+		while(i.hasNext()){
+			String k = (String) i.next();
+			String v = (String) nm.get(k);
+			sb.append(k).append(":").append(v);
+		}
+		
+		return sb.toString();
+	}
+
+	public List<TopicLog> getTopicLogByTopicId(String topicId){
+		return topicLogDao.find("from TopicLog where topicId = ? order by optime desc", topicId);
 	}
 }
