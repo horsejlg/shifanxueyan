@@ -30,6 +30,11 @@ public class StudentService {
 	private AwardsDao awardsDao;
 	
 	@Transactional
+	public Student getStudentById(String id){
+		return studentDao.load(id);
+	}
+	
+	@Transactional
 	public Student loadFullStudent(String id){
 		Student student = studentDao.load(id);
 		if(student!=null){

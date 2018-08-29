@@ -6,14 +6,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
-import cn.qlt.utils.DomainObject;
+import cn.qlt.utils.ManagedIdentityDomainObject;
 
 /**
  * @author zp
@@ -21,13 +20,12 @@ import cn.qlt.utils.DomainObject;
  */
 @Entity
 @Table(name="topicReply")
-public class TopicReply extends DomainObject<TopicReply>{
+public class TopicReply extends ManagedIdentityDomainObject<TopicReply>{
 
 	private static final long serialVersionUID = 5688111414759138696L;
 
-	@Id
-	@Column(name="id", length=24, nullable=false, unique=true)
-	private String id;
+	@Column(name="topicId", length=24, nullable=false)
+	private String topicId;
 	
 	@Column(name="create_time")
 	private Date createTime = new Date();
@@ -39,14 +37,6 @@ public class TopicReply extends DomainObject<TopicReply>{
 	@OneToOne(cascade=CascadeType.DETACH, fetch=FetchType.EAGER)
 	@JoinColumn(name="author_id",nullable=true)
 	private User author;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public Date getCreateTime() {
 		return createTime;
@@ -75,6 +65,19 @@ public class TopicReply extends DomainObject<TopicReply>{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
+	public String getTopicId() {
+		return topicId;
+	}
+
+	public void setTopicId(String topicId) {
+		this.topicId = topicId;
+	}
+
+	@Override
+	public String toString() {
+		return "TopicReply [topicId=" + topicId + ", createTime=" + createTime + ", content=" + content + ", author="
+				+ author + "]";
+	}
 	
 }

@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.qlt.dao.TopicDao;
 import cn.qlt.dao.TopicLogDao;
+import cn.qlt.dao.TopicReplyDao;
 import cn.qlt.domain.Topic;
 import cn.qlt.domain.TopicLog;
+import cn.qlt.domain.TopicReply;
 import cn.qlt.domain.User;
 import cn.qlt.utils.CompareUtils;
 import cn.qlt.utils.SQLUtils.PageInfo;
@@ -32,9 +34,13 @@ public class TopicService {
 	@Autowired
 	private TopicLogDao topicLogDao;
 	
+	@Autowired
+	private TopicReplyDao topicReplyDao;
+	
 	public boolean createTopic(Topic topic){
 		
 		try {
+			topic.getVisibleUsers().addAll(topic.getParticipants());//把参与人员加到可见人员里面
 			topicDao.save(topic);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,14 +57,20 @@ public class TopicService {
 	@Transactional
 	public PageResult find(Map<String,String> params, PageInfo page) {
 		PageResult result = new PageResult();
-		result.find(page, "from Topic t where 1=1 /~id: and t.id={id}~/"
+		result.find(page, "select t from Topic t /~visibleUsers: join t.visibleUsers v ~/ /~participants: join t.participants p ~/ where 1=1 /~id: and t.id={id}~/"
 				+ "/~title: and t.title like '%[title]%'~/"
 				+ "/~promiseTime: and t.promiseTime between {promiseTimeBegin} and {promiseTimeEnd}~/"
 				+ "/~endTime: and t.promiseTime between {endTimeBegin} and {endTimeEnd}~/"
 				+ "/~publish: and t.publish = {publish} ~/"
+				+ "/~visibleUsers: and v.id = {visibleUsers} ~/"
+				+ "/~participants: and p.id = {participants} ~/"
 				+ "/~author_id: and t.author.id = {author_id} ~/", 
 				params, topicDao);
 		return result;
+	}
+	
+	public void deleteTopic(String topicId){
+		topicDao.delete(topicId);
 	}
 	
 	/**
@@ -74,6 +86,7 @@ public class TopicService {
 		
 		//效验是否是作者或者是共建人
 		Topic topicOld = topicDao.findOne(topic.getId());
+		topic.getVisibleUsers().addAll(topic.getParticipants());//把参与人员加到可见人员里面
 		
 		if(topicOld.getAuthor().getId().equals(opUser.getId())){//作者,什么都能改
 			//记录个修改记录
@@ -150,5 +163,28 @@ public class TopicService {
 
 	public List<TopicLog> getTopicLogByTopicId(String topicId){
 		return topicLogDao.find("from TopicLog where topicId = ? order by optime desc", topicId);
+	}
+	
+	public boolean addTopicReply(TopicReply topicReply){
+		try {
+			topicReplyDao.save(topicReply);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public void deleteTopicReply(String topicReplyId){
+		topicReplyDao.delete(topicReplyId);
+	}
+	
+	@Transactional
+	public PageResult findTopicReply(Map<String,String> params, PageInfo page) {
+		PageResult result = new PageResult();
+		result.find(page, "from TopicReply tr where 1=1"
+				+ "/~topicId: and tr.topicId = {topicId} ~/",
+				params, topicDao);
+		return result;
 	}
 }

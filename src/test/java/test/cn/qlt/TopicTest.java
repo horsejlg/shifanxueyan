@@ -20,6 +20,7 @@ import cn.qlt.dao.TopicDao;
 import cn.qlt.dao.UserDao;
 import cn.qlt.domain.Role;
 import cn.qlt.domain.Topic;
+import cn.qlt.domain.TopicReply;
 import cn.qlt.domain.User;
 import cn.qlt.service.TopicService;
 import cn.qlt.service.UserService;
@@ -30,76 +31,109 @@ import cn.qlt.utils.SQLUtils.PageResult;
 @ContextConfiguration(locations = { "classpath:META-INF/conf-spring/spring-db.xml" })
 @Transactional
 public class TopicTest {
-	
+
 	@Autowired
 	private TopicService topicService;
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private RoleDao roleDao;
-	
+
 	@Autowired
 	private TopicDao topicDao;
-	
+
 	@Test
 	@Transactional
-	public void testTopic() throws Exception{
+	public void testTopic() throws Exception {
 		Topic topic = new Topic();
-		
+
 		User author = userService.login("administrator", "123456");
 		List<User> participants = new ArrayList<User>();
 		participants.add(addUser());
-		
+
 		List<User> visibleUsers = new ArrayList<User>();
 		visibleUsers.add(addUser2());
-		
+
 		topic.setAuthor(author);
 		topic.setTitle("测试专题1");
-		topic.setContent("8月2日，我国第一条地方自主高铁济青高铁开始联调联试，计划12月20日正式通车。根据中国铁总官方消息，济青高铁济南东站至胶州北站于8月21-24日顺利完成联调联试、运行试验安排，期间最快跑出了385公里的时速(点击看视频)，相当于每秒超过100米，创下联调联试期间的新纪录，比设计时速350公里超出10％。");
+		topic.setContent(
+				"8月2日，我国第一条地方自主高铁济青高铁开始联调联试，计划12月20日正式通车。根据中国铁总官方消息，济青高铁济南东站至胶州北站于8月21-24日顺利完成联调联试、运行试验安排，期间最快跑出了385公里的时速(点击看视频)，相当于每秒超过100米，创下联调联试期间的新纪录，比设计时速350公里超出10％。");
 		topic.setEndTime(new Date());
 		topic.setLocation("教学楼1#202");
 		topic.setParticipants(participants);
 		topic.setPromiseTime(new Date());
 		topic.setVisibleUsers(visibleUsers);
-		
+
 		topicService.createTopic(topic);
-		
+		// 上面是测试新增
+
 		PageInfo pageinfo = new PageInfo(1, 10);
 		Map<String, String> par = new HashMap<>();
-		
-		PageResult topics = topicService.find(par,pageinfo);//查询所有
+
+		PageResult topics = topicService.find(par, pageinfo);// 查询所有
 		System.out.println(topics.getRows());
-		
+
 		System.out.println("####################################################");
-		
+
+		/*
+		 * par.clear(); par.put("author_id", author.getId()); topics =
+		 * topicService.find(par,pageinfo);//查询作者
+		 */
+		User v = userService.login("class", "123456");
 		par.clear();
-		par.put("author_id", author.getId());
-		topics = topicService.find(par,pageinfo);//查询作者
+		par.put("visibleUsers", v.getId());
+		topics = topicService.find(par, pageinfo);// 可见范围
+		System.out.println(topics.getRows());
+
+		// 上面是测试查询
+
+		/*
+		 * Topic topicNew = new Topic(); BeanUtils.copyProperties((Topic)
+		 * topics.getRows().get(0), topicNew);
+		 * 
+		 * topicNew.setTitle("测试专题1-"+new
+		 * Date().getTime());//这里用查出来的直接set会触发update
+		 * 
+		 * topicService.updateTopic(topicNew, author);
+		 * 
+		 * //下面的会报无权限 User u = new User(); u.setId("123");
+		 * topicService.updateTopic(topicNew, u);
+		 * 
+		 * List loglist = topicService.getTopicLogByTopicId(topicNew.getId());
+		 * System.out.println(loglist);//输出修改记录
+		 * 
+		 */
+		// 测试修改
+
+		TopicReply r = new TopicReply();
+		r.setAuthor(author);
+		r.setContent("测试回复测试回复测试回复测试回复测试回复测试回复测试回复测试回复测试回复");
+		r.setTopicId(((Topic) topics.getRows().get(0)).getId());
+		topicService.addTopicReply(r);
+
+		par.clear();
+		par.put("topicId", r.getTopicId());
+		PageResult pageResult = topicService.findTopicReply(par, pageinfo);
 		
-		Topic topicNew = new Topic();
-		BeanUtils.copyProperties((Topic) topics.getRows().get(0), topicNew);
+		System.out.println(pageResult.getRows());
 		
-		topicNew.setTitle("测试专题1-"+new Date().getTime());//这里用查出来的直接set会触发update
+		topicService.deleteTopicReply(((TopicReply)pageResult.getRows().get(0)).getId());
 		
-		topicService.updateTopic(topicNew, author);
+		pageResult = topicService.findTopicReply(par, pageinfo);
 		
-		//下面的会报无权限
-		/*User u = new User();
-		u.setId("123");
-		topicService.updateTopic(topicNew, u);*/
+		System.out.println(pageResult.getRows());
 		
-		List loglist = topicService.getTopicLogByTopicId(topicNew.getId());
-		System.out.println(loglist);//输出修改记录
+		//专题回复
 	}
-	
-	private User addUser(){
+
+	private User addUser() {
 		Role assistant = roleDao.findSingle("code", "assistant");
-		
+
 		User user = new User();
 		user.setLoginname("assistant");
 		user.setNickName("辅导员测试");
@@ -108,10 +142,10 @@ public class TopicTest {
 		user.encodedPassword();
 		return userDao.save(user);
 	}
-	
-	private User addUser2(){
+
+	private User addUser2() {
 		Role classs = roleDao.findSingle("code", "class");
-		
+
 		User user = new User();
 		user.setLoginname("class");
 		user.setNickName("班级管理员");
