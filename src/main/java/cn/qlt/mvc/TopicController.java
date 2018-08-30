@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cn.qlt.domain.Student;
 import cn.qlt.domain.Topic;
 import cn.qlt.domain.TopicLog;
+import cn.qlt.domain.TopicWork;
 import cn.qlt.domain.User;
 import cn.qlt.service.StudentService;
 import cn.qlt.service.TopicService;
@@ -105,6 +106,20 @@ public class TopicController {
 	public boolean deleteTopicReply(@PathVariable String topicReplyId){
 		topicService.deleteTopicReply(topicReplyId);
 		return true;
+	}
+	
+	/**
+	 * 这里没做判断,随便交作业,多的也显示不出来
+	 * @param topicWork
+	 */
+	@PostMapping(value="/topicWork")
+	public void addTopicWork(TopicWork topicWork){
+		topicService.addTopicWork(topicWork);
+	}
+	
+	@GetMapping(value="/topicWork/{topicId}")
+	public List<TopicWork> getTopicWorkByTopicId(@PathVariable String topicId){
+		return topicService.getTopicWorkByTopicId(topicId);
 	}
 
 }

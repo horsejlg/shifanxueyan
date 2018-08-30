@@ -16,13 +16,19 @@ import cn.qlt.utils.ManagedIdentityDomainObject;
 
 /**
  * @author zp
- * 评论的作业
+ * 评论的作业,上传文件,每个专题下,每个参与人员交一个
  */
 @Entity
 @Table(name="topicWork")
 public class TopicWork extends ManagedIdentityDomainObject<TopicWork>{
 
 	private static final long serialVersionUID = 5688111414759138696L;
+	
+	/**
+	 * 标题,可能用不上,可以放文件名
+	 */
+	@Column(name="title", length=400, nullable=false)
+	private String title = "";
 
 	@Column(name="topicId", length=24, nullable=false)
 	private String topicId;
@@ -30,6 +36,17 @@ public class TopicWork extends ManagedIdentityDomainObject<TopicWork>{
 	@Column(name="create_time")
 	private Date createTime = new Date();
 	
+	@Column(name="update_time")
+	private Date updateTime = new Date();
+	
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
 	/**
 	 * 上传文件的地址
 	 */
@@ -78,8 +95,8 @@ public class TopicWork extends ManagedIdentityDomainObject<TopicWork>{
 
 	@Override
 	public String toString() {
-		return "TopicWork [topicId=" + topicId + ", createTime=" + createTime + ", url=" + url + ", author=" + author
-				+ "]";
+		return "TopicWork [topicId=" + topicId + ", createTime=" + createTime + ", updateTime=" + updateTime + ", url="
+				+ url + ", author=" + author + "]";
 	}
 
 }

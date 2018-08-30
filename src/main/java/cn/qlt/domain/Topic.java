@@ -105,6 +105,17 @@ public class Topic extends ManagedIdentityDomainObject<Topic>{
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
 	private List<User> visibleUsers;
+	
+	@Column(name="update_time")
+	private Date updateTime = new Date();
+	
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 
 	public Date getCreateTime() {
 		return createTime;
@@ -201,9 +212,9 @@ public class Topic extends ManagedIdentityDomainObject<Topic>{
 	@Override
 	public String toString() {
 		return "Topic [createTime=" + createTime + ", title=" + title + ", promiseTime=" + promiseTime + ", endTime="
-				+ endTime + ", publish=" + publish + ", location=" + location + ", participants=" + participants
-				+ ", content=" + content + ", remark=" + remark + ", author=" + author + ", visibleUsers="
-				+ visibleUsers + ", id=" + id + "]";
+				+ endTime + ", publish=" + publish + ", homework=" + homework + ", location=" + location
+				+ ", participants=" + participants + ", content=" + content + ", remark=" + remark + ", author="
+				+ author + ", visibleUsers=" + visibleUsers + ", updateTime=" + updateTime + "]";
 	}
 
 	

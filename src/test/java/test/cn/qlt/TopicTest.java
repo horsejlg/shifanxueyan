@@ -21,6 +21,7 @@ import cn.qlt.dao.UserDao;
 import cn.qlt.domain.Role;
 import cn.qlt.domain.Topic;
 import cn.qlt.domain.TopicReply;
+import cn.qlt.domain.TopicWork;
 import cn.qlt.domain.User;
 import cn.qlt.service.TopicService;
 import cn.qlt.service.UserService;
@@ -129,6 +130,24 @@ public class TopicTest {
 		System.out.println(pageResult.getRows());
 		
 		//专题回复
+		
+		TopicWork tw = new TopicWork();
+		tw.setAuthor(author);
+		tw.setTopicId(((Topic) topics.getRows().get(0)).getId());
+		tw.setUrl("D://上传的文件地址");
+		topicService.addTopicWork(tw);
+		
+		TopicWork tw2 = new TopicWork();
+		tw2.setAuthor(author);
+		tw2.setTopicId(((Topic) topics.getRows().get(0)).getId());
+		tw2.setUrl("D://上传的文件地址2");
+		topicService.addTopicWork(tw2);
+		
+		List<TopicWork> list = topicService.getTopicWorkByTopicId(tw2.getTopicId());
+		
+		System.out.println(list);
+		
+		//专题作业
 	}
 
 	private User addUser() {

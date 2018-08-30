@@ -1,5 +1,6 @@
 package cn.qlt.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -13,9 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.qlt.dao.TopicDao;
 import cn.qlt.dao.TopicLogDao;
 import cn.qlt.dao.TopicReplyDao;
+import cn.qlt.dao.TopicWorkDao;
 import cn.qlt.domain.Topic;
 import cn.qlt.domain.TopicLog;
 import cn.qlt.domain.TopicReply;
+import cn.qlt.domain.TopicWork;
 import cn.qlt.domain.User;
 import cn.qlt.utils.CompareUtils;
 import cn.qlt.utils.SQLUtils.PageInfo;
@@ -36,6 +39,9 @@ public class TopicService {
 	
 	@Autowired
 	private TopicReplyDao topicReplyDao;
+	
+	@Autowired
+	private TopicWorkDao topicWorkDao;
 	
 	public boolean createTopic(Topic topic){
 		
@@ -100,6 +106,7 @@ public class TopicService {
 			Topic old = new Topic();
 			BeanUtils.copyProperties(topicOld, old);
 			topicOld.setContent(topic.getContent());
+			topicOld.setUpdateTime(new Date());
 			TopicLog log = saveTopicLog(topicOld, opUser, old);//造一条只修改了个内容的log
 
 			topicDao.save(topicOld);
@@ -186,5 +193,24 @@ public class TopicService {
 				+ "/~topicId: and tr.topicId = {topicId} ~/",
 				params, topicDao);
 		return result;
+	}
+	
+	@Transactional
+	public void addTopicWork(TopicWork topicWork){
+		List<TopicWork> list = topicWorkDao.find("from TopicWork where topicId = ? and author.id = ?", topicWork.getTopicId(),topicWork.getAuthor().getId());
+		if(null==list || list.isEmpty()){
+			//新增
+			topicWorkDao.save(topicWork);
+		}else{
+			//修改
+			TopicWork old = list.get(0);
+			old.setUrl(topicWork.getUrl());
+			old.setUpdateTime(new Date());
+			topicWorkDao.save(old);
+		}
+	}
+	
+	public List<TopicWork> getTopicWorkByTopicId(String topicId){
+		return topicWorkDao.find("from TopicWork where topicId = ? ", topicId);
 	}
 }
