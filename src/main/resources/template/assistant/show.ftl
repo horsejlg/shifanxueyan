@@ -32,7 +32,7 @@
 	<td width="240" align="left">${student.user.nickName}</td>
 	<td width="100"  align="right">学号</td>
 	<td width="240" align="left">${student.user.loginname}</td>
-	<td width="160" rowspan="9" align="center" style="border-bottom: 0px"><img src="${base}${avatar(student.user.id)}" width="120" height="160" style="border: 1px silver solid ;"></td>
+	<td width="160" rowspan="9" align="center" style="border-bottom: 0px"><img src="" width="120" height="160" style="border: 1px silver solid ;"></td>
 </tr>
 <tr>
 	<td align="right">出生年月</td>
