@@ -16,13 +16,19 @@ import cn.qlt.utils.ManagedIdentityDomainObject;
 
 /**
  * @author zp
- * 评论的回复
+ * 评论的作业,上传文件,每个专题下,每个参与人员交一个
  */
 @Entity
-@Table(name="topicReply")
-public class TopicReply extends ManagedIdentityDomainObject<TopicReply>{
+@Table(name="topicWork")
+public class TopicWork extends ManagedIdentityDomainObject<TopicWork>{
 
 	private static final long serialVersionUID = 5688111414759138696L;
+	
+	/**
+	 * 标题,可能用不上,可以放文件名
+	 */
+	@Column(name="title", length=400, nullable=false)
+	private String title = "";
 
 	@Column(name="topicId", length=24, nullable=false)
 	private String topicId;
@@ -30,9 +36,22 @@ public class TopicReply extends ManagedIdentityDomainObject<TopicReply>{
 	@Column(name="create_time")
 	private Date createTime = new Date();
 	
-	@Column(name="content", nullable=true)
-	@Type(type="text")
-	private String content;
+	@Column(name="update_time")
+	private Date updateTime = new Date();
+	
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	/**
+	 * 上传文件的地址
+	 */
+	@Column(name="url", length=2000, nullable=true)
+	private String url;
 	
 	@OneToOne(cascade=CascadeType.DETACH, fetch=FetchType.EAGER)
 	@JoinColumn(name="author_id",nullable=true)
@@ -44,14 +63,6 @@ public class TopicReply extends ManagedIdentityDomainObject<TopicReply>{
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
 	}
 
 	public User getAuthor() {
@@ -74,10 +85,18 @@ public class TopicReply extends ManagedIdentityDomainObject<TopicReply>{
 		this.topicId = topicId;
 	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	@Override
 	public String toString() {
-		return "TopicReply [topicId=" + topicId + ", createTime=" + createTime + ", content=" + content + ", author="
-				+ author + "]";
+		return "TopicWork [topicId=" + topicId + ", createTime=" + createTime + ", updateTime=" + updateTime + ", url="
+				+ url + ", author=" + author + "]";
 	}
-	
+
 }

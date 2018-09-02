@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -17,13 +16,13 @@ public class TopicLog extends ManagedIdentityDomainObject<TopicLog>{
 	
 	private static final long serialVersionUID = -3411280406639061149L;
 
-	@Column(name="topicId", nullable=false, length=256)
+	@Column(name="topicId", nullable=true, length=256)
 	private String topicId;
 	
-	@Column(name="opuserId", nullable=false, length=256)
+	@Column(name="opuserId", nullable=true, length=256)
 	private String opuserId;
 	
-	@Column(name="opuserName", nullable=false, length=256)
+	@Column(name="opuserName", nullable=true, length=256)
 	private String opuserName;
 	
 	@Type(type="text")
@@ -72,5 +71,26 @@ public class TopicLog extends ManagedIdentityDomainObject<TopicLog>{
 	public void setOpuserName(String opuserName) {
 		this.opuserName = opuserName;
 	}
+	
+	public TopicLog() {
+		super();
+	}
+
+	public TopicLog(String topicId, String opuserId, String opuserName, String content, Date optime) {
+		super();
+		this.topicId = topicId;
+		this.opuserId = opuserId;
+		this.opuserName = opuserName;
+		this.content = content;
+		this.optime = optime;
+	}
+
+	@Override
+	public String toString() {
+		return "TopicLog [topicId=" + topicId + ", opuserId=" + opuserId + ", opuserName=" + opuserName + ", content="
+				+ content + ", optime=" + optime + "]";
+	}
+	
+	
 	
 }
