@@ -3,11 +3,11 @@
   <head>
   <meta charset="utf-8">
   <title>教师教育学院综合素质评价系统</title>
-  	<link rel="stylesheet" type="text/css" href="${base}css/easyui/<#if session??>${session.theme!"bootstrap"}<#else>bootstrap</#if>/easyui.css">
-	<link rel="stylesheet" type="text/css" href="${base}css/easyui/icon.css">
-<script type="text/javascript" src="${base}js/jquery.min.js"></script>
-<script type="text/javascript" src="${base}js/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="${base}js/easyui-lang-zh_CN.js"></script>
+  	<link rel="stylesheet" type="text/css" href="${base}/css/easyui/<#if session??>${session.theme!"bootstrap"}<#else>bootstrap</#if>/easyui.css">
+	<link rel="stylesheet" type="text/css" href="${base}/css/easyui/icon.css">
+<script type="text/javascript" src="${base}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${base}/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${base}/js/easyui-lang-zh_CN.js"></script>
 <@block name="css">
 </@block>
   </head>

@@ -9,3 +9,4 @@ var
 .freemarker-ide.xml
 .project
 .springBeans
+/.git-credentials

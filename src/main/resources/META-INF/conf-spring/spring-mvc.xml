@@ -95,6 +95,8 @@
 	<bean id="overrideDirective" class="cn.qlt.utils.web.freemarker.OverrideDirective" />
 	<bean id="superDirective" class="cn.qlt.utils.web.freemarker.SuperDirective" />
 	<bean id="jsonParser" class="cn.qlt.utils.web.freemarker.FreemarkerJsonParser" />
+	<bean id="jsonFormat" class="cn.qlt.utils.web.freemarker.FreemarkerJsonFormat" />
+	<bean id="avatarParser" class="cn.qlt.utils.web.freemarker.AvatarsParser" />
 
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
@@ -109,6 +111,8 @@
 				<entry key="block" value-ref="blockDirective"></entry>
 				<entry key="super" value-ref="superDirective"></entry>
 				<entry key="jsonParser" value-ref="jsonParser"></entry>
+				<entry key="jsonFormat" value-ref="jsonFormat"></entry>
+				<entry key="avatar" value-ref="avatarParser"></entry>
 			</map>
 		</property>
 		<property name="preferFileSystemAccess" value="false" />

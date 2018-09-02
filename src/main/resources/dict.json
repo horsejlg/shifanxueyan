@@ -13,5 +13,11 @@
 {"code":"people","label":"群众","type":"politics"},
 {"code":"student","label":"学生","type":"job"},
 {"code":"nation", "label":"民族","type":"type"},
-{"code":"mz01", "label":"汉族","type":"nation"}
+{"code":"grantee", "label":"受助档次","type":"type"},
+{"code":"g_0", "label":"无","type":"grantee"},
+{"code":"mz01", "label":"汉族","type":"nation"},
+{"code":"area", "label":"地区","type":"type"},
+{"code":"a_86", "label":"中国","type":"area"},
+{"code":"a_370000", "label":"山东省","parent":"a_86","type":"area"},
+{"code":"a_370100", "label":"济南市","parent":"a_370000","type":"area"}
 ]

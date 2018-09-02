@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import cn.qlt.utils.ManagedIdentityDomainObject;
 
 /**
@@ -19,6 +21,7 @@ import cn.qlt.utils.ManagedIdentityDomainObject;
  */
 @Entity
 @Table(name="awards")
+@JsonIgnoreProperties({"user"})
 public class Awards extends ManagedIdentityDomainObject<Evaluation>{
 
 	/**

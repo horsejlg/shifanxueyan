@@ -17,16 +17,13 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 import cn.qlt.utils.DomainObject;
+import cn.qlt.utils.ManagedIdentityDomainObject;
 
 @Entity
 @Table(name="topic")
-public class Topic extends DomainObject<Topic>{
+public class Topic extends ManagedIdentityDomainObject<Topic>{
 
 	private static final long serialVersionUID = -8141225990665755267L;
-	
-	@Id
-	@Column(name="id", length=24, nullable=false, unique=true)
-	private String id;
 	
 	@Column(name="create_time")
 	private Date createTime = new Date();
@@ -201,6 +198,14 @@ public class Topic extends DomainObject<Topic>{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	@Override
+	public String toString() {
+		return "Topic [createTime=" + createTime + ", title=" + title + ", promiseTime=" + promiseTime + ", endTime="
+				+ endTime + ", publish=" + publish + ", location=" + location + ", participants=" + participants
+				+ ", content=" + content + ", remark=" + remark + ", author=" + author + ", visibleUsers="
+				+ visibleUsers + "]";
 	}
 	
 }

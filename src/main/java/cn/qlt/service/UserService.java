@@ -74,10 +74,22 @@ public class UserService {
 			role.setCode("master");
 			role.setLabel("系统管理员");
 			roleDao.save(role);
+			
+			role = new Role();
+			role.setCode("assistant");
+			role.setLabel("辅导员");
+			roleDao.save(role);
+			
 			system = role;
-		}else{
-			system = roleDao.findSingle("code", "master");
+		}else if(roleDao.count()==3){
+			Role role = new Role();
+			role.setCode("assistant");
+			role.setLabel("辅导员");
+			roleDao.save(role);
 		}
+		
+			system = roleDao.findSingle("code", "master");
+	
 		Role stuRole = null;
 		try{
 		stuRole= roleDao.findSingle("code", "student");

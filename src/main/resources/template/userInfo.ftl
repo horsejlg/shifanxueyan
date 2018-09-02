@@ -39,8 +39,9 @@
     </#if>
     <div style="text-align:center;padding:5px 0">
             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#userInfoView').panel('close');$('#userInfoEdit').panel('open');" style="width:100px">修改帐户信息</a>
-            <a href="${base}/student/show/${user.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">查看人员信息</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#passwordEdit').window('open');" style="width:100px">修改密码</a>
+            <a href="${base}/student/show/${user.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">查看学生信息</a>
+            <a href="${base}/student/edit/${user.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">编辑学生信息</a>
     </div>
 </div>
 <div id="userInfoEdit" class="easyui-panel" title="编辑用户信息" data-options="iconCls:'icon-man',closed:true" style="width:300px;padding:20px;">

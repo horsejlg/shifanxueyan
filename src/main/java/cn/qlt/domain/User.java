@@ -130,7 +130,24 @@ public class User extends DomainObject<User>{
 		this.status = status;
 	}
 	
-	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+
 
 	public User(String id, String loginname, String nickName, String specialtyCode, String specialtyLabel, String gradeCode, String gradeLabel,
 			String classesCode, String classeslabel, String yearCode, String yearlabel, String politicsCode, String politicsLabel, String jobCode, String jobLabel, int status) {
@@ -280,5 +297,13 @@ public class User extends DomainObject<User>{
 	public void setJob(Dict job) {
 		this.job = job;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "User [loginname=" + loginname + ", nickName=" + nickName + "]";
+	}
+
 	
 }

@@ -66,6 +66,14 @@ public class Student extends DomainObject<Student>{
 	@Column(name="economy", length=255)
 	private String economy;
 	
+	public String getEconomy() {
+		return economy;
+	}
+
+	public void setEconomy(String economy) {
+		this.economy = economy;
+	}
+
 	/**
 	 * 身份证
 	 */

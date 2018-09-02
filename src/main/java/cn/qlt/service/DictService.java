@@ -41,6 +41,10 @@ public class DictService {
 	public List<Dict> getDictForType(String type){
 		return dictDao.findByType(type);
 	}
+	
+	public List<Dict> getDictForTypeAndParent(String type, String parent){
+		return dictDao.findByTypeAndParent(type, parent);
+	}
 
 	public PageResult find(Map<String, String> params, PageInfo pageInfo) {
 		PageResult result = new PageResult();

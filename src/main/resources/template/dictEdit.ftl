@@ -6,7 +6,7 @@
 			<tr>
 				<th data-options="field:'label',width:200,editor:'textbox',required:true">描述</th>
 				<th data-options="field:'code',width:100,editor:'textbox',required:true">字典代码</th>
-				<!--<th data-options="width:100,field:'parent', editor:'textbox',">上级字典代码</th>-->
+				<th data-options="width:100,field:'parent', editor:'textbox'">上级字典代码</th>
 			</tr>
 		</thead>
 	</table>
@@ -43,8 +43,10 @@ var tmp = editIndex;
 
 function deleteDict(){
 	var row = $('#dictList').datagrid('getSelected');
+	var code = row.code;
+	if(!code) code = '_';
 	$.ajax({
-	url:"${base}/dict/"+row.code,
+	url:"${base}/dict/"+code,
 	method:"DELETE",
 	success: function (data) {
 		if(data){

@@ -55,4 +55,32 @@ public class StudentService {
 		return result;
 	}
 	
+	@Transactional
+	public boolean saveStudent(Student student){
+		User user = student.getUser();
+		User old = userDao.load(student.getId());
+		user.setPassword(old.getPassword());
+		user.setLoginname(old.getLoginname());
+		user.setLastLoginTime(old.getLastLoginTime());
+		userDao.save(user);
+		studentDao.save(student);
+		return true;
+	}
+
+	public void saveSociogram(Sociogram sociogram) {
+		sociogramDao.save(sociogram);
+	}
+
+	public void saveAwards(Awards awards) {
+		awardsDao.save(awards);
+	}
+
+	public void deleteSociogram(String id) {
+		sociogramDao.delete(id);
+	}
+
+	public void deleteAwards(String id) {
+		awardsDao.delete(id);
+	}
+	
 }

@@ -72,7 +72,7 @@
 		<td width="117" align="right" >入团时间</td>
 		<td width="160" align="left" ><#if student.joinUs??>${student.joinUs?string("yyyy年MM月dd日")}</#if></td>
 		<td width="120" align="right" >性别</td>
-		<td width="160" align="left" >${student.sex}</td>
+		<td width="160" align="left" ><#if student.sex = 'f'>男<#elseif student.sex = 'm'>女</#if></td>
 	</tr>
 </table>
 <#if student.sociograms?? && student.sociograms?size gt 0>
