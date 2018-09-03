@@ -12,9 +12,11 @@
 </@block>
   </head>
   <body class="easyui-layout" style="text-align:left">
+  <@block name="head">
   <div region="north" border="false" class="group wrap header" style="height:66px;font-size:100%">
 
   </div>
+  </@>block>
   <@block name="body">
   没有引用
   </@block>

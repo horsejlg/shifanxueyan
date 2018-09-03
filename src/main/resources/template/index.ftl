@@ -18,6 +18,7 @@
 		</#if>
 		<#if user.classes??>
 			<div title="我的评测表" href="/evaluations/my.html" style="padding:10px;border-top:1px"></div>
+			<div title="我的专题" href="/topic/my.html" style="padding:10px;border-top:1px"></div>
 		</#if>
 		<#if user.roles?size gt 0 >
 			<#list user.roles as role>
@@ -25,15 +26,14 @@
 				<div title="用户管理" href="${base}/users.html" style="padding:10px;border-top:1px"></div>
 				<div title="字典管理" href="${base}/dict.html" style="padding:10px;border-top:1px"></div>
 				</#if>
-			</#list>
-			<#list user.roles as role>
 				<#if role.code == "teacher">
 				<div title="学院审核" href="/evaluations/group.html" style="padding:10px;border-top:1px"></div>
 				</#if>
-			</#list>
-			<#list user.roles as role>
 				<#if role.code == "class">
 				<div title="班级初步审核" href="/evaluations/class.html" style="padding:10px;border-top:1px"></div>
+				</#if>
+				<#if role.code == "assistant">
+				<div title="学生信息" href="/student/tree/list.html" style="padding:10px;border-top:1px"></div>
 				</#if>
 			</#list>
 		</#if>

@@ -1,3 +1,15 @@
+<#assign canSave = false />
+<#if user.id == student.user.id>
+	<#assign canSave = true />
+<#else>
+<#if user.roles?size gt 0 >
+<#list user.roles as role>
+<#if role.code == "assistant">
+	<#assign canSave = true />
+</#if>
+</#list></#if></#if>
+<@override name="head">
+</@override>
 <@override name="css">
 <style type="text/css">
  .infotable{
@@ -252,22 +264,6 @@ function startSociogramEdit(index, row){
 	sociogramIndex = index;
 	$('#sociogramList').datagrid('beginEdit', index)
 }
-function saveSociogram(){
-	var tmp = sociogramIndex;
-	if(endSociogramEdit()){
-	var row = $('#sociogramList').datagrid('getRows')[tmp];
-	$.ajax({
-	url:"${base}/student/sociogram/${student.user.id}",
-	method:"post",
-	contentType: "application/json; charset=utf-8",
-	data:JSON.stringify(row),
-	success: function (data) {
-		if(data){
-			row["id"]=data;
-		}
-	}
-});
-}}
 function cancelSociogram(){
 	$('#sociogramList').datagrid('rejectChanges');
     editIndex = undefined;
@@ -324,22 +320,8 @@ function startawardsEdit(index, row){
 	awardsIndex = index;
 	$('#awardsList').datagrid('beginEdit', index)
 }
-function saveawards(){
-	var tmp = awardsIndex;
-	if(endawardsEdit()){
-	var row = $('#awardsList').datagrid('getRows')[tmp];
-	$.ajax({
-	url:"${base}/student/awards/${student.user.id}",
-	method:"post",
-	contentType: "application/json; charset=utf-8",
-	data:JSON.stringify(row),
-	success: function (data) {
-		if(data){
-			row["id"]=data;
-		}
-	}
-});
-}}
+
+
 function cancelawards(){
 	$('#awardsList').datagrid('rejectChanges');
     editIndex = undefined;
@@ -358,6 +340,40 @@ function deleteawards(){
 }
 
 
+<#if canSave >
+function saveawards(){
+	var tmp = awardsIndex;
+	if(endawardsEdit()){
+	var row = $('#awardsList').datagrid('getRows')[tmp];
+	$.ajax({
+	url:"${base}/student/awards/${student.user.id}",
+	method:"post",
+	contentType: "application/json; charset=utf-8",
+	data:JSON.stringify(row),
+	success: function (data) {
+		if(data){
+			row["id"]=data;
+		}
+	}
+});
+}}
+
+function saveSociogram(){
+	var tmp = sociogramIndex;
+	if(endSociogramEdit()){
+	var row = $('#sociogramList').datagrid('getRows')[tmp];
+	$.ajax({
+	url:"${base}/student/sociogram/${student.user.id}",
+	method:"post",
+	contentType: "application/json; charset=utf-8",
+	data:JSON.stringify(row),
+	success: function (data) {
+		if(data){
+			row["id"]=data;
+		}
+	}
+});
+}}
 function saveStudent(){
 	var formdata = $("#studentForm").serializeArray();
 	var student = {id:"${student.id}"};
@@ -405,5 +421,6 @@ function fileupload(value){
 	}
 });
 }}
+</#if>
 </@override>
 <@extends name="/def.ftl"/>

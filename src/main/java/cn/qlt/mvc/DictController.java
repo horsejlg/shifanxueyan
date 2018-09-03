@@ -10,12 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.qlt.domain.Dict;
+import cn.qlt.domain.dto.DictNode;
 import cn.qlt.domain.dto.DictTreeNode;
 import cn.qlt.service.DictService;
 import cn.qlt.utils.SQLUtils;
@@ -41,9 +44,22 @@ public class DictController {
 		return dictService.getDictForType(type);
 	}
 	
-	@PostMapping("/dicts/{type}/{parent}")
-	public List<Dict> findDictByTypeAndParent(@PathVariable("type") String type, @PathVariable("parent") String parent){
-		return dictService.getDictForTypeAndParent(type, parent);
+	@RequestMapping("/dictNodes")
+	public List<DictNode> findDictByTypeAndParent(String type,String id, String state){
+		if(StringUtils.isEmpty(state))
+			state = "closed";
+		if(StringUtils.isEmpty(type)){
+			List<DictNode> list = new ArrayList<DictNode>();
+			list.add(new DictNode("", "学院", "grade", "closed"));
+			return list;
+		}else{
+			List<DictNode> list = new ArrayList<DictNode>();
+			List<Dict> dicts = dictService.getDictForTypeAndParent(type, id);
+			for (Dict dict : dicts) {
+				list.add(new DictNode(dict, state));
+			}
+			return list;
+		}
 	}
 	
 	@PostMapping("/dictTree/{type}")

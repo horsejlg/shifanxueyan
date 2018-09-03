@@ -13,4 +13,6 @@ public interface DictDao extends BaseRepository<Dict, String> {
 	public Dict findByTypeAndLabel(String type, String label);
 	
 	public List<Dict> findByTypeAndParent(String type, String parent);
+	
+	public List<Dict> findByParent(String parent);
 }

@@ -8,7 +8,7 @@ public class DictTreeNode {
 	
 	private String id;
 	private String text;
-	private List<DictTreeNode> children;
+	private List<DictTreeNode> children = null;
 	
 	
 	public DictTreeNode(Dict dict) {
@@ -16,6 +16,7 @@ public class DictTreeNode {
 		id = dict.getCode();
 		text = dict.getLabel();
 	}
+
 	public String getId() {
 		return id;
 	}

@@ -41,8 +41,8 @@ public class EnvironmentInterceptor implements HandlerInterceptor{
 						if(role.getCode().equals(auth.role())){
 							return true;
 						}
-						throw new BusinessException(403, "权限不足");
 					}
+					throw new BusinessException(403, "权限不足");
 				}else{
 					throw new BusinessException(404, "未登录或登录以超时！");
 				}

@@ -43,7 +43,11 @@ public class DictService {
 	}
 	
 	public List<Dict> getDictForTypeAndParent(String type, String parent){
-		return dictDao.findByTypeAndParent(type, parent);
+		if("ALL".equals(type)){
+			return dictDao.findByParent(parent);
+		}else{
+			return dictDao.findByTypeAndParent(type, StringUtils.isEmpty(parent)?null:parent);
+		}
 	}
 
 	public PageResult find(Map<String, String> params, PageInfo pageInfo) {

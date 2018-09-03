@@ -1,5 +1,9 @@
 package cn.qlt.mvc;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,13 +19,21 @@ import cn.qlt.domain.Sociogram;
 import cn.qlt.domain.Student;
 import cn.qlt.domain.User;
 import cn.qlt.service.StudentService;
+import cn.qlt.utils.SQLUtils;
+import cn.qlt.utils.SQLUtils.PageResult;
 import cn.qlt.utils.web.Auth;
+import cn.qlt.utils.web.RequestUtil;
 
 @Controller
 public class StudentController {
 	
 	@Autowired
 	private StudentService studentService;
+	
+	@GetMapping("student/tree/list")
+	public String list(){
+		return "student/tree.ftl";
+	}
 
 	@GetMapping("/student/show/{id}.html")
 	public String showStudent(@PathVariable("id")String id, ModelMap map){
@@ -29,6 +41,7 @@ public class StudentController {
 		return "student/show.ftl";
 	}
 	
+	@Auth
 	@GetMapping("/student/edit/{id}.html")
 	public String editStudent(@PathVariable("id")String id, ModelMap map){
 		map.put("student", studentService.loadFullStudent(id));
@@ -75,5 +88,12 @@ public class StudentController {
 	public boolean deleteAwards(@PathVariable String id){
 		studentService.deleteAwards(id);
 		return true;
+	}
+	
+	@Auth(role="assistant")
+	@PostMapping(value="/students")
+	public PageResult findUser(HttpServletRequest request){
+		Map<String, String> params = RequestUtil.getParams(request);
+		return studentService.find(params, SQLUtils.getPageInfo(params));
 	}
 }

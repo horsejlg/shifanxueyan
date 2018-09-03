@@ -25,7 +25,15 @@
 .Noprint{display:none;}
 </style>
 <body>
-<a class="easyui-linkbutton button Noprint" iconCls="icon-edit" href="${base}/student/edit/${student.user.id}.html">编辑</a>
+<#if user.id == student.user.id>
+	<a class="easyui-linkbutton button Noprint" iconCls="icon-edit" href="${base}/student/edit/${student.user.id}.html">编辑</a>
+<#else>
+<#if user.roles?size gt 0 >
+<#list user.roles as role>
+<#if role.code == "assistant">
+	<a class="easyui-linkbutton button Noprint" iconCls="icon-edit" href="${base}/student/edit/${student.user.id}.html">编辑</a>
+</#if>
+</#list></#if></#if>
 <table class="infotable" align="center" style="border-bottom: 0px">
 <tr>
 	<td width="100" align="right">姓名</td>
