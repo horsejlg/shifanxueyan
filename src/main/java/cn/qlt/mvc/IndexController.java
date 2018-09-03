@@ -52,4 +52,10 @@ public class IndexController {
 	public String userInfo() throws Exception{
 		return "userInfo.ftl";
 	}	
+	
+	@Auth
+	@GetMapping("/topic/my.html")
+	public String myTopic() {
+		return "topic/list.ftl";
+	}
 }

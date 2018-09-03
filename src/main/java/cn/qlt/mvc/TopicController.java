@@ -21,8 +21,10 @@ import cn.qlt.domain.TopicWork;
 import cn.qlt.domain.User;
 import cn.qlt.service.StudentService;
 import cn.qlt.service.TopicService;
+import cn.qlt.utils.SQLUtils;
 import cn.qlt.utils.SQLUtils.PageInfo;
 import cn.qlt.utils.SQLUtils.PageResult;
+import cn.qlt.utils.web.Auth;
 import cn.qlt.utils.web.AuthUtil;
 
 @RestController
@@ -78,9 +80,10 @@ public class TopicController {
 	 * @param pageSize
 	 * @return
 	 */
-	@PostMapping(value="/topics/{page}/{pageSize}")
-	public PageResult findTopic(Map<String,String> params,@PathVariable int page,@PathVariable int pageSize){
-		PageInfo pageinfo = new PageInfo(page, pageSize);
+	@Auth
+	@PostMapping(value="/topics")
+	public PageResult findTopic(Map<String,String> params){
+		PageInfo pageinfo = SQLUtils.getPageInfo(params);
 		User user = AuthUtil.getCurrentUser();
 		Student t = studentService.getStudentById(user.getId());
 		if(null!=t){//如果是学生 那就使用可见范围这个限制
@@ -96,9 +99,9 @@ public class TopicController {
 	 * @param pageSize
 	 * @return
 	 */
-	@PostMapping(value="/topicReply/{page}/{pageSize}")
-	public PageResult findTopicReply(Map<String,String> params,@PathVariable int page,@PathVariable int pageSize){
-		PageInfo pageinfo = new PageInfo(page, pageSize);
+	@PostMapping(value="/topicReply")
+	public PageResult findTopicReply(Map<String,String> params){
+		PageInfo pageinfo = SQLUtils.getPageInfo(params);
 		return topicService.findTopicReply(params, pageinfo);
 	}
 	
