@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         maven {
-        	url "http://maven.qlteacher.com:8081/nexus/content/groups/public/"
+        	url "http://maven.qltechdev.com/repository/public/"
         }
     }
     dependencies {
@@ -11,7 +11,7 @@ buildscript {
 	}
 	
 	repositories {
-    	maven { url "http://maven.qlteacher.com:8081/nexus/content/groups/public/" }
+    	maven { url "http://maven.qltechdev.com/repository/public/" }
 	}
 apply plugin: 'spring-boot'
 

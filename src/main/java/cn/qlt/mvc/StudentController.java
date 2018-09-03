@@ -92,6 +92,7 @@ public class StudentController {
 	
 	@Auth(role="assistant")
 	@PostMapping(value="/students")
+	@ResponseBody
 	public PageResult findUser(HttpServletRequest request){
 		Map<String, String> params = RequestUtil.getParams(request);
 		return studentService.find(params, SQLUtils.getPageInfo(params));

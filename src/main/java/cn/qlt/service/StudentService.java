@@ -12,6 +12,7 @@ import cn.qlt.dao.SociogramDao;
 import cn.qlt.dao.StudentDao;
 import cn.qlt.dao.UserDao;
 import cn.qlt.domain.Awards;
+import cn.qlt.domain.Dict;
 import cn.qlt.domain.Sociogram;
 import cn.qlt.domain.Student;
 import cn.qlt.domain.User;
@@ -56,7 +57,7 @@ public class StudentService {
 	
 	public PageResult find(Map<String,String> params, PageInfo page) {
 		PageResult result = new PageResult();
-		result.find(page, "select user from Student where 1=1 /~userId: and user.id = {userId}~//~name: and user.nickName like '%[name]%'~//~grade: and user.grade.code = {grade} ~//~specialty: and user.specialty.code = {specialty} ~//~classes: and user.classes.code = {classes} ~//~year: and user.code = {year} ~/", params, studentDao);
+		result.find(page, "select new User(st.user.id, st.user.loginname, ' ', st.user.nickName, st.user.specialty, st.user.grade, st.user.classes, st.user.year, 1) from Student st where st.user.status=1 /~userId: and st.user.id = {userId}~//~name: and st.user.nickName like '%[name]%'~//~grade: and st.user.grade.code = {grade} ~//~specialty: and st.user.specialty.code = {specialty} ~//~classes: and st.user.classes.code = {classes} ~//~year: and st.user.code = {year} ~/", params, studentDao);
 		return result;
 	}
 	
