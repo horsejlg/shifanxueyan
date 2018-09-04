@@ -46,7 +46,8 @@ public class DictService {
 		if("ALL".equals(type)){
 			return dictDao.findByParent(parent);
 		}else{
-			return dictDao.findByTypeAndParent(type, StringUtils.isEmpty(parent)?null:parent);
+			return dictDao.find("select distinct dict from Dict dict where dict.type = ? and (dict.parent is null or dict.parent = ?)", type,parent);
+//			return dictDao.findByTypeAndParent(type, StringUtils.isEmpty(parent)?null:parent);
 		}
 	}
 
