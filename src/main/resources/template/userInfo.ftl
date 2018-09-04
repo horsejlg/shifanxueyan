@@ -40,8 +40,18 @@
     <div style="text-align:center;padding:5px 0">
             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#userInfoView').panel('close');$('#userInfoEdit').panel('open');" style="width:100px">修改帐户信息</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#passwordEdit').window('open');" style="width:100px">修改密码</a>
-            <a href="${base}/student/show/${user.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">查看学生信息</a>
-            <a href="${base}/student/edit/${user.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">编辑学生信息</a>
+            
+            <#if user.roles?size gt 0>
+            	<#list user.roles as role>
+            	<#if role.code = 'assistant'>
+            		<a href="${base}/assistant/show/${user.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">查看辅导员信息</a>
+					<a href="${base}/assistant/edit/${user.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">编辑辅导员信息</a>
+            	<#else>
+					<a href="${base}/student/show/${user.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">查看学生信息</a>
+					<a href="${base}/student/edit/${user.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">编辑学生信息</a>
+            	</#if>
+            	</#list>
+            </#if>
     </div>
 </div>
 <div id="userInfoEdit" class="easyui-panel" title="编辑用户信息" data-options="iconCls:'icon-man',closed:true" style="width:300px;padding:20px;">

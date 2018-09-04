@@ -25,13 +25,13 @@ public class AssistantController {
 
 	@GetMapping("/assistant/show/{id}.html")
 	public String showAssistant(@PathVariable("id")String id, ModelMap map){
-		map.put("assistant", assistantService.loadFullAssistant(id));
+		map.put("assistant", assistantService.loadAssistantById(id));
 		return "assistant/show.ftl";
 	}
 	
 	@GetMapping("/assistant/edit/{id}.html")
 	public String editAssistant(@PathVariable("id")String id, ModelMap map){
-		map.put("assistant", assistantService.loadFullAssistant(id));
+		map.put("assistant", assistantService.loadAssistantById(id));
 		return "assistant/edit.ftl";
 	}
 	
@@ -43,7 +43,7 @@ public class AssistantController {
 		return assistant.getId();
 	}
 	
-	@Auth
+	/*@Auth
 	@PostMapping(value="/assistant/sociogram/{id}")
 	@ResponseBody
 	public String saveSociogram(@RequestBody Sociogram sociogram, @PathVariable String id){
@@ -58,9 +58,9 @@ public class AssistantController {
 	public boolean deleteSociogram(@PathVariable String id){
 		assistantService.deleteSociogram(id);
 		return true;
-	}
+	}*/
 	
-	@Auth
+	/*@Auth
 	@PostMapping(value="/assistant/awards/{id}")
 	@ResponseBody
 	public boolean saveAwards(@RequestBody Awards awards, @PathVariable String id){
@@ -75,5 +75,5 @@ public class AssistantController {
 	public boolean deleteAwards(@PathVariable String id){
 		assistantService.deleteAwards(id);
 		return true;
-	}
+	}*/
 }

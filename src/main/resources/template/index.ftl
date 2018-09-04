@@ -13,30 +13,41 @@
 	</#if>
 	<#if student>
 		<div title="个人信息" href="${base}/student/show/${user.id}.html" style="padding:10px;border-top:1px"></div>
-		<#else>
+	<#else>
 		<div title="个人信息" href="${base}/userInfo.html" style="padding:10px;border-top:1px"></div>
-		</#if>
-		<#if user.classes??>
+	</#if>
+		
+	<#if user.classes??>
+		<#-- 暂时不用这种判断 放到下面用角色判断了 -->
+		<#-- 
 			<div title="我的评测表" href="/evaluations/my.html" style="padding:10px;border-top:1px"></div>
-			<div title="我的专题" href="/topic/my.html" style="padding:10px;border-top:1px"></div>
-		</#if>
-		<#if user.roles?size gt 0 >
-			<#list user.roles as role>
-				<#if role.code == "master">
+		-->
+		<#-- 暂时不用这种判断 -->
+		<div title="我参与的专题" href="/topic/my.html" style="padding:10px;border-top:1px"></div>
+	</#if>
+		
+	<#if user.roles?size gt 0 >
+		<#list user.roles as role>
+			<#if role.code == "assistant">
+				<div title="我创建的专题" href="/topic/my_create.html" style="padding:10px;border-top:1px"></div>
+				<div title="我管理的学生" href="/student/tree/list.html" style="padding:10px;border-top:1px"></div>
+			</#if>
+			<#if role.code == "master">
 				<div title="用户管理" href="${base}/users.html" style="padding:10px;border-top:1px"></div>
 				<div title="字典管理" href="${base}/dict.html" style="padding:10px;border-top:1px"></div>
-				</#if>
-				<#if role.code == "teacher">
+			</#if>
+			<#if role.code == "teacher">
+				<div title="我的评测表" href="/evaluations/my.html" style="padding:10px;border-top:1px"></div>
 				<div title="学院审核" href="/evaluations/group.html" style="padding:10px;border-top:1px"></div>
-				</#if>
-				<#if role.code == "class">
+			</#if>
+			<#if role.code == "class">
+				<div title="我的评测表" href="/evaluations/my.html" style="padding:10px;border-top:1px"></div>
 				<div title="班级初步审核" href="/evaluations/class.html" style="padding:10px;border-top:1px"></div>
-				</#if>
-				<#if role.code == "assistant">
-				<div title="学生信息" href="/student/tree/list.html" style="padding:10px;border-top:1px"></div>
-				</#if>
-			</#list>
-		</#if>
+			</#if>
+		</#list>
+	<#else>
+		<div title="我的评测表" href="/evaluations/my.html" style="padding:10px;border-top:1px"></div>
+	</#if>
 	</div>
 </#if>
 </div>
