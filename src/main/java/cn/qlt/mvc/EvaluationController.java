@@ -8,9 +8,9 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.eclipse.jetty.util.UrlEncoded;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.qlt.domain.Dict;
 import cn.qlt.domain.Evaluation;
 import cn.qlt.domain.Evaluation1;
+import cn.qlt.domain.Evaluation2;
 import cn.qlt.domain.Role;
 import cn.qlt.domain.User;
 import cn.qlt.service.DictService;
@@ -46,6 +47,9 @@ public class EvaluationController {
 	@Autowired
 	private UserService userService;
 	
+	@Value("${def.evaluation.class}")
+	private String defEvalName;
+	
 /*	@Auth
 	@GetMapping("/meEvalutions.html")
 	public String meEvalutions(ModelMap map){
@@ -68,19 +72,20 @@ public class EvaluationController {
 	}*/
 
 	@Auth
-	@GetMapping("/{year}/evaluation1.html")
-	public String evaluation1(ModelMap map, @PathVariable("year")String year) {
+	@GetMapping("/{year}/evaluation.html")
+	public String evaluation1(ModelMap map, @PathVariable("year")String year) throws Exception {
 		User currentUser = AuthUtil.getCurrentUser();
 		Evaluation value = evaluationService.findByUser(currentUser.getId(), year, "Evaluation1");
 		if(value!=null){
 			return sendToPage(map, currentUser, value);
 		}
-		value = new Evaluation1();
+		Class<Evaluation> evalClass = (Class<Evaluation>) ClassLoader.getSystemClassLoader().loadClass(defEvalName);
+		value = evalClass.newInstance();
 		value.setAuthor(currentUser);
 		value.setYear(dictService.findDict(year));
 		map.put("evaluation", value);
 		map.put("edit", true);
-		return "evaluation1.ftl";
+		return String.format("/evaluation/%s.ftl", evalClass.getSimpleName().toLowerCase());
 	}
 	
 	@Auth
@@ -92,13 +97,14 @@ public class EvaluationController {
 
 	@Auth
 	@GetMapping("/evaluation/{id}.html")
-	public String openEevaluation1(@PathVariable String id, ModelMap map) {
+	public String openEevaluation(@PathVariable String id, ModelMap map) {
 		User user = AuthUtil.getCurrentUser();
 		Evaluation value = evaluationService.loadEvaluation(id);
 		return sendToPage(map, user, value);
 	}
 
 	private String sendToPage(ModelMap map, User user, Evaluation value) {
+		String path = String.format("/evaluation/%s.ftl", value.getClass().getSimpleName().toLowerCase());
 		map.put("evaluation", value);
 		if(value.getStatus() ==3){
 			map.put("edit", false);
@@ -111,13 +117,13 @@ public class EvaluationController {
 				case "teacher":
 					if (value.getStatus() ==2){
 						map.put("edit", true);
-						return "evaluation1.ftl";
+						return path;
 					}
 					break;
 				case "class":
 					if (value.getStatus() ==1 && value.getAuthor().getClasses().getCode().equals(user.getClasses().getCode())) {
 						map.put("edit", true);
-						return "evaluation1.ftl";
+						return path;
 					}
 					break;
 				default:
@@ -128,13 +134,24 @@ public class EvaluationController {
 				map.put("edit", false);
 			}
 		}
-		return "evaluation1.ftl";
+		return path;
 	}
 
 	@Auth
 	@PostMapping("/evaluation1")
 	@ResponseBody
 	public Evaluation saveEvaluation1(@RequestBody Evaluation1 eval) {
+		return saveEvaluation(eval);
+	}
+	
+	@Auth
+	@PostMapping("/evaluation2")
+	@ResponseBody
+	public Evaluation saveEvaluation2(@RequestBody Evaluation1 eval) {
+		return saveEvaluation(eval);
+	}
+
+	private Evaluation saveEvaluation(Evaluation eval) {
 		if("".equals(eval.getId())){
 			eval.setId(null);
 			if (StringUtils.isEmpty(eval.getTitle())) {
@@ -144,7 +161,7 @@ public class EvaluationController {
 			evaluationService.save(eval);
 			return eval;
 		}else{
-			Evaluation1 old = (Evaluation1) evaluationService.loadEvaluation(eval.getId());
+			Evaluation old = evaluationService.loadEvaluation(eval.getId());
 			switch (old.getStatus()) {
 			case 0:
 				BeanUtils.copyProperties(eval, old, "id","year","title","createTime","author","groupEvaluation","groupEvaluationDate");
@@ -154,13 +171,20 @@ public class EvaluationController {
 				break;
 			case 2:
 				BeanUtils.copyProperties(eval, old, "id","year","title","createTime","author","groupEvaluationDate","selfEvaluation","selfEvaluationDate");
-				if(old.getGroupEvaluationDate()==null)
-					old.setGroupEvaluationDate(new Date());
+				if(old instanceof Evaluation1){
+				if(((Evaluation1)old).getGroupEvaluationDate()==null)
+					((Evaluation1)old).setGroupEvaluationDate(new Date());
+				}
 				break;
 			default:
 				return old;
 			}
-			old.setBaseEvaluationLevel(new Float(old.getBaseEvaluationSorce()/10).intValue());
+			if(old instanceof Evaluation1){
+				((Evaluation1)old).setBaseEvaluationLevel(new Float(((Evaluation1)old).getBaseEvaluationSorce()/10).intValue());
+			}
+			if(old instanceof Evaluation2){
+				((Evaluation2)old).setBaseEvaluationLevel(new Float(((Evaluation1)old).getBaseEvaluationSorce()/10).intValue());
+			}
 			old.setGsIndex(eval.getGsIndex());
 			evaluationService.save(old);
 			return old;

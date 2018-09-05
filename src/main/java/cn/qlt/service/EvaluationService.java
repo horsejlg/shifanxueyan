@@ -111,6 +111,14 @@ public class EvaluationService {
 		else
 			return list.get(0);
 	}
+	
+	public Evaluation findByUser(String userid, String year) {
+		List<Evaluation> list = evaluationDao.find("from Evaluation where author.id=? and year.code = ? ", userid, year);
+		if(list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	}
 
 	public Long ofIndex(String entityName, String indexCol,String grade, String year, String specialty, Float number, String classes) {
 		return evaluationDao.count(String.format("from %s where year.code =? and author.grade.code=? and author.specialty.code = ? and %s > ? ",entityName, indexCol),year, grade, specialty, number);
