@@ -122,7 +122,7 @@ public class Assistant extends DomainObject<Assistant>{
             joinColumns = @JoinColumn(name = "ass_id"),
             inverseJoinColumns = @JoinColumn(name = "grade_id")
     )
-	private List<Dict> grades = new ArrayList<Dict>();
+	private List<Dict> grades;
 	
 	/**
 	 * 管理的班级
@@ -133,7 +133,7 @@ public class Assistant extends DomainObject<Assistant>{
             joinColumns = @JoinColumn(name = "ass_id"),
             inverseJoinColumns = @JoinColumn(name = "classes_id")
     )
-	private List<Dict> classess = new ArrayList<Dict>();
+	private List<Dict> classess;
 	
 	/**
 	 * 辅导员助理

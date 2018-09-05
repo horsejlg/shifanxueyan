@@ -41,12 +41,14 @@
 				<div title="学院审核" href="/evaluations/group.html" style="padding:10px;border-top:1px"></div>
 			</#if>
 			<#if role.code == "class">
+				<div title="我的辅导员" href="/assistant/my.html" style="padding:10px;border-top:1px"></div>
 				<div title="我的评测表" href="/evaluations/my.html" style="padding:10px;border-top:1px"></div>
 				<div title="班级初步审核" href="/evaluations/class.html" style="padding:10px;border-top:1px"></div>
 			</#if>
 		</#list>
 	<#else>
 		<div title="我的评测表" href="/evaluations/my.html" style="padding:10px;border-top:1px"></div>
+		<div title="我的辅导员" href="/assistant/my.html" style="padding:10px;border-top:1px"></div>
 	</#if>
 	</div>
 </#if>

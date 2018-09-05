@@ -22,16 +22,9 @@ public class AssistantService {
 	@Autowired
 	private UserDao userDao;
 	
-	@Transactional
 	public Assistant loadAssistantById(String id){
-		Assistant a = assistantDao.findOne(id);
-		if(null==a){
-			a = new Assistant();
-			a.setId(id);
-			a.setUser(userDao.load(id));
-		}
 		
-		return a;
+		return assistantDao.load(id);
 	}
 	
 	public boolean updateAssistant(Assistant assistant){
