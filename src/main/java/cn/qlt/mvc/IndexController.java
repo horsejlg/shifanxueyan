@@ -5,10 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import cn.qlt.domain.Evaluation1;
 import cn.qlt.service.DictService;
 import cn.qlt.service.UserService;
 import cn.qlt.utils.web.Auth;
