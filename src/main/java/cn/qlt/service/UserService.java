@@ -125,10 +125,10 @@ public class UserService {
 		}
 		
 		//批量处理下学生班级
-		Iterator<Student> st = stuDao.findAll().iterator();
+		Iterator<User> st = userDao.findAll().iterator();
 		while(st.hasNext()) {
-			Student s = st.next();
-			if(null==s.getClassTeam()) {
+			Student s = stuDao.load(st.next().getId());
+			if(null!=s && null==s.getClassTeam()) {
 				classTeamService.saveClassTeam(s);
 			}
 		}

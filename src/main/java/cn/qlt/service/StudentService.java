@@ -44,7 +44,6 @@ public class StudentService {
 	@Transactional
 	public Student loadFullStudent(String id){
 		Student student = studentDao.load(id);
-		student.getClassTeam();
 		if(student!=null){
 			List<Sociogram> findByUser = sociogramDao.findByUser(student.getUser());
 			student.setSociograms(findByUser);

@@ -79,7 +79,8 @@ public class EvaluationController {
 		if(value!=null){
 			return sendToPage(map, currentUser, value);
 		}
-		Class<Evaluation> evalClass = (Class<Evaluation>) ClassLoader.getSystemClassLoader().loadClass(defEvalName);
+		
+		Class<Evaluation> evalClass = (Class<Evaluation>) Thread.currentThread().getContextClassLoader().loadClass(defEvalName);
 		value = evalClass.newInstance();
 		value.setAuthor(currentUser);
 		value.setYear(dictService.findDict(year));
