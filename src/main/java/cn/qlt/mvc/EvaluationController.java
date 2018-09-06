@@ -153,6 +153,11 @@ public class EvaluationController {
 
 	private Evaluation saveEvaluation(Evaluation eval) {
 		if("".equals(eval.getId())){
+			Evaluation value = evaluationService.findByUser(eval.getAuthor().getId(), eval.getYear().getCode());
+			if(value !=null){
+				eval.setId(value.getId());
+				return saveEvaluation(eval);
+			}
 			eval.setId(null);
 			if (StringUtils.isEmpty(eval.getTitle())) {
 				eval.setTitle("齐鲁师范学院 教师教育学院" + dictService.findDict(eval.getYear().getCode()).getLabel() + "学年学生综合素质测评表——"
