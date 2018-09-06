@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.qlt.domain.Awards;
-import cn.qlt.domain.Sociogram;
 import cn.qlt.domain.Assistant;
-import cn.qlt.domain.User;
+import cn.qlt.domain.Dict;
 import cn.qlt.service.AssistantService;
 import cn.qlt.utils.web.Auth;
 
@@ -43,22 +41,20 @@ public class AssistantController {
 		return assistant.getId();
 	}
 	
-	/*@Auth
-	@PostMapping(value="/assistant/sociogram/{id}")
+	@Auth
+	@PostMapping(value="/assistant/grade/{id}")
 	@ResponseBody
-	public String saveSociogram(@RequestBody Sociogram sociogram, @PathVariable String id){
-		sociogram.setUser(new User(id));
-		assistantService.saveSociogram(sociogram);
-		return sociogram.getId();
+	public void saveGrade(@RequestBody Dict grade, @PathVariable String id){
+		assistantService.saveGrade(id,grade);
 	}
 	
 	@Auth
-	@DeleteMapping(value="/assistant/sociogram/{id}")
+	@DeleteMapping(value="/assistant/grade/{id}")
 	@ResponseBody
-	public boolean deleteSociogram(@PathVariable String id){
-		assistantService.deleteSociogram(id);
+	public boolean deleteGrade(@RequestBody Dict grade,@PathVariable String id){
+		assistantService.deleteGrade(id,grade);
 		return true;
-	}*/
+	}
 	
 	/*@Auth
 	@PostMapping(value="/assistant/awards/{id}")

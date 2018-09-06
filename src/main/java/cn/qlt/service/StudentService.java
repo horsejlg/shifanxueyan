@@ -12,7 +12,6 @@ import cn.qlt.dao.SociogramDao;
 import cn.qlt.dao.StudentDao;
 import cn.qlt.dao.UserDao;
 import cn.qlt.domain.Awards;
-import cn.qlt.domain.Dict;
 import cn.qlt.domain.Sociogram;
 import cn.qlt.domain.Student;
 import cn.qlt.domain.User;
@@ -33,6 +32,9 @@ public class StudentService {
 	
 	@Autowired
 	private AwardsDao awardsDao;
+	
+	@Autowired
+	private ClassTeamService classTeamService;
 	
 	@Transactional
 	public Student getStudentById(String id){
@@ -70,6 +72,9 @@ public class StudentService {
 		user.setLastLoginTime(old.getLastLoginTime());
 		userDao.save(user);
 		studentDao.save(student);
+		
+		classTeamService.saveClassTeam(student);
+		
 		return true;
 	}
 

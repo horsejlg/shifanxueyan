@@ -79,6 +79,24 @@
                     value:'<#if student.politics??>${student.politics.code}</#if>'"></td>
 </tr>
 <tr>
+	<td align="right">年度</td>
+	<td ><input class="easyui-combobox" name="user.dict.year"  data-options="
+                    url:'${base}/dicts/year',
+                    valueField:'code',
+                    textField:'label', 
+                    panelHeight:'auto',
+                    value:'<#if student.user.year??>${student.user.year.code}</#if>'
+                    "></td>
+	<td align="right">年级</td>
+	<td ><input class="easyui-combobox" name="user.dict.grade"  data-options="
+                    url:'${base}/dicts/grade',
+                    valueField:'code',
+                    textField:'label',
+                    value:'<#if student.user.grade??>${student.user.grade.code}</#if>', 
+                    panelHeight:'auto'
+                    "></td>
+</tr>
+<tr>
 	<td align="right">专业</td>
 	<td ><input class="easyui-combobox" name="user.dict.specialty"  data-options="
                     url:'${base}/dicts/specialty',
@@ -145,7 +163,7 @@
 </table>
 <div style="margin:20px auto; width:882px" align="center">
 	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="saveStudent()" style="width:80px">保存</a>
-	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#studentForm').from('reset');" style="width:80px">删除</a>
+	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#studentForm').from('reset');" style="width:80px">重置</a>
 </div>
 <div style="margin:auto; width:882px">
 <table id="sociogramList" class="easyui-datagrid" data-options="title:'主要社会关系',singleSelect:true,fit:false,onDblClickRow:startSociogramEdit,toolbar:'#sociogramsBtn'">

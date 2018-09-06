@@ -1,63 +1,66 @@
 <div style="width:300px;margin:0px auto"><div id="userInfoView" class="easyui-panel" title="个人信息" style="width:300px;padding:10px;">
 	<div style="margin-bottom:20px">
                 <label class="textbox-label textbox-label-before" style="text-align: left; height: 24px; line-height: 24px;">学号:</label>
-                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px;width:120px;">${user.loginname}</label>
+                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px;width:120px;">${cuser.loginname}</label>
     </div>
 	<div style="margin-bottom:20px">
                 <label class="textbox-label textbox-label-before" style="text-align: left; height: 24px; line-height: 24px;">姓名:</label>
-                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px;width:120px;">${user.nickName}</label>
+                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px;width:120px;">${cuser.nickName}</label>
     </div>
 	<div style="margin-bottom:20px">
                 <label class="textbox-label textbox-label-before" style="text-align: left; height: 24px; line-height: 24px;">专业:</label>
-                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px; width:120px;">${user.specialty.label}</label>
+                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px; width:120px;">${cuser.specialty.label}</label>
     </div>
 	<div style="margin-bottom:20px">
                 <label class="textbox-label textbox-label-before" style="text-align: left; height: 24px; line-height: 24px;">年级:</label>
-                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px;width:120px;">${user.grade.label}</label>
+                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px;width:120px;">${cuser.grade.label}</label>
     </div>
 	<div style="margin-bottom:20px">
                 <label class="textbox-label textbox-label-before" style="text-align: left; height: 24px; line-height: 24px;">班级:</label>
-                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px;width:120px;">${user.classes.label}</label>
+                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px;width:120px;">${cuser.classes.label}</label>
     </div>
 	<div style="margin-bottom:20px">
                 <label class="textbox-label textbox-label-before" style="text-align: left; height: 24px; line-height: 24px;">年度:</label>
-                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px;width:120px;">${user.year.label}</label>
+                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px;width:120px;">${cuser.year.label}</label>
     </div>
 	<div style="margin-bottom:20px">
                 <label class="textbox-label textbox-label-before" style="text-align: left; height: 24px; line-height: 24px;">政治面貌:</label>
-                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px;width:120px;">${user.politics.label}</label>
+                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px;width:120px;">${cuser.politics.label}</label>
     </div>
 	<div style="margin-bottom:20px">
                 <label class="textbox-label textbox-label-before" style="text-align: left; height: 24px; line-height: 24px;">职务:</label>
-                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px;width:120px;">${user.job.label}</label>
+                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px;width:120px;">${cuser.job.label}</label>
     </div>
-    <#if user.roles?size gt 0>
+    <#if cuser.roles?size gt 0>
 	<div style="margin-bottom:20px">
                 <label class="textbox-label textbox-label-before" style="text-align: left; height: 24px; line-height: 24px;">角色:</label>
-                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px;width:120px;"><#list user.roles as role><#if role_index gt 0>, </#if>${role.label}</#list></label>
+                <label class="textbox-label" style="text-align: left; height: 24px; line-height: 24px;width:120px;"><#list cuser.roles as role><#if role_index gt 0>, </#if>${role.label}</#list></label>
     </div>
     </#if>
     <div style="text-align:center;padding:5px 0">
             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#userInfoView').panel('close');$('#userInfoEdit').panel('open');" style="width:100px">修改帐户信息</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#passwordEdit').window('open');" style="width:100px">修改密码</a>
             
-            <#if user.roles?size gt 0>
-            	<#list user.roles as role>
+            <#if cuser.roles?size gt 0>
+            	<#list cuser.roles as role>
             	<#if role.code = 'assistant'>
-            		<a href="${base}/assistant/show/${user.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">查看辅导员信息</a>
-					<a href="${base}/assistant/edit/${user.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">编辑辅导员信息</a>
+            		<a href="${base}/assistant/show/${cuser.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">查看辅导员信息</a>
+					<a href="${base}/assistant/edit/${cuser.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">编辑辅导员信息</a>
             	<#else>
-					<a href="${base}/student/show/${user.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">查看学生信息</a>
-					<a href="${base}/student/edit/${user.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">编辑学生信息</a>
+					<a href="${base}/student/show/${cuser.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">查看学生信息</a>
+					<a href="${base}/student/edit/${cuser.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">编辑学生信息</a>
             	</#if>
             	</#list>
+            <#else>
+				<a href="${base}/student/show/${cuser.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">查看学生信息</a>
+				<a href="${base}/student/edit/${cuser.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">编辑学生信息</a>
             </#if>
     </div>
 </div>
 <div id="userInfoEdit" class="easyui-panel" title="编辑用户信息" data-options="iconCls:'icon-man',closed:true" style="width:300px;padding:20px;">
 	<form id="userInfoForm" method="post" >
             <div style="margin-bottom:20px">
-                <input class="easyui-textbox" name="nickName" style="width:100%" data-options="label:'姓名:',value:'${user.nickName}',required:true,validType:length[2,20]">
+                <input class="easyui-textbox" name="nickName" style="width:100%" data-options="label:'姓名:',value:'${cuser.nickName}',required:true,validType:length[2,20]">
             </div>
             <div style="margin-bottom:20px">
                 <input class="easyui-combobox" name="specialty" style="width:100%;" data-options="
@@ -65,7 +68,7 @@
                     valueField:'code',
                     textField:'label', 
                     panelHeight:'auto',
-                    value:'${user.specialty.code}',
+                    value:'${cuser.specialty.code}',
                     label: '专业:'
                     ">
             </div>
@@ -74,7 +77,7 @@
                     url:'${base}/dicts/grade',
                     valueField:'code',
                     textField:'label', 
-                    value:'${user.grade.code}',
+                    value:'${cuser.grade.code}',
                     panelHeight:'auto',
                     label: '年级:'
                     ">
@@ -84,7 +87,7 @@
                     url:'${base}/dicts/class',
                     valueField:'code',
                     textField:'label',
-                    value:'${user.classes.code}', 
+                    value:'${cuser.classes.code}', 
                     panelHeight:'auto',
                     label: '班级:'
                     ">
@@ -94,7 +97,7 @@
                     url:'${base}/dicts/year',
                     valueField:'code',
                     textField:'label',
-                    value:'${user.year.code}', 
+                    value:'${cuser.year.code}', 
                     panelHeight:'auto',
                     label: '年度:'
                     ">
@@ -104,7 +107,7 @@
                     url:'${base}/dicts/politics',
                     valueField:'code',
                     textField:'label',
-                    value:'${user.politics.code}', 
+                    value:'${cuser.politics.code}', 
                     panelHeight:'auto',
                     label: '政治面貌:'
                     ">
@@ -114,14 +117,14 @@
                     url:'${base}/dicts/job',
                     valueField:'code',
                     textField:'label', 
-                    value:'${user.job.code}', 
+                    value:'${cuser.job.code}', 
                     panelHeight:'auto',
                     label: '职务:'
                     ">
             </div>
-            <input type="hidden" name="id" value="${user.id}"/>
-            <input type="hidden" name="loginname" value="${user.loginname}"/>
-            <input type="hidden" name="status" value="${user.status}"/>
+            <input type="hidden" name="id" value="${cuser.id}"/>
+            <input type="hidden" name="loginname" value="${cuser.loginname}"/>
+            <input type="hidden" name="status" value="${cuser.status}"/>
         </form>
         <div style="text-align:center;padding:5px 0">
             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="saveUserInfo()" style="width:80px">提交</a>

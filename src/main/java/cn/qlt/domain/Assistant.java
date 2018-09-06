@@ -2,7 +2,9 @@ package cn.qlt.domain;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -116,35 +118,35 @@ public class Assistant extends DomainObject<Assistant>{
 	/**
 	 * 管理的年级
 	 */
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
     @JoinTable(
             name = "ass_grade",
             joinColumns = @JoinColumn(name = "ass_id"),
             inverseJoinColumns = @JoinColumn(name = "grade_id")
     )
-	private List<Dict> grades;
+	private Set<Dict> grades  = new HashSet<Dict>();
 	
 	/**
 	 * 管理的班级
 	 */
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
     @JoinTable(
             name = "ass_classess",
             joinColumns = @JoinColumn(name = "ass_id"),
             inverseJoinColumns = @JoinColumn(name = "classes_id")
     )
-	private List<Dict> classess;
+	private Set<ClassTeam> classess = new HashSet<ClassTeam>();
 	
 	/**
 	 * 辅导员助理
 	 */
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
     @JoinTable(
             name = "assistant_helper",
             joinColumns = @JoinColumn(name = "ass_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-	private List<User> helpers;
+	private Set<User> helpers = new HashSet<User>();
 
 	public String getId() {
 		return id;
@@ -274,21 +276,32 @@ public class Assistant extends DomainObject<Assistant>{
 		this.updateTime = updateTime;
 	}
 
-	public List<Dict> getGrades() {
+	public Set<Dict> getGrades() {
 		return grades;
 	}
 
-	public void setGrades(List<Dict> grades) {
+	public void setGrades(Set<Dict> grades) {
 		this.grades = grades;
 	}
 
-	public List<Dict> getClassess() {
+	public Set<ClassTeam> getClassess() {
 		return classess;
 	}
 
-	public void setClassess(List<Dict> classess) {
+	public void setClassess(Set<ClassTeam> classess) {
 		this.classess = classess;
 	}
-	
 
+	public Set<User> getHelpers() {
+		return helpers;
+	}
+
+	public void setHelpers(Set<User> helpers) {
+		this.helpers = helpers;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 }

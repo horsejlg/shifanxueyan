@@ -90,19 +90,15 @@ public class User extends DomainObject<User>{
 	
 	@OneToMany(mappedBy="user", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<UserAttribute> attributes = new ArrayList<UserAttribute>();
-
+	
 	public User() {
 		super();
 	}
-	
-	
 
 	public User(String id) {
 		super();
 		this.id = id;
 	}
-
-
 
 	public User(String loginname, String password, String nickName,
 			Date lastLoginTime, Set<Role> roles) {
@@ -297,9 +293,7 @@ public class User extends DomainObject<User>{
 	public void setJob(Dict job) {
 		this.job = job;
 	}
-
-
-
+	
 	@Override
 	public String toString() {
 		return "User [loginname=" + loginname + ", nickName=" + nickName + "]";

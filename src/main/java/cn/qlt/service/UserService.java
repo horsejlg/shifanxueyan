@@ -2,6 +2,7 @@ package cn.qlt.service;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import cn.qlt.dao.RoleDao;
+import cn.qlt.dao.StudentDao;
 import cn.qlt.dao.UserDao;
 import cn.qlt.domain.Role;
+import cn.qlt.domain.Student;
 import cn.qlt.domain.User;
 import cn.qlt.utils.SQLUtils;
 import cn.qlt.utils.SQLUtils.PageInfo;
@@ -34,6 +37,15 @@ public class UserService {
 	
 	@Autowired
 	private RoleDao roleDao;
+	
+	@Autowired
+	private StudentDao stuDao;
+	
+	@Autowired
+	private ClassTeamService classTeamService;
+	
+	@Autowired
+	private StudentService studentService;
 	
 	@Transactional
 	public User login(String loginname, String password) throws Exception{
@@ -114,6 +126,15 @@ public class UserService {
 			System.out.println(userDao.count("from User", null));
 			System.out.println("##############################");
 		}
+		
+		//批量处理下学生班级
+		/*Iterator<User> st = userDao.findAll().iterator();
+		while(st.hasNext()) {
+			Student s = studentService.loadFullStudent(st.next().getId());
+			if(null!=s && null==s.getClassTeam()) {
+				classTeamService.saveClassTeam(s);
+			}
+		}*/
 	}
 	
 	public List<Role> findAllRole(){
@@ -149,6 +170,7 @@ public class UserService {
 			user.setJob(null);
 		}
 		userDao.save(user);
+		
 		return true;
 	}
 	
