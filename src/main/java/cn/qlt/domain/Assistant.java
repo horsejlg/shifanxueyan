@@ -133,7 +133,7 @@ public class Assistant extends DomainObject<Assistant>{
             joinColumns = @JoinColumn(name = "ass_id"),
             inverseJoinColumns = @JoinColumn(name = "classes_id")
     )
-	private List<Dict> classess;
+	private List<ClassTeam> classess;
 	
 	/**
 	 * 辅导员助理
@@ -282,13 +282,20 @@ public class Assistant extends DomainObject<Assistant>{
 		this.grades = grades;
 	}
 
-	public List<Dict> getClassess() {
+	public List<ClassTeam> getClassess() {
 		return classess;
 	}
 
-	public void setClassess(List<Dict> classess) {
+	public void setClassess(List<ClassTeam> classess) {
 		this.classess = classess;
 	}
-	
+
+	public List<User> getHelpers() {
+		return helpers;
+	}
+
+	public void setHelpers(List<User> helpers) {
+		this.helpers = helpers;
+	}
 
 }

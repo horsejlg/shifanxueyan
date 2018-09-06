@@ -86,6 +86,11 @@ public class Dict extends DomainObject<Dict> {
 	public Dict() {
 		super();
 	}
+
+	@Override
+	public String toString() {
+		return "[" + label + "]";
+	}
 	
 	
 }

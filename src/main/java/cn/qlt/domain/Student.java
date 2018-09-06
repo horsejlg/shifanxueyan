@@ -11,10 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
 
 import cn.qlt.utils.DomainObject;
@@ -148,6 +146,17 @@ public class Student extends DomainObject<Student>{
 	
 	@Transient
 	private List<Awards> awards = new ArrayList<Awards>();
+	
+	@ManyToOne(cascade=CascadeType.DETACH)
+	private ClassTeam classTeam;
+	
+	public ClassTeam getClassTeam() {
+		return classTeam;
+	}
+
+	public void setClassTeam(ClassTeam classTeam) {
+		this.classTeam = classTeam;
+	}
 	
 	
 	public User getUser() {

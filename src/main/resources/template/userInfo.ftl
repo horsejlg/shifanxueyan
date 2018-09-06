@@ -51,6 +51,9 @@
 					<a href="${base}/student/edit/${user.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">编辑学生信息</a>
             	</#if>
             	</#list>
+            <#else>
+				<a href="${base}/student/show/${user.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">查看学生信息</a>
+				<a href="${base}/student/edit/${user.id}.html" class="easyui-linkbutton" style="width:100px" target="_blank">编辑学生信息</a>
             </#if>
     </div>
 </div>

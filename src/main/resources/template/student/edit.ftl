@@ -79,6 +79,24 @@
                     value:'<#if student.politics??>${student.politics.code}</#if>'"></td>
 </tr>
 <tr>
+	<td align="right">年度</td>
+	<td ><input class="easyui-combobox" name="user.dict.year"  data-options="
+                    url:'${base}/dicts/year',
+                    valueField:'code',
+                    textField:'label', 
+                    panelHeight:'auto',
+                    value:'<#if student.user.year??>${student.user.year.code}</#if>'
+                    "></td>
+	<td align="right">年级</td>
+	<td ><input class="easyui-combobox" name="user.dict.grade"  data-options="
+                    url:'${base}/dicts/grade',
+                    valueField:'code',
+                    textField:'label',
+                    value:'<#if student.user.grade??>${student.user.grade.code}</#if>', 
+                    panelHeight:'auto'
+                    "></td>
+</tr>
+<tr>
 	<td align="right">专业</td>
 	<td ><input class="easyui-combobox" name="user.dict.specialty"  data-options="
                     url:'${base}/dicts/specialty',
