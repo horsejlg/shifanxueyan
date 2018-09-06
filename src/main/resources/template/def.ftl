@@ -65,7 +65,9 @@ $.ajaxSetup({
 });
 $("#logonButton").click(function(){
 if($("#logonForm").form('enableValidation').form('validate')){
-	$.post("${base}/logon",$("#logonForm").serialize(),function(data){alert("登录成功，请继续操作！");$('#logon').window('close')}, "json");
+	$.post("${base}/logon",$("#logonForm").serialize(),function(data){
+	//alert("登录成功，请继续操作！");
+	$('#logon').window('close')}, "json");
 }});
 $("clearButton").click(function(){
 	$("logonForm").form('disableValidation').form('reset');

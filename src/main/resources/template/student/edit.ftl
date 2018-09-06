@@ -163,7 +163,7 @@
 </table>
 <div style="margin:20px auto; width:882px" align="center">
 	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="saveStudent()" style="width:80px">保存</a>
-	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#studentForm').from('reset');" style="width:80px">删除</a>
+	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#studentForm').from('reset');" style="width:80px">重置</a>
 </div>
 <div style="margin:auto; width:882px">
 <table id="sociogramList" class="easyui-datagrid" data-options="title:'主要社会关系',singleSelect:true,fit:false,onDblClickRow:startSociogramEdit,toolbar:'#sociogramsBtn'">

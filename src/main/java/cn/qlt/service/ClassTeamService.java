@@ -27,25 +27,27 @@ public class ClassTeamService {
 	
 	@Transactional
 	public void saveClassTeam(Student student) {
+		ClassTeam t = new ClassTeam();
 		if(null==student.getClassTeam()) {
-			ClassTeam t = new ClassTeam();
-			t.setYear(student.getUser().getYear());
 			t.setGrade(student.getUser().getGrade());
 			t.setSpecialty(student.getUser().getSpecialty());
 			t.setClasses(student.getUser().getClasses());
 			
-			List<ClassTeam> classTeams = classTeamDao.find("from ClassTeam where year=? and grade=? and specialty=? and classes=?", t.getYear(),t.getGrade(),t.getSpecialty(),t.getClasses());
-			if(null==classTeams || classTeams.isEmpty()) {//如果对应的班级没有
-				//就新增
-				classTeamDao.save(t);
-				student.setClassTeam(t);
-				studentDao.save(student);
-			}
+			checkAndSave(t);
+			student.setClassTeam(t);
+			studentDao.save(student);
 		}else {
-			classTeamDao.save(student.getClassTeam());
+			checkAndSave(t);
 			studentDao.save(student);
 		}
 		
+	}
+
+	private void checkAndSave(ClassTeam t) {
+		List<ClassTeam> classTeams = classTeamDao.find("from ClassTeam where grade=? and specialty=? and classes=?",t.getGrade(),t.getSpecialty(),t.getClasses());
+		if(null==classTeams || classTeams.isEmpty()) {//如果对应的班级没有
+			classTeamDao.save(t);//就新增
+		}
 	} 
 
 }

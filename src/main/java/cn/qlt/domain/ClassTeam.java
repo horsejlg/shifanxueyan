@@ -36,10 +36,6 @@ public class ClassTeam extends ManagedIdentityDomainObject<ClassTeam>{
 	@JoinColumn(name="classes",nullable=true)
 	private Dict classes;
 	
-	@ManyToOne(cascade=CascadeType.DETACH, fetch=FetchType.EAGER)
-	@JoinColumn(name="years",nullable=true)
-	private Dict year;
-	
 	@ManyToMany(mappedBy="classess")
 	private List<Assistant> assistants;
 	
@@ -70,14 +66,6 @@ public class ClassTeam extends ManagedIdentityDomainObject<ClassTeam>{
 		this.classes = classes;
 	}
 
-	public Dict getYear() {
-		return year;
-	}
-
-	public void setYear(Dict year) {
-		this.year = year;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -100,8 +88,7 @@ public class ClassTeam extends ManagedIdentityDomainObject<ClassTeam>{
 
 	@Override
 	public String toString() {
-		return "ClassTeam [specialty=" + specialty + ", grade=" + grade + ", classes=" + classes + ", year=" + year
-				+ "]";
+		return "ClassTeam [specialty=" + specialty + ", grade=" + grade + ", classes=" + classes + "]";
 	}
 	
 }
