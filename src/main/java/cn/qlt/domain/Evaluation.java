@@ -30,6 +30,8 @@ public class Evaluation extends ManagedIdentityDomainObject<Evaluation>{
 		switch (type) {
 		case "Evaluation1":
 			return "齐鲁师范学院 教师教育学院学生综合素质测评";
+		case "Evaluation2":
+			return "齐鲁师范学院 教师教育学院学生综合素质测评";
 		default:
 			return "综合素质测评";
 		}

@@ -22,6 +22,7 @@ import cn.qlt.dao.UserDao;
 import cn.qlt.domain.Dict;
 import cn.qlt.domain.Evaluation;
 import cn.qlt.domain.Evaluation1;
+import cn.qlt.domain.Evaluation2;
 import cn.qlt.domain.User;
 import cn.qlt.utils.SQLUtils.PageInfo;
 import cn.qlt.utils.SQLUtils.PageResult;
@@ -126,14 +127,17 @@ public class EvaluationService {
 
 	@Transactional(readOnly=true)
 	public void writeExcal(String type, Dict grade, Dict classes, Dict year, OutputStream outputStream) throws Exception {
-		List<Evaluation> list = evaluationDao.find(String.format("from %s where year.code=? and author.grade.code=? and author.classes.code=? order by author.loginname", type), year.getCode(), grade.getCode(), classes.getCode());
+		List<Evaluation> list = evaluationDao.find(String.format("from %s where year.code=? and author.grade.code=? and author.classes.code=? order by sumSorce desc", type), year.getCode(), grade.getCode(), classes.getCode());
 		HSSFWorkbook book = new HSSFWorkbook(new FileInputStream(new File(String.format("conf/xls/%s.xls",type))));
 		HSSFSheet sheet = book.getSheetAt(0);
 		HSSFRow row = sheet.getRow(0);
 		HSSFCell cell = row.getCell(0);
 		String string = String.format(cell.getStringCellValue(), year.getLabel(), grade.getLabel()+classes.getLabel());
 		cell.setCellValue(string);
-		int line = 4;
+		int line ;
+		switch (type) {
+		case "Evaluation1":
+			line = 4;
 		for(Evaluation evaluation:list){
 			Evaluation1 e1 = (Evaluation1) evaluation;
 			row = sheet.createRow(line++);
@@ -150,6 +154,36 @@ public class EvaluationService {
 			row.createCell(10).setCellFormula(String.format("SUM(F%d:J%d)/5", line,line));
 			row.createCell(11).setCellFormula(String.format("C%d*.45+E%d+K%d",line,line,line));
 			row.createCell(12);//.setCellValue(e1.getGsIndex());
+		}
+		break;
+		case "Evaluation2":
+			line = 4;
+			for(int index=0;index <list.size();index++){
+				int i=0;
+				Evaluation2 e1 = (Evaluation2) list.get(index);
+				row = sheet.createRow(line++);
+				row.createCell(i++).setCellValue(e1.getAuthor().getLoginname());
+				row.createCell(i++).setCellValue(e1.getAuthor().getNickName());
+				row.createCell(i++).setCellValue(e1.getBaseSource1());
+				row.createCell(i++).setCellValue(e1.getBaseSource2());
+				row.createCell(i++).setCellValue(e1.getBaseSource3());
+				row.createCell(i++).setCellValue(e1.getBaseSource4());
+				row.createCell(i++).setCellValue(e1.getBaseSource5());
+				row.createCell(i++).setCellValue(e1.getGrowSource1());
+				row.createCell(i++).setCellValue(e1.getGrowSource2());
+				row.createCell(i++).setCellValue(e1.getGrowSource3());
+				row.createCell(i++).setCellValue(e1.getGrowSource4());
+				row.createCell(i++).setCellValue(e1.getGrowSource5());
+				row.createCell(i++).setCellValue(e1.getGrowEvaluationSorce());
+				row.createCell(i++).setCellValue(e1.getStudySorce());
+				row.createCell(i++).setCellValue(e1.getOtherSource());
+				row.createCell(i++).setCellValue(e1.getStudySum());
+				row.createCell(i++).setCellValue(e1.isVetoSource()?"有":"无");
+				row.createCell(i++).setCellValue(e1.getSumSorce());
+				row.createCell(i++).setCellValue(index+1);
+			}
+		default:
+			break;
 		}
 		book.write(outputStream);
 		outputStream.flush();

@@ -55,7 +55,7 @@
                     ">
                     <span>&nbsp;报告类型:</span>
 	<input class="easyui-combobox" name="type" style="width:120px;" data-options="
-					data:[{code:'Evaluation',label:'全部'},{code:'Evaluation1',label:'学生综合素质测评表'}],
+					data:[{code:'Evaluation2',label:'学生综合素质测评表(2018),{code:'Evaluation1',label:'学生综合素质测评表(2016)'}'}],
                     valueField:'code',
                     textField:'label', 
                     panelHeight:'auto'
