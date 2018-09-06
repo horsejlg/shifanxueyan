@@ -147,7 +147,7 @@ public class EvaluationController {
 	@Auth
 	@PostMapping("/evaluation2")
 	@ResponseBody
-	public Evaluation saveEvaluation2(@RequestBody Evaluation1 eval) {
+	public Evaluation saveEvaluation2(@RequestBody Evaluation2 eval) {
 		return saveEvaluation(eval);
 	}
 
