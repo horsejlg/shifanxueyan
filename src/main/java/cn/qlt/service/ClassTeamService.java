@@ -33,21 +33,26 @@ public class ClassTeamService {
 			t.setSpecialty(student.getUser().getSpecialty());
 			t.setClasses(student.getUser().getClasses());
 			
-			checkAndSave(t);
+			t = checkAndSave(t);
 			student.setClassTeam(t);
 			studentDao.save(student);
 		}else {
-			checkAndSave(t);
+			t = checkAndSave(t);
+			student.setClassTeam(t);
 			studentDao.save(student);
 		}
 		
 	}
 
-	private void checkAndSave(ClassTeam t) {
+	private ClassTeam checkAndSave(ClassTeam t) {
 		List<ClassTeam> classTeams = classTeamDao.find("from ClassTeam where grade=? and specialty=? and classes=?",t.getGrade(),t.getSpecialty(),t.getClasses());
 		if(null==classTeams || classTeams.isEmpty()) {//如果对应的班级没有
-			classTeamDao.save(t);//就新增
+			t = classTeamDao.save(t);//就新增
+		}else{
+			t = classTeams.get(0);
 		}
+		
+		return t;
 	} 
 
 }

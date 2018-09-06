@@ -147,7 +147,7 @@ public class Student extends DomainObject<Student>{
 	@Transient
 	private List<Awards> awards = new ArrayList<Awards>();
 	
-	@ManyToOne(cascade=CascadeType.DETACH)
+	@ManyToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE})
 	private ClassTeam classTeam;
 	
 	public ClassTeam getClassTeam() {

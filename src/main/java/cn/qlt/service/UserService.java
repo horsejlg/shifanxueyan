@@ -44,6 +44,9 @@ public class UserService {
 	@Autowired
 	private ClassTeamService classTeamService;
 	
+	@Autowired
+	private StudentService studentService;
+	
 	@Transactional
 	public User login(String loginname, String password) throws Exception{
 		try{
@@ -125,13 +128,13 @@ public class UserService {
 		}
 		
 		//批量处理下学生班级
-		Iterator<User> st = userDao.findAll().iterator();
+		/*Iterator<User> st = userDao.findAll().iterator();
 		while(st.hasNext()) {
-			Student s = stuDao.load(st.next().getId());
+			Student s = studentService.loadFullStudent(st.next().getId());
 			if(null!=s && null==s.getClassTeam()) {
 				classTeamService.saveClassTeam(s);
 			}
-		}
+		}*/
 	}
 	
 	public List<Role> findAllRole(){
