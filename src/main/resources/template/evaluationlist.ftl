@@ -84,7 +84,7 @@ function openEvaluation(){
 		$.messager.alert('Warning','请选择年度');
 		return;
 	}
-	window.open("/"+year+"/evaluation1.html");
+	window.open("/"+year+"/evaluation.html");
 }
 
 function downloadExcel(){

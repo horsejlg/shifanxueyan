@@ -55,7 +55,7 @@
 </style>
 </head>
 <body>
-<form id="evaluation1" action="${base}/evaluation1" method="post">
+<form id="evaluation2" action="${base}/evaluation2" method="post">
 <div style="float: right;">填表日期：<#if evaluation.createTime??>${evaluation.createTime?string("yyyy年MM月dd日")}</#if></div>
 <div align="center" style="width: 1200px;margin: 1em auto;">
 	<h1>齐鲁师范学院 教师教育学院<#if evaluation.year?? || !edit>${evaluation.year.label}<input type="hidden" name="year" value="${evaluation.year.code}" /><#else><input class="easyui-combobox" id="year" name="year" data-options="
@@ -117,7 +117,7 @@
 6、学习了解中华民族的优良传统，继承与发扬中华优秀传统文化，得3分；<br>
 7、积极参加学校组织的普法活动；积极参加消防及安全知识的学习和培训，2分
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource1" class="easyui-numberbox base" data-options="min:0,max:3,precision:2,width:40,value:'${evaluation.baseSource1?string("#.##")}'" /><#else>${evaluation.baseSource1}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource1" class="easyui-numberbox base" data-options="min:0,max:20,precision:2,width:40,value:'${evaluation.baseSource1?string("#.##")}'" /><#else>${evaluation.baseSource1}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent1" value=evaluation.baseContent1 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark1" style="width: 100%">${evaluation.baseRemark1}</textarea><#else><p>${evaluation.baseRemark1?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -129,7 +129,7 @@
 5、宿舍卫生合格，成员每人加4分，优秀宿舍每人次加0.5分，通报宿舍每人次扣0.5分；<br>
 6、教室卫生合格，班级每人加4分，优秀班级每人次加1分，通报班级每人次扣0.5分
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource2" class="easyui-numberbox base" data-options="min:0,max:5,precision:2,width:40,value:'${evaluation.baseSource2?string("#.##")}'" /><#else>${evaluation.baseSource2}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource2" class="easyui-numberbox base" data-options="min:0,max:20,precision:2,width:40,value:'${evaluation.baseSource2?string("#.##")}'" /><#else>${evaluation.baseSource2}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent2" value=evaluation.baseContent2 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark2" style="width: 100%">${evaluation.baseRemark2}</textarea><#else><p>${evaluation.baseRemark2?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -138,7 +138,7 @@
 2、有见义勇为、同违法分子作斗争的行为，凭相关证明，加5分；<br>
 3、积极参加社会实践，具有积极的社会服务和奉献意识，加3分；
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource3" class="easyui-numberbox base" data-options="min:0,max:5,precision:2,width:40,value:'${evaluation.baseSource3?string("#.##")}'" /><#else>${evaluation.baseSource3}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource3" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:40,value:'${evaluation.baseSource3?string("#.##")}'" /><#else>${evaluation.baseSource3}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent3" value=evaluation.baseContent3 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark3" style="width: 100%">${evaluation.baseRemark3}</textarea><#else><p>${evaluation.baseRemark3?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -150,11 +150,11 @@
 5、体育成绩合格、体质测试合格加5分；不合格此项分数为0；<br>
 6、学生手册考试不合格者扣2分；
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource4" class="easyui-numberbox base" data-options="min:0,max:5,precision:2,width:40,value:'${evaluation.baseSource4?string("#.##")}'" /><#else>${evaluation.baseSource4}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource4" class="easyui-numberbox base" data-options="min:0,max:20,precision:2,width:40,value:'${evaluation.baseSource4?string("#.##")}'" /><#else>${evaluation.baseSource4}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent4" value=evaluation.baseContent4 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark4" style="width: 100%">${evaluation.baseRemark4}</textarea><#else><p>${evaluation.baseRemark4?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
-	<th class="th">日常行为<br/>（20分）</th>
+	<th class="th">日常行为<br/>（25分）</th>
 	<td colspan="6" align="left">1、严格遵守学校作息制度，按时作息，生活有规律，生活方式健康，积极参加有益于身心健康的各种集体活动，营造风朗气晴的网络环境，得3分；<br>
 2、自尊自爱，注重仪表，行为举止文明，男女交往公共场合举止得体，得3分；<br>
 3、热爱家庭，有家庭责任意识，孝敬父母，得3分；<br>
@@ -164,7 +164,7 @@
 7、参加班会、政治学习全勤者加5分。缺席一次扣0.5分<br>
 8、错误观点坚决反对，不信谣不传谣，不造谣
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource5" class="easyui-numberbox base" data-options="min:0,max:5,precision:2,width:40,value:'${evaluation.baseSource5?string("#.##")}'" /><#else>${evaluation.baseSource5}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource5" class="easyui-numberbox base" data-options="min:0,max:25,precision:2,width:40,value:'${evaluation.baseSource5?string("#.##")}'" /><#else>${evaluation.baseSource5}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent5" value=evaluation.baseContent5 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark5" style="width: 100%">${evaluation.baseRemark5}</textarea><#else><p>${evaluation.baseRemark5?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -283,20 +283,20 @@
 4、通过国家英语四级加10分、六级加20分；通过托福、雅思者加30分；计算机二级加10分、三级加15分；
 5、获得教师资格证书加10分；其他专业技能需获劳动技术鉴定部门颁发或行业认定的各类专业技能资格证书可加10分；
 </td>
-	<td align="right"><#if edit><input type="text" name="growSource5" class="easyui-numberbox grow" data-options="min:0,max:20,precision:0,width:40,value:'${evaluation.growSource5}'" /><#else>${evaluation.growSource5}</#if></td>
-	<td colspan="4"><@m.filesupload label="编辑材料" name="growContent5" value=evaluation.growContent5 edit=edit ></@m.filesupload><#if edit><textarea name="growRemark5" style="width: 100%">${evaluation.growRemark5}</textarea><#else><p>${evaluation.growRemark5?replace("\r","<br>")}</p></#if></td>
+	<td align="right"><#if edit><input type="text" id="otherSource" name="otherSource" class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:40,value:'${evaluation.otherSource}'" /><#else>${evaluation.otherSource}</#if></td>
+	<td colspan="4"><@m.filesupload label="编辑材料" name="otherContent" value=evaluation.otherContent edit=edit ></@m.filesupload><#if edit><textarea name="otherRemark" style="width: 100%">${evaluation.growRemark5}</textarea><#else><p>${evaluation.otherRemark?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
 	<th colspan="6">学业成绩=【（学习成绩×80%）+（其他×20%）】×60%</th>
 	<td colspan="1">得分</td>
-	<td colspan="5" align="right"><#if edit><input type="text" id="studySorce" name="studySorce" class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:40,value:'${evaluation.studySorce?string("#.##")}'" /><#else>${evaluation.studySorce?string("#.##")}</#if></td>
+	<td colspan="5" align="right"><#if edit><input type="text" id="studySum" name="studySum" class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:40,value:'${evaluation.studySum?string("#.##")}',readonly:true" /><#else>${evaluation.studySorce?string("#.##")}</#if></td>
 </tr>
 <tr>
 	<th colspan="12">综合测评成绩=基础性测评成绩+发展性素质测评成绩+学业成绩</th>
 </tr>
 <tr>
 	<th colspan="3">综合测评成绩</th>
-	<td colspan="3" align="right"><#if edit><input type="text" name="sumSorce" id="sumSorce"  class="easyui-numberbox" data-options="min:0,precision:2,width:40,value:'${evaluation.sumSorce?string("#.##")}',readonly:true" /><#else>${evaluation.sumSorce?string("#.##")}</#if></td>
+	<td colspan="3" align="right"><#if edit><input type="text" name="sumSorce" id="sumSorce"  class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:40,value:'${evaluation.sumSorce?string("#.##")}',readonly:true" /><#else>${evaluation.sumSorce?string("#.##")}</#if></td>
 	<th colspan="3">总排名</th>
 	<td colspan="3" align="right"><#if edit><input type="text" id="gsIndex" name="gsIndex"  class="easyui-numberbox" data-options="min:0,precision:0,width:40,value:'${evaluation.gsIndex},readonly:true'" /><#else>${evaluation.gsIndex}</#if></td>
 </tr>
@@ -364,7 +364,32 @@
 <@m.filesuploadScript title="材料管理" label="材料列表"></@m.filesuploadScript>
 </body>
 <script>
+
 $(function(){
+
+	$("#vetoSource").checkbox({"onChange":function(checked){
+		var count = 0;
+		if(!checked){
+			$('.base').each(function(){
+				count += parseFloat($(this).val());
+			});
+		}
+		$("#baseEvaluationSorce").numberbox("setValue",count/5);
+		sumAll();
+	}});
+	
+	$("#growFull").checkbox({"onChange":function(checked){
+		var count = 0;
+		if(checked){
+			count = 100;
+		}else{
+			$('.grow').each(function(){
+				count += Number($(this).numberbox("getValue"));
+			});
+		}
+		$("#growEvaluationSorce").numberbox("setValue", count/5);
+		sumAll();
+	}});
 	/*$('#evaluation1').form({
 		success:function(data){
 			$.messager.alert('Info', data, 'info');
@@ -380,34 +405,27 @@ $(function(){
 				}else{
 					var count = 0;
 					$('.base').each(function(){
-						var name = $(this).context.attributes['textboxname'].textContent;
-						if(name=='baseSource10' && $(this).val()!='0'){
-						count=-100;
-						}else if(name=='baseSource8'){
-							count -= parseFloat($(this).val())
-						}else{
-							count += parseFloat($(this).val())
-						}
-						});
-					if(count<0)count=0;
-					$("#baseEvaluationSorce").numberbox("setValue", count);
-					$("#baseEvaluationLevel").combobox("select", ""+Number(Number($("#baseEvaluationSorce").numberbox("getValue"))/10));
+						count += parseFloat($(this).val());
+					});
+					if($("#vetoSource").attr('checked'))count=0;
+					$("#baseEvaluationSorce").numberbox("setValue", count/5);
+					//$("#baseEvaluationLevel").combobox("select", ""+Number(Number($("#baseEvaluationSorce").numberbox("getValue"))/10));
 					sumAll();
 				}
-			}});
+		}});
 	})
 	$('.grow').each(function(){
 			$(this).numberbox({"onChange":function(newValue, oldValue){
 	if(newValue==""){
 					$(this).numberbox("setValue",0);
-				}else{
+				}
 			var count = 0;
 			$('.grow').each(function(){
 				count += Number($(this).numberbox("getValue"));
 			});
+			if($("#growFull").attr("checked"))count=100
 				$("#growEvaluationSorce").numberbox("setValue", count/5);
 				sumAll();
-			}
 			}});
 	});
 	$('#studySorce').numberbox({"onChange":function(newValue,oldValue){
@@ -417,6 +435,15 @@ $(function(){
 		sumAll();
 		}
 	}});
+	
+	$('#otherSource').numberbox({"onChange":function(newValue,oldValue){
+	if(newValue==""){
+		$('#otherSource').numberbox("setValue", 0);
+	}else{
+		sumAll();
+		}
+	}});
+	
 /*	$('.base').numberbox("change",function(){
 	var count = 0;
 		$('#baseEvaluationSorce').val(count);
@@ -426,7 +453,7 @@ $(function(){
                 title:'请稍等',
                 msg:'正在保存...'
             });
-		var fromDate = $("#evaluation1").serializeArray();
+		var fromDate = $("#evaluation2").serializeArray();
 		var data = {};
 		$(fromDate).each(function(){
 		switch (this.name){
@@ -439,6 +466,8 @@ $(function(){
 		default:
 			data[this.name]=this.value;
 		}});
+		data["growFull"]=$("#growFull").attr("checked");
+		data["vetoSource"]=$("#vetoSource").attr('checked');
 		$.ajax({
 	url:"${base}/evaluation2",
 	method:"post",
@@ -457,9 +486,15 @@ $(function(){
 	}
 });
 	};
+
+	
 	function sumAll(){
-		$("#sumSorce").numberbox("setValue",parseFloat($("#growEvaluationSorce").numberbox("getValue"))+parseFloat($("#baseEvaluationSorce").numberbox("getValue"))+(parseFloat($("#studySorce").numberbox("getValue"))*.45));
-		$.get("/evaluation/index/Evaluation2/sumSorce/${evaluation.author.grade.code}/<#if evaluation.year??>${evaluation.author.year.code}<#else>"+$("#year").combobox("getValue")+"</#if>/${evaluation.author.specialty.code}/${evaluation.author.classes.code}/"+$("#sumSorce").numberbox("getValue"),function(data){
+		$("#studySum").numberbox("setValue",(parseFloat($("#studySorce").numberbox("getValue"))*0.8+parseFloat($("#otherSource").numberbox("getValue"))*0.2)*0.6);
+		$("#sumSorce").numberbox("setValue",parseFloat($("#growEvaluationSorce").numberbox("getValue"))+parseFloat($("#baseEvaluationSorce").numberbox("getValue"))+parseFloat($("#studySum").numberbox("getValue")));
+		var sum = $("#sumSorce").numberbox("getValue")
+		$.get("/evaluation/index/Evaluation2/sumSorce/${evaluation.author.grade.code}/<#if evaluation.year??>${evaluation.author.year.code}<#else>"+$("#year").combobox("getValue")+"</#if>/${evaluation.author.specialty.code}/${evaluation.author.classes.code}/"+
+		sum
+		,function(data){
 			$("#gsIndex").numberbox("setValue", data);
 		});
 	}
