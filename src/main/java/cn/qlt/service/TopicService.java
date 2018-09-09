@@ -20,6 +20,7 @@ import cn.qlt.domain.TopicLog;
 import cn.qlt.domain.TopicReply;
 import cn.qlt.domain.TopicWork;
 import cn.qlt.domain.User;
+import cn.qlt.domain.dto.TopicEdit;
 import cn.qlt.utils.CompareUtils;
 import cn.qlt.utils.SQLUtils.PageInfo;
 import cn.qlt.utils.SQLUtils.PageResult;
@@ -46,7 +47,8 @@ public class TopicService {
 	public boolean createTopic(Topic topic){
 		
 		try {
-			topic.getVisibleUsers().addAll(topic.getParticipants());//把参与人员加到可见人员里面
+			//你在新建的时候加的什么人啊
+			//topic.getVisibleUsers().addAll(topic.getParticipants());//把参与人员加到可见人员里面
 			topicDao.save(topic);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -79,6 +81,18 @@ public class TopicService {
 		topicDao.delete(topicId);
 	}
 	
+	@Transactional
+	public TopicEdit getTopicEdit(String id, User opUser){
+		Topic topic = getTopicByid(id);
+		int permissions =0;
+		if(topic.getAuthor().getId().equals(opUser.getId())){
+			permissions = 2;
+		}else if(topic.getParticipants().contains(opUser)){
+			permissions = 1;
+		}
+		return new TopicEdit(topic, permissions);
+	}
+	
 	/**
 	 * 只有作者和共建人能修改,修改会记log
 	 * 
@@ -92,13 +106,14 @@ public class TopicService {
 		
 		//效验是否是作者或者是共建人
 		Topic topicOld = topicDao.findOne(topic.getId());
-		topic.getVisibleUsers().addAll(topic.getParticipants());//把参与人员加到可见人员里面
+		//人员操作就不能放到另外的方法里处理吗？
+		//topic.getVisibleUsers().addAll(topic.getParticipants());//把参与人员加到可见人员里面
 		
+		topic.setAuthor(topicOld.getAuthor());
 		if(topicOld.getAuthor().getId().equals(opUser.getId())){//作者,什么都能改
 			//记录个修改记录
 			TopicLog log = saveTopicLog(topic, opUser, topicOld);
 			topicLogDao.save(log);
-			
 			topicDao.save(topic);
 			
 		}else if(topicOld.getParticipants().contains(opUser)){//参与者只能改内容

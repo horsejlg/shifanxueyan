@@ -92,6 +92,17 @@ public class SQLUtils {
 			return rows;
 		}
 		
+		
+		
+		public PageResult() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+		public PageResult(long total, List rows) {
+			super();
+			this.total = total;
+			this.rows = rows;
+		}
 		public void find(PageInfo page, String hql, Map<String, String> params, BaseRepository dao){
 			SqlItem sqlItem = markSql(hql, params);
 			total =dao.count(sqlItem.getSql(), sqlItem.getValues().toArray());

@@ -1,16 +1,19 @@
 package cn.qlt.mvc;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,25 +40,23 @@ public class TopicController {
 	private StudentService studentService;
 	
 	//新建
+	//改为保存(只保存专题本身，不对关联人员进行操作)
 	@PostMapping(value="/topic")
-	public boolean createTopic(Topic topic) throws Exception{
-		topicService.createTopic(topic);
-		return true;
-	}
-	
-	//修改 只有作者和参与人员可修改
-	@PutMapping(value="/topic")
-	public boolean updateTopic(Topic topic) throws Exception{
+	public Topic saveTopic(@RequestBody Topic topic) throws Exception{
 		User user = AuthUtil.getCurrentUser();
-		
-		topicService.updateTopic(topic, user);
-		return true;
+		if(StringUtils.isEmpty(topic.getId())){
+			topic.setAuthor(user);
+			topicService.createTopic(topic);
+		}else{
+			topicService.updateTopic(topic, user);
+		}
+		return topic;
 	}
 	
-	@GetMapping(value="/topic/{id}")
+/*	@GetMapping(value="/topic/{id}")
 	public Topic getTopicByid(String id){
 		return topicService.getTopicByid(id);
-	}
+	}*/
 	
 	@DeleteMapping(value="/topic/{topicId}")
 	public boolean deleteTopic(@PathVariable String topicId){
@@ -82,12 +83,21 @@ public class TopicController {
 	 */
 	@Auth
 	@PostMapping(value="/topics")
-	public PageResult findTopic(Map<String,String> params){
+	public PageResult findTopic(Map<String, String> params) {
 		PageInfo pageinfo = SQLUtils.getPageInfo(params);
 		User user = AuthUtil.getCurrentUser();
+		if (params.containsKey("author_id")) {
+			params.put("author_id", user.getId());
+		}
 		Student t = studentService.getStudentById(user.getId());
-		if(null!=t){//如果是学生 那就使用可见范围这个限制
-			params.put("visibleUsers", user.getId());
+		if (null != t) {
+			if (params.containsKey("participants")) {
+				params.put("participants", user.getId());
+			} else {// 如果是学生 那就使用可见范围这个限制
+				params.put("visibleUsers", user.getId());
+			}
+		} else {
+			return new PageResult(0, new ArrayList<Topic>());
 		}
 		return topicService.find(params, pageinfo);
 	}

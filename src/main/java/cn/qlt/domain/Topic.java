@@ -15,10 +15,18 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
-import cn.qlt.utils.ManagedIdentityDomainObject;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import cn.qlt.utils.ManagedIdentityDomainObject;
+/**
+ * 
+ * 参与人员和可见人员不要在转json中出现
+ * 人员操作和专题操作应该分开处理。
+ *
+ */
 @Entity
 @Table(name="topic")
+@JsonIgnoreProperties({"participants","visibleUsers"})
 public class Topic extends ManagedIdentityDomainObject<Topic>{
 
 	private static final long serialVersionUID = -8141225990665755267L;
@@ -67,7 +75,7 @@ public class Topic extends ManagedIdentityDomainObject<Topic>{
 	/**
 	 * 参与人员
 	 */
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.LAZY)
     @JoinTable(
             name = "topic_user",
             joinColumns = @JoinColumn(name = "topic_id"),
@@ -98,7 +106,7 @@ public class Topic extends ManagedIdentityDomainObject<Topic>{
 	/**
 	 * 可见人员
 	 */
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.LAZY)
     @JoinTable(
             name = "topic_visible_user",
             joinColumns = @JoinColumn(name = "topic_id"),
@@ -195,6 +203,14 @@ public class Topic extends ManagedIdentityDomainObject<Topic>{
 
 	public void setAuthor(User author) {
 		this.author = author;
+	}
+
+	public int getHomework() {
+		return homework;
+	}
+
+	public void setHomework(int homework) {
+		this.homework = homework;
 	}
 
 	public List<User> getVisibleUsers() {
