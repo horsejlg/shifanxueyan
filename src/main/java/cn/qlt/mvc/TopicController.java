@@ -42,7 +42,7 @@ public class TopicController {
 		return topicService.addVisibleUsers(opUser, topicId, users);
 	}
 	
-	@DeleteMapping(value="/topic/visibleUsers/{topicId}/isSynchronous")
+	@DeleteMapping(value="/topic/visibleUsers/{topicId}/{isSynchronous}")
 	public int deleteVisibleUsers(@PathVariable String topicId,@RequestBody Set<User> users,@PathVariable boolean isSynchronous) throws Exception {
 		User opUser = AuthUtil.getCurrentUser();
 		return topicService.remvoceVisibleUsers(opUser, topicId, users,isSynchronous);
@@ -54,7 +54,7 @@ public class TopicController {
 		return topicService.addParticipants(opUser, topicId, users);
 	}
 	
-	@DeleteMapping(value="/topic/participants/{topicId}/isSynchronous")
+	@DeleteMapping(value="/topic/participants/{topicId}/{isSynchronous}")
 	public int deleteParticipants(@PathVariable String topicId,@RequestBody Set<User> users,@PathVariable boolean isSynchronous) throws Exception {
 		User opUser = AuthUtil.getCurrentUser();
 		return topicService.remvoceParticipants(opUser, topicId, users,isSynchronous);
