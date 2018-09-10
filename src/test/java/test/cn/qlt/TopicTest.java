@@ -3,8 +3,10 @@ package test.cn.qlt;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,11 +56,6 @@ public class TopicTest {
 		Topic topic = new Topic();
 
 		User author = userService.login("administrator", "123456");
-		List<User> participants = new ArrayList<User>();
-		participants.add(addUser());
-
-		List<User> visibleUsers = new ArrayList<User>();
-		visibleUsers.add(addUser2());
 
 		topic.setAuthor(author);
 		topic.setTitle("测试专题1");
@@ -66,30 +63,55 @@ public class TopicTest {
 				"8月2日，我国第一条地方自主高铁济青高铁开始联调联试，计划12月20日正式通车。根据中国铁总官方消息，济青高铁济南东站至胶州北站于8月21-24日顺利完成联调联试、运行试验安排，期间最快跑出了385公里的时速(点击看视频)，相当于每秒超过100米，创下联调联试期间的新纪录，比设计时速350公里超出10％。");
 		topic.setEndTime(new Date());
 		topic.setLocation("教学楼1#202");
-		topic.setParticipants(participants);
+		//topic.setParticipants(participants);
 		topic.setPromiseTime(new Date());
-		topic.setVisibleUsers(visibleUsers);
+		//topic.setVisibleUsers(visibleUsers);
 
-		topicService.createTopic(topic);
+		topic = topicService.createTopic(topic);
 		// 上面是测试新增
+		
+		Set<User> participants = new HashSet<User>();
+		
+		User user1 = addUser();
+		User user2 = addUser2();
+		
+		participants.add(user1);
+		
+		
+		int l = topicService.addParticipants(topic.getId(), participants);
+		
+		System.out.println("##################"+l);
+		
+		
+		participants.add(user2);
+		
+		l = topicService.addParticipants(topic.getId(), participants);
+		
+		System.out.println("##################"+l);
+		
+		participants.remove(user1);
+		System.out.println("@@@@"+participants.size());
+		l = topicService.remvoceParticipants(topic.getId(), participants);
+		
+		System.out.println("##################"+l);
 
-		PageInfo pageinfo = new PageInfo(1, 10);
+		/*PageInfo pageinfo = new PageInfo(1, 10);
 		Map<String, String> par = new HashMap<>();
 
 		PageResult topics = topicService.find(par, pageinfo);// 查询所有
-		System.out.println(topics.getRows());
-
-		System.out.println("####################################################");
-
-		/*
-		 * par.clear(); par.put("author_id", author.getId()); topics =
-		 * topicService.find(par,pageinfo);//查询作者
-		 */
-		User v = userService.login("class", "123456");
-		par.clear();
-		par.put("visibleUsers", v.getId());
-		topics = topicService.find(par, pageinfo);// 可见范围
-		System.out.println(topics.getRows());
+		System.out.println(topics.getRows());*/
+//
+//		System.out.println("####################################################");
+//
+//		/*
+//		 * par.clear(); par.put("author_id", author.getId()); topics =
+//		 * topicService.find(par,pageinfo);//查询作者
+//		 */
+//		User v = userService.login("class", "123456");
+//		par.clear();
+//		par.put("visibleUsers", v.getId());
+//		topics = topicService.find(par, pageinfo);// 可见范围
+//		System.out.println(topics.getRows());
 
 		// 上面是测试查询
 
@@ -111,7 +133,7 @@ public class TopicTest {
 		 */
 		// 测试修改
 
-		TopicReply r = new TopicReply();
+		/*TopicReply r = new TopicReply();
 		r.setAuthor(author);
 		r.setContent("测试回复测试回复测试回复测试回复测试回复测试回复测试回复测试回复测试回复");
 		r.setTopicId(((Topic) topics.getRows().get(0)).getId());
@@ -127,11 +149,11 @@ public class TopicTest {
 		
 		pageResult = topicService.findTopicReply(par, pageinfo);
 		
-		System.out.println(pageResult.getRows());
+		System.out.println(pageResult.getRows());*/
 		
 		//专题回复
 		
-		TopicWork tw = new TopicWork();
+		/*TopicWork tw = new TopicWork();
 		tw.setAuthor(author);
 		tw.setTopicId(((Topic) topics.getRows().get(0)).getId());
 		tw.setUrl("D://上传的文件地址");
@@ -145,7 +167,7 @@ public class TopicTest {
 		
 		List<TopicWork> list = topicService.getTopicWorkByTopicId(tw2.getTopicId());
 		
-		System.out.println(list);
+		System.out.println(list);*/
 		
 		//专题作业
 	}

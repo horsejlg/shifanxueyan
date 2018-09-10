@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,18 +45,110 @@ public class TopicService {
 	@Autowired
 	private TopicWorkDao topicWorkDao;
 	
-	public boolean createTopic(Topic topic){
+	@Transactional
+	public int addVisibleUsers(User opUser,String topicId,Set<User> users) throws Exception {
+		Topic topic = topicDao.load(topicId);
+		if(null!=topic && topic.getAuthor().equals(opUser)) {
+			if(null==topic.getVisibleUsers()) {
+				topic.setVisibleUsers(users);
+			}else {
+				topic.getVisibleUsers().addAll(users);
+			}
+			
+			topicDao.save(topic);
+			return topic.getVisibleUsers().size();
+		}
+		throw new Exception("专题不存在或您没有操作权限");
+	}
+	
+	/**
+	 * @param opUser
+	 * @param topicId
+	 * @param users
+	 * @param isSynchronous 是否同时在参与人员里面也删这些人
+	 * @return
+	 * @throws Exception
+	 */
+	@Transactional
+	public int remvoceVisibleUsers(User opUser,String topicId,Set<User> users, boolean isSynchronous) throws Exception {
+		Topic topic = topicDao.load(topicId);
+		if(null!=topic && topic.getAuthor().equals(opUser)) {
+			
+			if(null!=topic.getVisibleUsers()) {
+				topic.getVisibleUsers().removeAll(users);
+				topicDao.save(topic);
+				
+				if(isSynchronous) {
+					remvoceParticipants(opUser, topicId, users,false);
+				}
+				
+				return topic.getVisibleUsers().size();
+			}
+			
+		}
+		throw new Exception("专题不存在或您没有操作权限");
+	}
+	
+	@Transactional
+	public int addParticipants(User opUser,String topicId,Set<User> users) throws Exception {
+		Topic topic = topicDao.load(topicId);
+		
+		if(null!=topic && topic.getAuthor().equals(opUser)) {
+			if(null==topic.getParticipants()) {
+				topic.setParticipants(users);
+			}else {
+				topic.getParticipants().addAll(users);
+			}
+			
+			//把参与人员加到可见人员里面
+			addVisibleUsers(opUser, topicId, users);
+			topicDao.save(topic);
+			
+			return topic.getParticipants().size();
+		}
+		throw new Exception("专题不存在或您没有操作权限");
+	}
+	
+	/**
+	 * @param opUser
+	 * @param topicId
+	 * @param users
+	 * @param isSynchronous 是否同时在可见人员里面也删这些人
+	 * @return
+	 * @throws Exception
+	 */
+	@Transactional
+	public int remvoceParticipants(User opUser,String topicId,Set<User> users,boolean isSynchronous) throws Exception {
+		Topic topic = topicDao.load(topicId);
+		
+		if(null!=topic && topic.getAuthor().equals(opUser)) {
+			if(null!=topic.getParticipants()) {
+				topic.getParticipants().removeAll(users);
+				
+				topicDao.save(topic);
+				
+				if(isSynchronous) {
+					remvoceVisibleUsers(opUser, topicId, users,false);
+				}
+				return topic.getParticipants().size();
+			}
+		}
+		
+		throw new Exception("专题不存在或您没有操作权限");
+	}
+	
+	@Transactional
+	public Topic createTopic(Topic topic){
 		
 		try {
 			//你在新建的时候加的什么人啊
 			//topic.getVisibleUsers().addAll(topic.getParticipants());//把参与人员加到可见人员里面
-			topicDao.save(topic);
+			return topicDao.save(topic);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
 		}
+		return topic;
 		
-		return true;
 	}
 	
 	public Topic getTopicByid(String id){

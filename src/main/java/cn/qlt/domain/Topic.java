@@ -2,6 +2,7 @@ package cn.qlt.domain;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -81,7 +82,7 @@ public class Topic extends ManagedIdentityDomainObject<Topic>{
             joinColumns = @JoinColumn(name = "topic_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-	private List<User> participants;
+	private Set<User> participants;
 	
 	/**
 	 * 内容
@@ -112,7 +113,7 @@ public class Topic extends ManagedIdentityDomainObject<Topic>{
             joinColumns = @JoinColumn(name = "topic_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-	private List<User> visibleUsers;
+	private Set<User> visibleUsers;
 	
 	@Column(name="update_time")
 	private Date updateTime = new Date();
@@ -173,11 +174,11 @@ public class Topic extends ManagedIdentityDomainObject<Topic>{
 		this.location = location;
 	}
 
-	public List<User> getParticipants() {
+	public Set<User> getParticipants() {
 		return participants;
 	}
 
-	public void setParticipants(List<User> participants) {
+	public void setParticipants(Set<User> participants) {
 		this.participants = participants;
 	}
 
@@ -213,11 +214,11 @@ public class Topic extends ManagedIdentityDomainObject<Topic>{
 		this.homework = homework;
 	}
 
-	public List<User> getVisibleUsers() {
+	public Set<User> getVisibleUsers() {
 		return visibleUsers;
 	}
 
-	public void setVisibleUsers(List<User> visibleUsers) {
+	public void setVisibleUsers(Set<User> visibleUsers) {
 		this.visibleUsers = visibleUsers;
 	}
 
