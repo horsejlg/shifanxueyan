@@ -78,20 +78,20 @@ public class TopicTest {
 		participants.add(user1);
 		
 		
-		int l = topicService.addParticipants(topic.getId(), participants);
+		int l = topicService.addParticipants(author,topic.getId(), participants);
 		
 		System.out.println("##################"+l);
 		
 		
 		participants.add(user2);
 		
-		l = topicService.addParticipants(topic.getId(), participants);
+		l = topicService.addParticipants(author,topic.getId(), participants);
 		
 		System.out.println("##################"+l);
 		
 		participants.remove(user1);
 		System.out.println("@@@@"+participants.size());
-		l = topicService.remvoceParticipants(topic.getId(), participants);
+		l = topicService.remvoceParticipants(author,topic.getId(), participants,false);
 		
 		System.out.println("##################"+l);
 
