@@ -78,7 +78,14 @@
                     labelWidth:32,
                     label: '年级:'
                     ">
-    <input class="easyui-combobox" id="grades_classes" data-options="
+    <input class="easyui-combobox" name="classess_specialty" data-options="
+                    url:'${base}/dicts/specialty',
+                    valueField:'code',
+                    textField:'label', 
+                    panelHeight:'auto',
+                    label: '专业:'
+                    ">
+    <input class="easyui-combobox" id="classess_classes" data-options="
                     url:'${base}/dicts/class',
                     valueField:'code',
                     textField:'label', 
@@ -86,8 +93,8 @@
                     labelWidth:32,
                     label: '班级:'
                     ">
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addawards()" style="width:80px">添加</a>
-	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cut" plain="true" onclick="deleteawards()" style="width:80px">删除</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addClassess()" style="width:80px">添加</a>
+	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cut" plain="true" onclick="deleteClassess()" style="width:80px">删除</a>
 </div>
 
 <div style="margin:auto; width:882px">
@@ -153,6 +160,42 @@ $(function(){
 	$('#classessList').datagrid({data:${jsonFormat(assistant.classess)}});
 	$('#awardsList').datagrid({data:${jsonFormat(assistant.awards)}});
 })
+
+function addClassess(){
+	var gradvalue = $('#classess_grade').combobox('getValue');
+	var gradlabel = $('#classess_grade').combobox('getText');
+	
+	var specialtyvalue = $('#classess_specialty').combobox('getValue');
+	var specialtylabel = $('#classess_specialty').combobox('getText');
+	
+	var classessvalue = $('#classess_classes').combobox('getValue');
+	var classesslabel = $('#classess_classes').combobox('getText');
+	
+	if(gradvalue){
+		$.messager.alert('警告','请选择一个年级','warning');
+		return;
+	}
+	
+	if(specialtyvalue){
+		$.messager.alert('警告','请选择一个专业','warning');
+		return;
+	}
+	
+	if(classessvalue){
+		$.messager.alert('警告','请选择一个班级','warning');
+		return;
+	}
+	
+	$.ajax({
+		url:"${base}/assistant/grade/${assistant.user.id}",
+		method:"post",
+		contentType: "application/json; charset=utf-8",
+		data:JSON.stringify({code:grad,label:label}),
+		success: function (data) {
+			$('#gradesList').datagrid('appendRow',{code:grad,label:label});
+		}
+	});
+}
 
 function addGrades(){
 	var grad = $('#grades_grade').combobox('getValue');

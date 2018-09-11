@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.qlt.domain.Assistant;
+import cn.qlt.domain.ClassTeam;
 import cn.qlt.domain.Dict;
 import cn.qlt.service.AssistantService;
 import cn.qlt.utils.web.Auth;
@@ -56,6 +57,20 @@ public class AssistantController {
 		return true;
 	}
 	
+	@Auth
+	@PostMapping(value="/assistant/classTeam/{id}")
+	@ResponseBody
+	public void saveClassTeam(@RequestBody ClassTeam classTeam, @PathVariable String id){
+		assistantService.saveClassTeam(id,classTeam);
+	}
+	
+	@Auth
+	@DeleteMapping(value="/assistant/classTeam/{id}")
+	@ResponseBody
+	public boolean deleteClassTeam(@RequestBody ClassTeam classTeam,@PathVariable String id){
+		assistantService.deleteClassTeam(id,classTeam);
+		return true;
+	}
 	/*@Auth
 	@PostMapping(value="/assistant/awards/{id}")
 	@ResponseBody

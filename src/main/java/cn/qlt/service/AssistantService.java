@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.qlt.dao.AssistantDao;
 import cn.qlt.dao.UserDao;
 import cn.qlt.domain.Assistant;
+import cn.qlt.domain.ClassTeam;
 import cn.qlt.domain.Dict;
 import cn.qlt.domain.User;
 
@@ -70,6 +71,16 @@ public class AssistantService {
 		Assistant ass = assistantDao.load(id);
 		ass.getGrades().remove(grades);
 		assistantDao.save(ass);
+	}
+
+	public void saveClassTeam(String id, ClassTeam classTeam) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteClassTeam(String id, ClassTeam classTeam) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

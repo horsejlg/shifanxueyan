@@ -75,12 +75,13 @@ public class EvaluationController {
 	@GetMapping("/{year}/evaluation.html")
 	public String evaluation1(ModelMap map, @PathVariable("year")String year) throws Exception {
 		User currentUser = AuthUtil.getCurrentUser();
-		Evaluation value = evaluationService.findByUser(currentUser.getId(), year, "Evaluation1");
+		Class<Evaluation> evalClass = (Class<Evaluation>) Thread.currentThread().getContextClassLoader().loadClass(defEvalName);
+
+		Evaluation value = evaluationService.findByUser(currentUser.getId(), year, evalClass.getSimpleName());
 		if(value!=null){
 			return sendToPage(map, currentUser, value);
 		}
 		
-		Class<Evaluation> evalClass = (Class<Evaluation>) Thread.currentThread().getContextClassLoader().loadClass(defEvalName);
 		value = evalClass.newInstance();
 		value.setAuthor(currentUser);
 		value.setYear(dictService.findDict(year));
@@ -131,10 +132,11 @@ public class EvaluationController {
 					break;
 				}
 			}
-			if (map.containsKey("edit")) {
+			if (!map.containsKey("edit")) {
 				map.put("edit", false);
 			}
 		}
+		
 		return path;
 	}
 
@@ -189,7 +191,7 @@ public class EvaluationController {
 				((Evaluation1)old).setBaseEvaluationLevel(new Float(((Evaluation1)old).getBaseEvaluationSorce()/10).intValue());
 			}
 			if(old instanceof Evaluation2){
-				((Evaluation2)old).setBaseEvaluationLevel(new Float(((Evaluation1)old).getBaseEvaluationSorce()/10).intValue());
+				((Evaluation2)old).setBaseEvaluationLevel(new Float(((Evaluation2)old).getBaseEvaluationSorce()/10).intValue());
 			}
 			old.setGsIndex(eval.getGsIndex());
 			evaluationService.save(old);
