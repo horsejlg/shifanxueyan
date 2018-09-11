@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.qlt.domain.ClassTeam;
 import cn.qlt.domain.Student;
 import cn.qlt.domain.Topic;
 import cn.qlt.domain.TopicLog;
@@ -35,6 +36,18 @@ public class TopicController {
 	
 	@Autowired
 	private StudentService studentService;
+	
+	@PostMapping(value="/topic/visibleUsers/class/{topicId}")
+	public int addVisibleUsersByClass(@PathVariable String topicId,@RequestBody ClassTeam classTeam) throws Exception {
+		User opUser = AuthUtil.getCurrentUser();
+		return topicService.addVisibleUsersByClass(opUser, topicId, classTeam.getSpecialty(),classTeam.getGrade(),classTeam.getClasses());
+	}
+	
+	@PostMapping(value="/topic/participants/class/{topicId}")
+	public int addParticipantsByClass(@PathVariable String topicId,@RequestBody ClassTeam classTeam) throws Exception {
+		User opUser = AuthUtil.getCurrentUser();
+		return topicService.addParticipantsByClass(opUser, topicId, classTeam.getSpecialty(),classTeam.getGrade(),classTeam.getClasses());
+	}
 	
 	@PostMapping(value="/topic/visibleUsers/{topicId}")
 	public int addVisibleUsers(@PathVariable String topicId,@RequestBody Set<User> users) throws Exception {

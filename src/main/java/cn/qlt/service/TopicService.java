@@ -2,6 +2,7 @@ package cn.qlt.service;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -12,10 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.qlt.dao.ClassTeamDao;
+import cn.qlt.dao.StudentDao;
 import cn.qlt.dao.TopicDao;
 import cn.qlt.dao.TopicLogDao;
 import cn.qlt.dao.TopicReplyDao;
 import cn.qlt.dao.TopicWorkDao;
+import cn.qlt.dao.UserDao;
+import cn.qlt.domain.Dict;
 import cn.qlt.domain.Topic;
 import cn.qlt.domain.TopicLog;
 import cn.qlt.domain.TopicReply;
@@ -44,6 +49,22 @@ public class TopicService {
 	
 	@Autowired
 	private TopicWorkDao topicWorkDao;
+	
+	@Autowired
+	private ClassTeamDao classTeamDao;
+	
+	@Autowired
+	private StudentDao studentDao;
+	
+	@Autowired
+	private UserDao userDao;
+	
+	@Transactional
+	public int addVisibleUsersByClass(User opUser,String topicId,Dict specialty,Dict grade,Dict classes) throws Exception {
+		List<User> users = userDao.find("from User u where u.specialty = ? and u.grade = ? and u.classes = ?", specialty,grade,classes);
+		
+		return addVisibleUsers(opUser, topicId, new HashSet(users));
+	}
 	
 	@Transactional
 	public int addVisibleUsers(User opUser,String topicId,Set<User> users) throws Exception {
@@ -87,6 +108,13 @@ public class TopicService {
 			
 		}
 		throw new Exception("专题不存在或您没有操作权限");
+	}
+	
+	@Transactional
+	public int addParticipantsByClass(User opUser,String topicId,Dict specialty,Dict grade,Dict classes) throws Exception {
+		List<User> users = userDao.find("from User u where u.specialty = ? and u.grade = ? and u.classes = ?", specialty,grade,classes);
+		
+		return addParticipants(opUser, topicId, new HashSet(users));
 	}
 	
 	@Transactional
