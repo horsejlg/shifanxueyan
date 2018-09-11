@@ -18,7 +18,7 @@
 <form id="evalquery">
 <div>
 <#if type != 'my'>	<span>填表人:</span>
-	<input id="nickName" class="easyui-textbox" prompt="填表人">
+	<input id="nickName" name="nickName" class="easyui-textbox" prompt="填表人">
 	<span>&nbsp;专业:</span>
 	<input class="easyui-combobox" name="specialty" style="width:120px;" data-options="
                     <#if type == 'class'>data:[{code:'${user.specialty.code}',label:'${user.specialty.label}'}],
@@ -107,11 +107,19 @@ function downloadExcel(){
 }
 
 function query(){
-	var fromDate = $("#evalquery").serializeArray();
+	//var fromDate = $("#evalquery").serializeArray(); //这个方法取不出来隐藏input的val 有问题
 	var data = {};
-	$(fromDate).each(function(){
-		data[this.name]=this.value;
-	});
+	data.nickName = $("#nickName").val();
+	data.specialty = $("#specialty").val();
+	data.grade = $("#grade").val();
+	data.classes = $("#classes").val();
+	data.year = $("#year").val();
+	data.type = $("#type").val();
+	data.status = $("#status").val();
+	
+	//$(fromDate).each(function(){
+	//	data[this.name]=this.value;
+	//});
 	$('#evaluations').datagrid('load', data);
 }
 </script>
