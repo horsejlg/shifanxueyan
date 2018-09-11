@@ -343,6 +343,7 @@
 <input type="hidden" name="author" value="${evaluation.author.id}" />
 <input type="hidden" id="status" name="status" value="${evaluation.status}" />
 </form>
+<@m.filesuploadScript title="材料管理" label="材料列表"></@m.filesuploadScript>
 <#if edit>
 <div style="text-align:center;padding:5px 0" id="buttons">
 	<#if evaluation.status==0>
@@ -361,7 +362,6 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" onclick="window.location.reload()" style="width:80px">撤销修改</a>
     </#if>
         </div>
-<@m.filesuploadScript title="材料管理" label="材料列表"></@m.filesuploadScript>
 </body>
 <script>
 

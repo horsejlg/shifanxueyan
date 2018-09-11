@@ -2,6 +2,8 @@
 <#if edit>
 <button class="easyui-linkbutton" type="button" onclick="reload('${name}')">${label}</button>
 <input id="${name}" name="${name}" type="hidden" value="${value?html}"/>
+<#else>
+<input id="${name}" name="${name}" type="hidden" value="${value?html}"/>
 </#if>
 <div id="${name}_list">
 <#-- if value?? && value!="">
