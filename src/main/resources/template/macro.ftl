@@ -71,21 +71,18 @@ function deleteFile(index){
 }
 function reload(id){
 	window.updatefiles = $("#"+id);
+	$("#attachments").datagrid({data:{rows:[],total:0}});
 	if(window.updatefiles.val()){
 	var list = $.parseJSON(window.updatefiles.val());
-	var list1=[];
 	for(var i=0;i<list.length;i++){
 		if(list[i].path){
-			list1.push(list[i]);
+			//list1.push(list[i]);
+			$("#attachments").datagrid("appendRow",list[i]);
 		}else{
 			$("#txt_row").val(list[i].label);
 		}
 	}
-		list = {rows:list1,total:list1.length};
-		$("#attachments").datagrid({data:list});
 		
-	}else{
-	$("#attachments").datagrid({data:{rows:[],total:0}});
 	}
 	$("#filesuploadWindow").dialog("open");
 	$("#filesuploadWindow").dialog("center");
