@@ -200,7 +200,7 @@ if($("#passwordFrom").form('enableValidation').form('validate')){
 $.extend($.fn.validatebox.defaults.rules, {
     equals: {
         validator: function(value,param){
-            return value == $(param[0]).val();
+            return value == $(param).val();
         },
         message: '两次输入不同，请重新输入'
     }
