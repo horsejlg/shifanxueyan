@@ -20,6 +20,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -57,14 +59,17 @@ public class User extends DomainObject<User>{
 	
 	@ManyToOne(cascade=CascadeType.DETACH, fetch=FetchType.EAGER)
 	@JoinColumn(name="specialty",nullable=true)
+	@NotFound(action=NotFoundAction.IGNORE)
 	private Dict specialty;
 	
 	@ManyToOne(cascade=CascadeType.DETACH, fetch=FetchType.EAGER)
 	@JoinColumn(name="grade",nullable=true)
+	@NotFound(action=NotFoundAction.IGNORE)
 	private Dict grade;
 	
 	@ManyToOne(cascade=CascadeType.DETACH, fetch=FetchType.EAGER)
 	@JoinColumn(name="classes",nullable=true)
+	@NotFound(action=NotFoundAction.IGNORE)
 	private Dict classes;
 	
 	@ManyToOne(cascade=CascadeType.DETACH, fetch=FetchType.EAGER)
