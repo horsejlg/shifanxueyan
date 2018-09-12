@@ -39,8 +39,8 @@ public class EvaluationService {
 	@Autowired
 	private DictService dictService;
 
-	@PostConstruct
-	@Scheduled(cron="0 0 0,6,12,18 * * ?")
+	//@PostConstruct
+	//@Scheduled(cron="0 0 0,6,12,18 * * ?")
 	public void reloadEvaluation1Index(){
 		List<Dict> years = dictService.getDictForType("year");
 		List<Dict> specialtys = dictService.getDictForType("specialty");
@@ -48,6 +48,8 @@ public class EvaluationService {
 		for(Dict year:years){
 			for(Dict specialty:specialtys){
 				for( Dict grade:grades){
+					//这个启动报错
+					//Caused by: javax.persistence.EntityNotFoundException: Unable to find cn.qlt.domain.Dict with id
 					List<Evaluation> list = evaluationDao.find("from Evaluation1 where status BETWEEN 1 AND 3 and year.code = ? and author.specialty.code=? and author.grade.code=? order by studySorce desc", year.getCode(), specialty.getCode(), grade.getCode());
 					for(int i=0;i<list.size();i++){
 						Evaluation1 e = (Evaluation1) (list.get(i));
