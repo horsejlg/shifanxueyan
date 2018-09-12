@@ -115,13 +115,13 @@
 4、维护国家尊严与声誉，敢于同有损于祖国、国格的言行作斗争，得2分；<br>
 5、关心国家大事，为祖国和家乡的建设尽义务，得2分；<br>
 6、学习了解中华民族的优良传统，继承与发扬中华优秀传统文化，得3分；<br>
-7、积极参加学校组织的普法活动；积极参加消防及安全知识的学习和培训，2分
+7、积极参加学校组织的普法活动；积极参加消防及安全知识的学习和培训，得2分
 </td>
 	<td align="right"><#if edit><input type="text" name="baseSource1" class="easyui-numberbox base" data-options="min:0,max:20,precision:2,width:40,value:'${evaluation.baseSource1?string("#.##")}'" /><#else>${evaluation.baseSource1}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent1" value=evaluation.baseContent1 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark1" style="width: 100%">${evaluation.baseRemark1}</textarea><#else><p>${evaluation.baseRemark1?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
-	<th class="th">热爱集体<br/>（20分）</th>
+	<th class="th">热爱集体<br/>（15分）</th>
 	<td colspan="6" align="left">关爱集体，爱护公物，节约水电，得2分；<br>
 2、积极树立团结意识，乐于助人，团结互助，服务他人，尊重他人与他人和谐相处，得4分；宿舍关系不和谐，宿舍全体成员减2分；申请调宿舍者减3分。<br>
 3、坚持社会主义集体主义，个人利益要服从集体利益，得2分；<br>
@@ -129,7 +129,7 @@
 5、宿舍卫生合格，成员每人加4分，优秀宿舍每人次加0.5分，通报宿舍每人次扣0.5分；<br>
 6、教室卫生合格，班级每人加4分，优秀班级每人次加1分，通报班级每人次扣0.5分
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource2" class="easyui-numberbox base" data-options="min:0,max:20,precision:2,width:40,value:'${evaluation.baseSource2?string("#.##")}'" /><#else>${evaluation.baseSource2}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource2" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:40,value:'${evaluation.baseSource2?string("#.##")}'" /><#else>${evaluation.baseSource2}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent2" value=evaluation.baseContent2 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark2" style="width: 100%">${evaluation.baseRemark2}</textarea><#else><p>${evaluation.baseRemark2?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -142,19 +142,20 @@
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent3" value=evaluation.baseContent3 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark3" style="width: 100%">${evaluation.baseRemark3}</textarea><#else><p>${evaluation.baseRemark3?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
-	<th class="th">学科德育<br/>（20分）</th>
+	<th class="th">学科德育<br/>（15分）</th>
 	<td colspan="6" align="left">1、热爱学习，学习态度端正，勤奋刻苦，此项加5分；<br>
 2、严守考纪，诚信考试，杜绝作弊，真实地反映自己的学习成绩，得5分；<br>
 3、爱护教学、科研设备，得3分；<br>
 4、尊重教师劳动，积极参与教学活动，得2分；<br>
 5、体育成绩合格、体质测试合格加5分；不合格此项分数为0；<br>
-6、学生手册考试不合格者扣2分；
+6、学生手册考试不合格者扣2分；<br>
+7、抄袭、剽窃他人作业、文章或论文，一次扣15分；
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource4" class="easyui-numberbox base" data-options="min:0,max:20,precision:2,width:40,value:'${evaluation.baseSource4?string("#.##")}'" /><#else>${evaluation.baseSource4}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource4" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:40,value:'${evaluation.baseSource4?string("#.##")}'" /><#else>${evaluation.baseSource4}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent4" value=evaluation.baseContent4 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark4" style="width: 100%">${evaluation.baseRemark4}</textarea><#else><p>${evaluation.baseRemark4?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
-	<th class="th">日常行为<br/>（25分）</th>
+	<th class="th">日常行为<br/>（35分）</th>
 	<td colspan="6" align="left">1、严格遵守学校作息制度，按时作息，生活有规律，生活方式健康，积极参加有益于身心健康的各种集体活动，营造风朗气晴的网络环境，得3分；<br>
 2、自尊自爱，注重仪表，行为举止文明，男女交往公共场合举止得体，得3分；<br>
 3、热爱家庭，有家庭责任意识，孝敬父母，得3分；<br>
@@ -162,9 +163,16 @@
 5、有强烈的纪律观念，自觉遵守校内各项纪律；自觉抵制各种违纪行为，得3分。<br>
 6、学年满勤（含早操、晚自习及其他教学活动）者加5分，每旷一次扣0.5分<br>
 7、参加班会、政治学习全勤者加5分。缺席一次扣0.5分<br>
-8、错误观点坚决反对，不信谣不传谣，不造谣
+8、错误观点坚决反对，不信谣不传谣，不造谣，得2分；<br>
+9、弄虚作假骗取各类困难补助或奖学金的，扣20分； <br>
+10、生活简朴，不铺张浪费，学生公认的，加5分；铺张浪费，进行与自己经济情况不符的消费活动，一次扣5分；<br>
+11、不按时归还贷款本息的或不履行贷款约定的，一次扣10分；<br>
+12、按时交学费，得3分；恶意欠缴学费，一次扣15分；<br>
+13、酗酒者，一次扣10分；<br>
+14、在禁烟区吸烟者，一次扣3分；<br>
+15、隐瞒自身健康状况，拒不配合学校或社会有关机构进行健康调查的，一次扣20分；
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource5" class="easyui-numberbox base" data-options="min:0,max:25,precision:2,width:40,value:'${evaluation.baseSource5?string("#.##")}'" /><#else>${evaluation.baseSource5}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource5" class="easyui-numberbox base" data-options="min:0,max:35,precision:2,width:40,value:'${evaluation.baseSource5?string("#.##")}'" /><#else>${evaluation.baseSource5}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent5" value=evaluation.baseContent5 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark5" style="width: 100%">${evaluation.baseRemark5}</textarea><#else><p>${evaluation.baseRemark5?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -178,8 +186,8 @@
 	<td colspan="4"><@m.filesupload label="编辑材料" name="vetoContent" value=evaluation.vetoContent edit=edit ></@m.filesupload><#if edit><textarea name="vetoRemark" style="width: 100%">${evaluation.vetoRemark}</textarea><#else><p>${evaluation.vetoRemark?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
-	<th colspan="3">基础性素质测评成绩</th>
-	<td colspan="9" align="right"><#if edit><input type="text" id="baseEvaluationSorce" name="baseEvaluationSorce" class="easyui-numberbox" data-options="min:0,max:35,precision:2,width:40,readonly:true,value:'${evaluation.baseEvaluationSorce?string("#.##")}'" /><#else>${evaluation.baseEvaluationSorce}</#if></td>
+	<th colspan="5">思想政治与道德素质测评成绩</th>
+	<td colspan="7" align="right"><#if edit><input type="text" id="baseEvaluationSorce" name="baseEvaluationSorce" class="easyui-numberbox" data-options="min:0,max:35,precision:2,width:40,readonly:true,value:'${evaluation.baseEvaluationSorce?string("#.##")}'" /><#else>${evaluation.baseEvaluationSorce}</#if></td>
 </tr>
 <tr>
 	<th colspan="12">发　 展　性　素　 质　 测　 评　 （20分）</th>
@@ -212,7 +220,7 @@
 注：上述项目可重复加分，具体分数由各级负责人协商决定，最终由教师教育学院全体辅导员老师审核，有权酌情加减分；<br>
 
 </td>
-	<td align="right"><#if edit><input type="text" name="growSource2" class="easyui-numberbox grow" data-options="min:0,max:20,precision:0,width:40,value:'${evaluation.growSource2}'" /><#else>${evaluation.growSource2}</#if></td>
+	<td align="right"><#if edit><input type="text" name="growSource2" class="easyui-numberbox grow" data-options="min:0,max:30,precision:0,width:40,value:'${evaluation.growSource2}'" /><#else>${evaluation.growSource2}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="growContent2" value=evaluation.growContent2 edit=edit ></@m.filesupload><#if edit><textarea name="growRemark2" style="width: 100%">${evaluation.growRemark2}</textarea><#else><p>${evaluation.growRemark2?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -226,7 +234,7 @@
 注：鉴定依据为有创业基地、拥有合作投资协议、实体店面或网络官方平台认定的虚拟店铺；
 
 </td>
-	<td align="right"><#if edit><input type="text" name="growSource3" class="easyui-numberbox grow" data-options="min:0,max:20,precision:0,width:40,value:'${evaluation.growSource3}'" /><#else>${evaluation.growSource3}</#if></td>
+	<td align="right"><#if edit><input type="text" name="growSource3" class="easyui-numberbox grow" data-options="min:0,max:10,precision:0,width:40,value:'${evaluation.growSource3}'" /><#else>${evaluation.growSource3}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="growContent3" value=evaluation.growContent3 edit=edit ></@m.filesupload><#if edit><textarea name="growRemark3" style="width: 100%">${evaluation.growRemark3}</textarea><#else><p>${evaluation.growRemark3?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -245,8 +253,8 @@
 	<th class="th">通报表扬、获得个人荣誉称号等加分<br/>（20分）</th>
 	<td colspan="6" align="left">1、校通报表扬者，每人次加4分，院通报表扬者，每人次加2分（有文件按文件加分）；<br>
 2、获得国家级、省级、校级和院级的个人荣誉（如各级各类奖学金和优秀党员、优秀学生干部、支教优秀青年志愿者、优秀心理健康工作者等荣誉称号）分别加16分、12分、8分、4分；<br>
-2、校级“优秀学生干部”“优秀学生”“优秀团员”“优秀团干部”每人加2分；省级“优秀学生干部”“优秀学生”“优秀团员”“优秀团干部”每人加3分；校级“先进班集体”班级成员每人加1分，校级“先进团支部”班级成员每人加1分；省级“先进班集体”班级成员每人加3分；省级“先进团支部”班级成员每人加3分；<br>
-3、技能展示（黑板字、毛笔字、硬笔字、简笔画等），一经展示，每次加2分；以《学习部展览作品名单》为准；
+3、校级“优秀学生干部”“优秀学生”“优秀团员”“优秀团干部”每人加2分；省级“优秀学生干部”“优秀学生”“优秀团员”“优秀团干部”每人加3分；校级“先进班集体”班级成员每人加1分，校级“先进团支部”班级成员每人加1分；省级“先进班集体”班级成员每人加3分；省级“先进团支部”班级成员每人加3分；<br>
+4、技能展示（黑板字、毛笔字、硬笔字、简笔画等），一经展示，每次加2分；以《学习部展览作品名单》为准；
 </td>
 	<td align="right"><#if edit><input type="text" name="growSource5" class="easyui-numberbox grow" data-options="min:0,max:20,precision:0,width:40,value:'${evaluation.growSource5}'" /><#else>${evaluation.growSource5}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="growContent5" value=evaluation.growContent5 edit=edit ></@m.filesupload><#if edit><textarea name="growRemark5" style="width: 100%">${evaluation.growRemark5}</textarea><#else><p>${evaluation.growRemark5?replace("\r","<br>")}</p></#if></td>

@@ -49,6 +49,14 @@
 </div>
 <input type="hidden" name="id" id="topicId" value="${topic.id}" />
 </form>
+<table id="participants" class="easyui-datagrid" data-options="url:'/topic/participants/class/${topic.id}'">
+	<thead>
+		<tr>
+			<th ></th>
+			<th></th>
+		</tr>
+	</thead>
+</table>
 </div>
 </@override>
 <@override name="script">

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,6 +29,7 @@ import cn.qlt.utils.SQLUtils.PageInfo;
 import cn.qlt.utils.SQLUtils.PageResult;
 import cn.qlt.utils.web.Auth;
 import cn.qlt.utils.web.AuthUtil;
+import cn.qlt.utils.web.RequestUtil;
 
 @RestController
 public class TopicController {
@@ -117,12 +120,13 @@ public class TopicController {
 	 */
 	@Auth
 	@PostMapping(value="/topics")
-	public PageResult findTopic(Map<String, String> params) {
+	public PageResult findTopic(HttpServletRequest request) {
+		Map<String, String> params = RequestUtil.getParams(request);
 		PageInfo pageinfo = SQLUtils.getPageInfo(params);
 		User user = AuthUtil.getCurrentUser();
 		if (params.containsKey("author_id")) {
 			params.put("author_id", user.getId());
-		}
+		}else{
 		Student t = studentService.getStudentById(user.getId());
 		if (null != t) {
 			if (params.containsKey("participants")) {
@@ -130,8 +134,7 @@ public class TopicController {
 			} else {// 如果是学生 那就使用可见范围这个限制
 				params.put("visibleUsers", user.getId());
 			}
-		} else {
-			return new PageResult(0, new ArrayList<Topic>());
+		}
 		}
 		return topicService.find(params, pageinfo);
 	}
