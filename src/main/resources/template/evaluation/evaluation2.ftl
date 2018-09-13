@@ -99,7 +99,7 @@
 	<td colspan="5" align="center">${evaluation.author.job.label}</td>
 </tr>
 <tr>
-	<th colspan="12" align="center">基　础　性　素　质　测　评　（35分）</th>
+	<th colspan="12" align="center">思 想 政 治 与 道 德 素 质  测   评（20分）</th>
 </tr>
 <tr>
 	<th colspan="7" align="center">具体内容</th>
@@ -143,11 +143,11 @@
 </tr>
 <tr>
 	<th class="th">学科德育<br/>（15分）</th>
-	<td colspan="6" align="left">1、热爱学习，学习态度端正，勤奋刻苦，此项加5分；<br>
-2、严守考纪，诚信考试，杜绝作弊，真实地反映自己的学习成绩，得5分；<br>
-3、爱护教学、科研设备，得3分；<br>
+	<td colspan="6" align="left">1、热爱学习，学习态度端正，勤奋刻苦，此项加4分；<br>
+2、严守考纪，诚信考试，杜绝作弊，真实地反映自己的学习成绩，得4分；<br>
+3、爱护教学、科研设备，得2分；<br>
 4、尊重教师劳动，积极参与教学活动，得2分；<br>
-5、体育成绩合格、体质测试合格加5分；不合格此项分数为0；<br>
+5、体育成绩合格、体质测试合格加3分；不合格此项分数为0；<br>
 6、学生手册考试不合格者扣2分；<br>
 7、抄袭、剽窃他人作业、文章或论文，一次扣15分；
 </td>
@@ -260,7 +260,7 @@
 	<td colspan="4"><@m.filesupload label="编辑材料" name="growContent5" value=evaluation.growContent5 edit=edit ></@m.filesupload><#if edit><textarea name="growRemark5" style="width: 100%">${evaluation.growRemark5}</textarea><#else><p>${evaluation.growRemark5?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
-	<th colspan="8">凡是获得一项（及以上）荣誉、在省级（及以上）刊物发表作品的学生，发展性素质测评成绩为满分</th>
+	<th colspan="8">凡是获得一项省级（及以上）荣誉、在省级（及以上）刊物发表作品的学生，发展性素质测评成绩为满分</th>
 	<td colspan="4" align="right"><#if edit><input type="text" id="growFull" name="growFull" class="easyui-checkbox" value="true" <#if evaluation.growFull>checked</#if>/><#else>${evaluation.growFull}</#if></td>
 </tr>
 <tr>
@@ -300,7 +300,7 @@
 	<td colspan="5" align="right"><#if edit><input type="text" id="studySum" name="studySum" class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:40,value:'${evaluation.studySum?string("#.##")}',readonly:true" /><#else>${evaluation.studySorce?string("#.##")}</#if></td>
 </tr>
 <tr>
-	<th colspan="12">综合测评成绩=基础性测评成绩+发展性素质测评成绩+学业成绩</th>
+	<th colspan="12">综合测评成绩=思想政治与道德素质测评成绩+发展性素质测评成绩+学业成绩</th>
 </tr>
 <tr>
 	<th colspan="3">综合测评成绩</th>
