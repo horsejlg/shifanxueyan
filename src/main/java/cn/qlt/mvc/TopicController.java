@@ -1,6 +1,5 @@
 package cn.qlt.mvc;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,6 +38,16 @@ public class TopicController {
 	
 	@Autowired
 	private StudentService studentService;
+	
+	@GetMapping(value="/topic/visibleUsers/{topicId}")
+	public List<User> getVisibleUsers(@PathVariable String topicId) throws Exception {
+		return topicService.getVisibleUsers(topicId);
+	}
+	
+	@GetMapping(value="/topic/participants/{topicId}")
+	public List<User> getParticipants(@PathVariable String topicId) throws Exception {
+		return topicService.getParticipants(topicId);
+	}
 	
 	@PostMapping(value="/topic/visibleUsers/class/{topicId}")
 	public int addVisibleUsersByClass(@PathVariable String topicId,@RequestBody ClassTeam classTeam) throws Exception {
