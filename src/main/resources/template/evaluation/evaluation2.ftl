@@ -474,8 +474,11 @@ $(function(){
 		default:
 			data[this.name]=this.value;
 		}});
-		data["growFull"]=$("#growFull").attr("checked");
-		data["vetoSource"]=$("#vetoSource").attr('checked');
+		//data["growFull"]=$("#growFull").attr("checked");
+		//data["vetoSource"]=$("#vetoSource").attr('checked');
+		
+		data["growFull"]=$("#growFull").val();
+		data["vetoSource"]=$("#vetoSource").val();
 		$.ajax({
 	url:"${base}/evaluation2",
 	method:"post",
