@@ -114,6 +114,7 @@ function fileListSubmit(){
 		delete window.updatefiles;
 	}
 }
+
 </script>
 <#assign hasUploadScript=true >
 </#if>

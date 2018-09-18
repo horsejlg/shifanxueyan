@@ -474,8 +474,8 @@ $(function(){
 		default:
 			data[this.name]=this.value;
 		}});
-		data["growFull"]=$("#growFull").attr("checked");
-		data["vetoSource"]=$("#vetoSource").attr('checked');
+		data["growFull"]=$("#growFull").val();
+		data["vetoSource"]=$("#vetoSource").val();
 		$.ajax({
 	url:"${base}/evaluation2",
 	method:"post",
@@ -494,19 +494,6 @@ $(function(){
 	}
 });
 	};
-	
-function showfilelist(id){
-	if($("#"+id).val()){
-	var list = $.parseJSON($("#"+id).val());
-	var list_div=$("#"+id+"_list");
-	list_div.empty();
-	if(list){
-	$(list).each(function(){
-		list_div.append('<a href="'+this.path+'" style="margin-right:10px;" target="_blank">'+this.label+'</a>');
-		});
-	}}
-}
-
 	
 	function sumAll(){
 		$("#studySum").numberbox("setValue",(parseFloat($("#studySorce").numberbox("getValue"))*0.8+parseFloat($("#otherSource").numberbox("getValue"))*0.2)*0.6);
@@ -529,6 +516,19 @@ function showfilelist(id){
 	});
 	$('#evaluation_save').click(toSave);
 	});
+	
+	
+	function showfilelist(id){
+		if($("#"+id).val()){
+		var list = $.parseJSON($("#"+id).val());
+		var list_div=$("#"+id+"_list");
+		list_div.empty();
+		if(list){
+		$(list).each(function(){
+			list_div.append('<a href="'+this.path+'" style="margin-right:10px;" target="_blank">'+this.label+'</a>');
+			});
+		}}
+	}
 </script>
 </#if>
 </html>

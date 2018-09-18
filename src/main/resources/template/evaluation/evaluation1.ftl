@@ -443,18 +443,6 @@ $(function(){
 		});
 	}
 	
-	function showfilelist(id){
-	if($("#"+id).val()){
-	var list = $.parseJSON($("#"+id).val());
-	var list_div=$("#"+id+"_list");
-	list_div.empty();
-	if(list){
-	$(list).each(function(){
-		list_div.append('<a href="'+this.path+'" style="margin-right:10px;" target="_blank">'+this.label+'</a>');
-		});
-	}}
-}
-	
 	$('#evaluation_submit').click(function(){
 		$('#status').val('${evaluation.status+1}');
 		toSave();
@@ -465,6 +453,19 @@ $(function(){
 	});
 	$('#evaluation_save').click(toSave);
 	});
+	
+	
+	function showfilelist(id){
+		if($("#"+id).val()){
+		var list = $.parseJSON($("#"+id).val());
+		var list_div=$("#"+id+"_list");
+		list_div.empty();
+		if(list){
+		$(list).each(function(){
+			list_div.append('<a href="'+this.path+'" style="margin-right:10px;" target="_blank">'+this.label+'</a>');
+			});
+		}}
+	}
 </script>
 </#if>
 </html>
