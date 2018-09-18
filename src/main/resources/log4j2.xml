@@ -68,4 +68,5 @@
 			<appender-ref ref="RollingFileWarn" />
 			<appender-ref ref="RollingFileError" />
 		</root>
-</configuration
+	</loggers>
+</configuration>
