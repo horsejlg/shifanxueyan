@@ -1,5 +1,6 @@
 package cn.qlt.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -348,5 +349,21 @@ public class TopicService {
 	
 	public List<TopicWork> getTopicWorkByTopicId(String topicId){
 		return topicWorkDao.find("from TopicWork where topicId = ? ", topicId);
+	}
+
+	@Transactional
+	public List<User> getVisibleUsers(String topicId) {
+		// TODO Auto-generated method stub
+		Set<User> users = getTopicByid(topicId).getVisibleUsers();
+		users.size();
+		return new ArrayList<User>(users);
+	}
+	
+	@Transactional
+	public List<User> getParticipants(String topicId) {
+		// TODO Auto-generated method stub
+		Set<User> participants = getTopicByid(topicId).getParticipants();
+		participants.size();
+		return new ArrayList<>(participants);
 	}
 }

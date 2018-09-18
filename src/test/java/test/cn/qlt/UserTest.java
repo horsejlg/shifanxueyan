@@ -121,10 +121,10 @@ public class UserTest {
 	public void testCount(){
 		/*System.out.println(roleDao.count("from Role", null));
 		User loadUser = userdao.findSingle("loginname", "administrator");*/
-		User u = us.loadUser("167da3b154c7a5a102e6aa58");
-		System.out.println(u.checkPassword("123456"));
-		us.updatePasswordByMaster("167da3b154c7a5a102e6aa58", "123456");
-		System.out.println(u.checkPassword("123456"));
+//		User u = us.loadUser("167da3b154c7a5a102e6aa58");
+//		System.out.println(u.checkPassword("123456"));
+//		us.updatePasswordByMaster("167da3b154c7a5a102e6aa58", "123456");
+//		System.out.println(u.checkPassword("123456"));
 	}
 
 
