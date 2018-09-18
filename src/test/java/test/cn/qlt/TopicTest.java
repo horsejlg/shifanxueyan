@@ -49,9 +49,14 @@ public class TopicTest {
 
 	@Autowired
 	private TopicDao topicDao;
-
+	
 	@Test
-	@Transactional
+	public void t() {
+		
+	}
+
+	//@Test
+	//@Transactional
 	public void testTopic() throws Exception {
 		Topic topic = new Topic();
 
