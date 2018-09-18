@@ -1,12 +1,16 @@
 package cn.qlt.mvc;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import cn.qlt.domain.Role;
 import cn.qlt.domain.Topic;
+import cn.qlt.domain.User;
 import cn.qlt.domain.dto.TopicEdit;
 import cn.qlt.service.DictService;
 import cn.qlt.service.TopicService;
@@ -66,7 +70,8 @@ public class IndexController {
 	@Auth
 	@GetMapping("/topic/edit/{id}.html")
 	public String editTopic(@PathVariable String id,ModelMap map) {
-		TopicEdit topicEdit = topicService.getTopicEdit(id, AuthUtil.getCurrentUser());
+		User user = AuthUtil.getCurrentUser();
+		TopicEdit topicEdit = topicService.getTopicEdit(id, user);
 		map.put("topic", topicEdit.getTopic());
 		map.put("permissions", topicEdit.getPermissions());
 		return "topic/edit.ftl";

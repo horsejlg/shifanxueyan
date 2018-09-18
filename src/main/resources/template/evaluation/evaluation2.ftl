@@ -182,7 +182,7 @@
 3、通过不良手段（作弊、协助他人作弊等）获得学年所修课程成绩者；<br>
 4、通过网络散布谣言，造成不良影响者；
 </td>
-	<td align="right"><#if edit><input type="text" id="vetoSource" name="vetoSource" class="easyui-checkbox" value="true" <#if evaluation.vetoSource>checked</#if>" /><#else><#if evaluation.vetoSource>是<#else>否</#if></#if></td>
+	<td align="right"><#if edit><input type="text" id="vetoSource" name="vetoSource" class="easyui-checkbox" value="true" <#if evaluation.vetoSource >checked</#if> /><#else><#if evaluation.vetoSource>是<#else>否</#if></#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="vetoContent" value=evaluation.vetoContent edit=edit ></@m.filesupload><#if edit><textarea name="vetoRemark" style="width: 100%">${evaluation.vetoRemark}</textarea><#else><p>${evaluation.vetoRemark?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -474,8 +474,8 @@ $(function(){
 		default:
 			data[this.name]=this.value;
 		}});
-		data["growFull"]=$("#growFull").val();
-		data["vetoSource"]=$("#vetoSource").val();
+		data["growFull"]=data["growFull"]?true:false;
+		data["vetoSource"]=data["vetoSource"]?true:false;
 		$.ajax({
 	url:"${base}/evaluation2",
 	method:"post",

@@ -18,24 +18,24 @@
 <form id='topicForm' >
 <table class="infotable" align="center" style="border-bottom: 0px">
 <tr>
-	<td width="100" align="right">标题</td>
-	<td width="744" align="left" colspan="5"><input type="text" class="easyui-textbox" data-options="value:'${topic.title}'" name="title" /></td>
+	<td width="100" align="right">标题:</td>
+	<td width="744" align="left" colspan="5"><input type="text" class="easyui-textbox" data-options="value:'${topic.title}',width:600<#if permissions lt 2>,readonly:true</#if>" name="title" /></td>
 </tr>
 <tr>
-	<td align="right">约定时间</td>
-	<td ><input type="text" name="promiseTime" class="easyui-datebox" data-options="width:120,value:'<#if topic.promiseTime??>${topic.promiseTime?string("yyyy-MM-dd")}</#if>',showSeconds:false" /></td>
-	<td align="right">截止时间</td>
-	<td ><input type="text" name="endTime" class="easyui-datebox" data-options="width:120,value:'<#if topic.endTime??>${topic.endTime?string("yyyy-MM-dd")}</#if>',showSeconds:false" /></td>
+	<td align="right">约定时间:</td>
+	<td ><input type="text" name="promiseTime" class="easyui-datebox" data-options="width:120,value:'<#if topic.promiseTime??>${topic.promiseTime?string("yyyy-MM-dd")}</#if>',showSeconds:false<#if permissions lt 2>,readonly:true</#if>" /></td>
+	<td align="right">截止时间:</td>
+	<td ><input type="text" name="endTime" class="easyui-datebox" data-options="width:120,value:'<#if topic.endTime??>${topic.endTime?string("yyyy-MM-dd")}</#if>',showSeconds:false<#if permissions lt 2>,readonly:true</#if>" /></td>
 	<td><input class="easyui-checkbox" id="publish" name="publish" value="true" label="发布:" <#if topic.publish == 1>checked</#if> ></td>
 </tr>
 <tr>
-	<td align="right">地点</td>
-	<td colspan="3"><input type="text" class="easyui-textbox" data-options="value:'${topic.location}'" name="location" /></td>
+	<td align="right">地点:</td>
+	<td colspan="3"><input type="text" class="easyui-textbox" data-options="value:'${topic.location}',width:500" name="location" /></td>
 	<td><input class="easyui-checkbox" id="homework" name="homework" value="true" label="要求交作业:" <#if topic.homework == 1>checked</#if>></td>
 </tr>
 <tr>
-	<td align="right">备注</td>
-	<td colspan="4"><input class="easyui-textbox" name="remark" data-options="value:'${topic.remark}'" style="width:300px"></td>
+	<td align="right" valign="top">备注:</td>
+	<td colspan="4"><input class="easyui-textbox" name="remark" data-options="value:'${topic.remark}',width:600,multiline:true,height:50" ></td>
 </tr>
 <tr>
 	<td colspan="6"><textarea id="content" name="content" style="width:100%;height:300px;">
@@ -50,7 +50,19 @@
 <input type="hidden" name="id" id="topicId" value="${topic.id}" />
 </form>
 <div align="center">
-<table id="participants" class="easyui-datagrid" data-options="url:'${base}/topic/participants/${topic.id}',method:'get',toolbar:'#participantsButton',width:800">
+<table id="participants" class="easyui-datagrid" data-options="url:'${base}/topic/participants/${topic.id}',method:'get',toolbar:'#participantsButton',width:800,title:'参与人员'">
+	<thead>
+		<tr>
+			<th data-options="field:'id',checkbox:true"></th>
+			<th data-options="field:'loginname',width:120">学号</th>
+			<th data-options="field:'nickName',width:120,align:'right'">姓名</th>
+			<th data-options="field:'specialty',width:120,align:'right',formatter:function(value,row,index){if(value)return value.label;}">专业</th>
+			<th data-options="field:'grade',width:120,align:'right',formatter:function(value,row,index){if(value)return value.label}">年级</th>
+			<th data-options="field:'classes',width:120,align:'right',formatter:function(value,row,index){if(value)return value.label}">班级</th>
+		</tr>
+	</thead>
+</table>
+<table id="visibleUsers" class="easyui-datagrid" data-options="url:'${base}/topic/visibleUsers/${topic.id}',method:'get',toolbar:'#visibleUsersButton',width:800,title:'可见人员'">
 	<thead>
 		<tr>
 			<th data-options="field:'id',checkbox:true"></th>
@@ -63,10 +75,15 @@
 	</thead>
 </table>
 </div>
+<div id="visibleUsersButton" >
+	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addUser('visibleUsers')">添加</a>
+	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cut" plain="true" onclick="deleteUser('visibleUsers')">删除</a>
 </div>
 <div id="participantsButton" >
 	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addUser('participants')">添加</a>
 	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cut" plain="true" onclick="deleteUser('participants')">删除</a>
+</div>
+</div>
 </div>
 <div id="userSelect" class="easyui-window" title="用户信息" data-options="iconCls:'icon-man',minimizable:false,maximizable:false,collapsible:false,modal:true,resizable:false,draggable:false,closed:true" style="width:850px;padding:20px;">
 <table id="userList" class="easyui-datagrid" data-options="url:'/console/users',toolbar:'#userTools'">
@@ -175,7 +192,8 @@ function addTo(){
 				if(data){
 					$.messager.alert('信息','添加用户成功','info');
 					$('#userSelect').window('close');
-					$("#"+window.targetType).datagrid('reload');
+					$("#participants").datagrid('reload');
+					$("#visibleUsers").datagrid('reload');
 					window.targetType = undefined;
 				}
 			}
@@ -194,7 +212,8 @@ function deleteUser(type){
 			dataType: "json",
 			success: function (data) {
 				$.messager.alert('信息','删除用户成功','info');
-				$("#"+type).datagrid('reload');
+				$("#participants").datagrid('reload');
+				$("#visibleUsers").datagrid('reload');
 			}
 		});
 	}
