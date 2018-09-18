@@ -517,8 +517,9 @@ $(function(){
 	});
 	$('#evaluation_save').click(toSave);
 	});
-	
-	
+</script>
+</#if>
+	<script>
 	function showfilelist(id){
 		if($("#"+id).val()){
 		var list = $.parseJSON($("#"+id).val());
@@ -530,6 +531,5 @@ $(function(){
 			});
 		}}
 	}
-</script>
-</#if>
+	</script>
 </html>
