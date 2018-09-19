@@ -70,6 +70,12 @@ public class EvaluationController {
 		map.put("status", 2);
 		return "evaluation.ftl";
 	}*/
+	
+	@Auth
+	@GetMapping("/reloadEvaluation2Index")
+	public void reloadEvaluation2Index() {
+		evaluationService.reloadEvaluation1Index();
+	}
 
 	@Auth
 	@GetMapping("/{year}/evaluation.html")
