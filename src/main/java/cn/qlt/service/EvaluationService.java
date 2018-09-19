@@ -68,6 +68,7 @@ public class EvaluationService {
 	
 	@PostConstruct
 	@Scheduled(cron="0 0 0,6,12,18 * * ?")
+	@Transactional
 	public void reloadEvaluation2Index(){
 		List<Dict> years = dictService.getDictForType("year");
 		List<Dict> specialtys = dictService.getDictForType("specialty");
@@ -83,11 +84,13 @@ public class EvaluationService {
 					}
 					evaluationDao.save(list);*/
 					for( Dict clz:classes){
-					List<Evaluation> list = evaluationDao.find("from Evaluation2 where status BETWEEN 1 AND 3 and year.code = ? and author.specialty.code=? and author.grade.code=? and author.classes.code=? order by sumSorce desc", year.getCode(), specialty.getCode(), grade.getCode(),clz.getCode());
+					List<Evaluation2> list = evaluationDao.findEvaluation2(year.getCode(), specialty.getCode(), grade.getCode(),clz.getCode());
 					for(int i=0;i<list.size();i++){
-						list.get(i).setGsIndex(i+1);
+						Evaluation2 e = list.get(i);
+						e.setGsIndex(i+1);
+						evaluationDao.saveGsIndex(e.getGsIndex(),e.getId());
 					}
-					evaluationDao.save(list);
+					//evaluationDao.save(list);
 					}
 				}
 			}

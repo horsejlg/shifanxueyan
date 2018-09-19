@@ -117,7 +117,7 @@ public class UserTest {
 
 	}
 	
-	@Test
+	//@Test
 	public void testCount(){
 		/*System.out.println(roleDao.count("from Role", null));
 		User loadUser = userdao.findSingle("loginname", "administrator");*/
