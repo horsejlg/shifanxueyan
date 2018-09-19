@@ -542,6 +542,10 @@ public class Evaluation2 extends Evaluation{
 	public boolean isVetoSource() {
 		return vetoSource;
 	}
+	
+	public boolean getVetoSource() {
+		return vetoSource;
+	}
 
 	public void setVetoSource(boolean vetoSource) {
 		this.vetoSource = vetoSource;
@@ -562,6 +566,10 @@ public class Evaluation2 extends Evaluation{
 	public void setVetoRemark(String vetoRemark) {
 		this.vetoRemark = vetoRemark;
 	}
+	
+	public boolean getGrowFull() {
+		return growFull;
+	}
 
 	public boolean isGrowFull() {
 		return growFull;
@@ -578,5 +586,27 @@ public class Evaluation2 extends Evaluation{
 	public void setStudySum(float studySum) {
 		this.studySum = studySum;
 	}
-		
+
+	@Override
+	public String toString() {
+		return "Evaluation2 [baseEvaluationSorce=" + baseEvaluationSorce + ", baseEvaluationLevel="
+				+ baseEvaluationLevel + ", baseSource1=" + baseSource1 + ", baseContent1=" + baseContent1
+				+ ", baseRemark1=" + baseRemark1 + ", baseSource2=" + baseSource2 + ", baseContent2=" + baseContent2
+				+ ", baseRemark2=" + baseRemark2 + ", baseSource3=" + baseSource3 + ", baseContent3=" + baseContent3
+				+ ", baseRemark3=" + baseRemark3 + ", baseSource4=" + baseSource4 + ", baseContent4=" + baseContent4
+				+ ", baseRemark4=" + baseRemark4 + ", baseSource5=" + baseSource5 + ", baseContent5=" + baseContent5
+				+ ", baseRemark5=" + baseRemark5 + ", vetoSource=" + vetoSource + ", vetoContent=" + vetoContent
+				+ ", vetoRemark=" + vetoRemark + ", growEvaluationSorce=" + growEvaluationSorce + ", growEvaluation="
+				+ growEvaluation + ", growSource1=" + growSource1 + ", growContent1=" + growContent1 + ", growRemark1="
+				+ growRemark1 + ", growSource2=" + growSource2 + ", growContent2=" + growContent2 + ", growRemark2="
+				+ growRemark2 + ", growSource3=" + growSource3 + ", growContent3=" + growContent3 + ", growRemark3="
+				+ growRemark3 + ", growSource4=" + growSource4 + ", growContent4=" + growContent4 + ", growRemark4="
+				+ growRemark4 + ", growSource5=" + growSource5 + ", growContent5=" + growContent5 + ", growRemark5="
+				+ growRemark5 + ", growFull=" + growFull + ", studySorce=" + studySorce + ", studyContent="
+				+ studyContent + ", studyRemark=" + studyRemark + ", otherSource=" + otherSource + ", otherContent="
+				+ otherContent + ", otherRemark=" + otherRemark + ", studySum=" + studySum + ", selfEvaluation="
+				+ selfEvaluation + ", selfEvaluationDate=" + selfEvaluationDate + ", groupEvaluation=" + groupEvaluation
+				+ ", groupEvaluationDate=" + groupEvaluationDate + "]";
+	}
+	
 }

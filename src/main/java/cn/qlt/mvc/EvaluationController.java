@@ -8,6 +8,8 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,6 +52,8 @@ public class EvaluationController {
 	@Value("${def.evaluation.class}")
 	private String defEvalName;
 	
+	private static Logger logger = LogManager.getLogger("EvaluationController");
+	
 /*	@Auth
 	@GetMapping("/meEvalutions.html")
 	public String meEvalutions(ModelMap map){
@@ -74,7 +78,7 @@ public class EvaluationController {
 	@Auth
 	@GetMapping("/reloadEvaluation2Index")
 	public void reloadEvaluation2Index() {
-		evaluationService.reloadEvaluation1Index();
+		evaluationService.reloadEvaluation2Index();
 	}
 
 	@Auth
@@ -108,6 +112,9 @@ public class EvaluationController {
 	public String openEevaluation(@PathVariable String id, ModelMap map) {
 		User user = AuthUtil.getCurrentUser();
 		Evaluation value = evaluationService.loadEvaluation(id);
+		logger.error("######");
+		logger.error(value);
+		logger.error("######");
 		return sendToPage(map, user, value);
 	}
 

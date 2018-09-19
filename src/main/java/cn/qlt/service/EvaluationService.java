@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -17,6 +19,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.qlt.dao.Evaluation2Dao;
 import cn.qlt.dao.EvaluationDao;
 import cn.qlt.dao.UserDao;
 import cn.qlt.domain.Dict;
@@ -34,11 +37,16 @@ public class EvaluationService {
 	private EvaluationDao evaluationDao;
 	
 	@Autowired
+	private Evaluation2Dao evaluation2Dao;
+	
+	@Autowired
 	private UserDao userDao;
 	
 	@Autowired
 	private DictService dictService;
 
+	private static Logger logger = LogManager.getLogger("EvaluationService");
+	
 	//@PostConstruct
 	//@Scheduled(cron="0 0 0,6,12,18 * * ?")
 	public void reloadEvaluation1Index(){
@@ -66,7 +74,7 @@ public class EvaluationService {
 		}
 	}
 	
-	@PostConstruct
+	//@PostConstruct
 	@Scheduled(cron="0 0 0,6,12,18 * * ?")
 	@Transactional
 	public void reloadEvaluation2Index(){
@@ -87,8 +95,8 @@ public class EvaluationService {
 					List<Evaluation2> list = evaluationDao.findEvaluation2(year.getCode(), specialty.getCode(), grade.getCode(),clz.getCode());
 					for(int i=0;i<list.size();i++){
 						Evaluation2 e = list.get(i);
-						e.setGsIndex(i+1);
-						evaluationDao.saveGsIndex(e.getGsIndex(),e.getId());
+//						e.setGsIndex(i+1);
+						evaluationDao.saveGsIndex(i+1,e.getId());
 					}
 					//evaluationDao.save(list);
 					}
@@ -158,7 +166,8 @@ public class EvaluationService {
 		return evaluationDao.count(String.format("from %s where year.code =? and author.grade.code=? and author.specialty.code = ? and %s > ? ",entityName, indexCol),year, grade, specialty, number);
 	}
 
-	@Transactional(readOnly=true)
+	//FIXME 这里打开会让下面的isVetoSource 取值错误!!!
+	//@Transactional(readOnly=true)
 	public void writeExcal(String type, Dict grade, Dict classes, Dict year, OutputStream outputStream) throws Exception {
 		List<Evaluation> list = evaluationDao.find(String.format("from %s where year.code=? and author.grade.code=? and author.classes.code=? order by sumSorce desc", type), year.getCode(), grade.getCode(), classes.getCode());
 		HSSFWorkbook book = new HSSFWorkbook(new FileInputStream(new File(String.format("conf/xls/%s.xls",type))));
@@ -194,6 +203,13 @@ public class EvaluationService {
 			for(int index=0;index <list.size();index++){
 				int i=0;
 				Evaluation2 e1 = (Evaluation2) list.get(index);
+				
+				e1 = (Evaluation2) loadEvaluation(e1.getId());
+				logger.error("===========");
+				logger.error(e1.isVetoSource());
+				logger.error(e1.getVetoSource());
+				logger.error("===========");
+				
 				row = sheet.createRow(line++);
 				row.createCell(i++).setCellValue(e1.getAuthor().getLoginname());
 				row.createCell(i++).setCellValue(e1.getAuthor().getNickName());
