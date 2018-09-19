@@ -20,7 +20,7 @@
 <#if type != 'my'>	<span>填表人:</span>
 	<input id="nickName" name="nickName" class="easyui-textbox" prompt="填表人">
 	<span>&nbsp;专业:</span>
-	<input class="easyui-combobox" name="specialty" style="width:120px;" data-options="
+	<input class="easyui-combobox" id="specialty" name="specialty" style="width:120px;" data-options="
                     <#if type == 'class'>data:[{code:'${user.specialty.code}',label:'${user.specialty.label}'}],
                     value:'${user.specialty.code}',<#else>
                     url:'${base}/dicts/specialty',</#if>
@@ -54,14 +54,14 @@
                     panelHeight:'auto'
                     ">
                     <span>&nbsp;报告类型:</span>
-	<input class="easyui-combobox" name="type" style="width:120px;" data-options="
+	<input class="easyui-combobox" id="type" name="type" style="width:120px;" data-options="
 					data:[{code:'Evaluation2',label:'学生综合素质测评表(2018)'},{code:'Evaluation1',label:'学生综合素质测评表(2016)'}],
                     valueField:'code',
                     textField:'label', 
                     panelHeight:'auto'
                     ">
                     <span>&nbsp;报告状态:</span>
-	<input class="easyui-combobox" name="status" style="width:120px;" data-options="
+	<input class="easyui-combobox" id="status" name="status" style="width:120px;" data-options="
 					data:[<#if type == 'my'>{code:'0',label:'个人未上报'},</#if>{code:'1',label:'班级审核'},{code:'2',label:'学院审核'},{code:'3',label:'审核通过'}],
                     valueField:'code',
                     textField:'label', 
@@ -88,22 +88,28 @@ function openEvaluation(){
 }
 
 function downloadExcel(){
-	var grade = $("#grade").combobox("getValue");
-	var classes = $("#classes").combobox("getValue");
-	var year = $("#year").combobox("getValue");
-	if(!grade) {
+	var query = $("#evalquery").serializeArray();
+	var data = {};
+	$(query).each(function(){
+		data[this.name]=this.value;
+	});
+	if(!data['grade']) {
 		$.messager.alert('Warning','请选择年级');
 		return;
 	}
-	if(!classes){
+	if(!data['classes']){
 		$.messager.alert('Warning','请选择班');
 		return;
 	}
-	if(!year){
+	if(!data['year']){
 		$.messager.alert('Warning','请选择年度');
 		return;
 	}
-	window.open("/evaluation/download/excel/Evaluation1/"+grade+"/"+classes+"/"+year);
+	if(!data['type']){
+		$.messager.alert('Warning','请选择类型');
+		return;
+	}
+	window.open("/evaluation/download/excel/"+data['type']+"/"+data['grade']+"/"+data['classes']+"/"+data['year']);
 }
 
 function query(){
