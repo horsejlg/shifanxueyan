@@ -101,7 +101,7 @@ function fileListSubmit(){
 		window.updatefiles.val(JSON.stringify(list));
 		$(list).each(function(){
 		if(this.path){
-			list_div.append('<a href="'+this.path+'" style="margin-right:10px;" target="_blank">'+this.label+'</a>');
+			list_div.append('&nbsp;<a href="'+this.path+'" style="max-length:100px;overload:none;" target="_blank">'+this.label+'</a>&nbsp;');
 		}else{
 			list_div.append('<span style="margin-right:10px;" >'+this.label+'</span>');
 		}

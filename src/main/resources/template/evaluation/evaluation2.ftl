@@ -28,6 +28,7 @@
 	
 	.table td{
 		font-size: 10px;
+		word-break:break-all;
 		/*letter-spacing: 2px;*/
 	}
 	.table tr{
@@ -117,7 +118,7 @@
 6、学习了解中华民族的优良传统，继承与发扬中华优秀传统文化，得3分；<br>
 7、积极参加学校组织的普法活动；积极参加消防及安全知识的学习和培训，得2分
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource1" class="easyui-numberbox base" data-options="min:0,max:20,precision:2,width:40,value:'${evaluation.baseSource1?string("#.##")}'" /><#else>${evaluation.baseSource1}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource1" class="easyui-numberbox base" data-options="min:0,max:20,precision:2,width:60,value:'${evaluation.baseSource1?string("#.##")}'" /><#else>${evaluation.baseSource1}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent1" value=evaluation.baseContent1 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark1" style="width: 100%">${evaluation.baseRemark1}</textarea><#else><p>${evaluation.baseRemark1?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -129,7 +130,7 @@
 5、宿舍卫生合格，成员每人加4分，优秀宿舍每人次加0.5分，通报宿舍每人次扣0.5分；<br>
 6、教室卫生合格，班级每人加4分，优秀班级每人次加1分，通报班级每人次扣0.5分
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource2" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:40,value:'${evaluation.baseSource2?string("#.##")}'" /><#else>${evaluation.baseSource2}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource2" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:60,value:'${evaluation.baseSource2?string("#.##")}'" /><#else>${evaluation.baseSource2}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent2" value=evaluation.baseContent2 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark2" style="width: 100%">${evaluation.baseRemark2}</textarea><#else><p>${evaluation.baseRemark2?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -138,7 +139,7 @@
 2、有见义勇为、同违法分子作斗争的行为，凭相关证明，加5分；<br>
 3、积极参加社会实践，具有积极的社会服务和奉献意识，加3分；
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource3" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:40,value:'${evaluation.baseSource3?string("#.##")}'" /><#else>${evaluation.baseSource3}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource3" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:60,value:'${evaluation.baseSource3?string("#.##")}'" /><#else>${evaluation.baseSource3}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent3" value=evaluation.baseContent3 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark3" style="width: 100%">${evaluation.baseRemark3}</textarea><#else><p>${evaluation.baseRemark3?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -151,7 +152,7 @@
 6、学生手册考试不合格者扣2分；<br>
 7、抄袭、剽窃他人作业、文章或论文，一次扣15分；
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource4" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:40,value:'${evaluation.baseSource4?string("#.##")}'" /><#else>${evaluation.baseSource4}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource4" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:60,value:'${evaluation.baseSource4?string("#.##")}'" /><#else>${evaluation.baseSource4}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent4" value=evaluation.baseContent4 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark4" style="width: 100%">${evaluation.baseRemark4}</textarea><#else><p>${evaluation.baseRemark4?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -172,7 +173,7 @@
 14、在禁烟区吸烟者，一次扣3分；<br>
 15、隐瞒自身健康状况，拒不配合学校或社会有关机构进行健康调查的，一次扣20分；
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource5" class="easyui-numberbox base" data-options="min:0,max:35,precision:2,width:40,value:'${evaluation.baseSource5?string("#.##")}'" /><#else>${evaluation.baseSource5}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource5" class="easyui-numberbox base" data-options="min:0,max:35,precision:2,width:60,value:'${evaluation.baseSource5?string("#.##")}'" /><#else>${evaluation.baseSource5}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent5" value=evaluation.baseContent5 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark5" style="width: 100%">${evaluation.baseRemark5}</textarea><#else><p>${evaluation.baseRemark5?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -187,7 +188,7 @@
 </tr>
 <tr>
 	<th colspan="5">思想政治与道德素质测评成绩</th>
-	<td colspan="7" align="right"><#if edit><input type="text" id="baseEvaluationSorce" name="baseEvaluationSorce" class="easyui-numberbox" data-options="min:0,max:35,precision:2,width:40,readonly:true,value:'${evaluation.baseEvaluationSorce?string("#.##")}'" /><#else>${evaluation.baseEvaluationSorce}</#if></td>
+	<td colspan="7" align="right"><#if edit><input type="text" id="baseEvaluationSorce" name="baseEvaluationSorce" class="easyui-numberbox" data-options="min:0,max:35,precision:2,width:60,readonly:true,value:'${evaluation.baseEvaluationSorce?string("#.##")}'" /><#else>${evaluation.baseEvaluationSorce}</#if></td>
 </tr>
 <tr>
 	<th colspan="12">发　 展　性　素　 质　 测　 评　 （20分）</th>
@@ -202,7 +203,7 @@
 	<td colspan="6" align="left">获国家、省、校表彰的社会实践团队、每人次分别为10分、6分、3分；获国家、省、校表彰的社会实践先进个人，每人次分别为12分、8分、5分；获国家、省、校、系（院）奖励的社会实践调查报告，每人次分别为8分、6分、4分、2分。上述项目，按最高项计分，不重复加分。<br>
 2、获国家、省、校、系（院）表彰的优秀社团，其主要成员（5人以内，由社团自行推选）；分值分别为6分、5分、4分、3分。获国家、省、校表彰的社团先进个人，分值分别为7分、6分、5分、4分。上述项目，按最高项计分，不重复加分。所有学生参加社团活动一次加1分，依次递增，社内正常开设的课程不加分，如：书画课、舞蹈课。
 </td>
-	<td align="right"><#if edit><input type="text" name="growSource1" class="easyui-numberbox grow" data-options="min:0,max:20,precision:0,width:40,value:'${evaluation.growSource1}'" /><#else>${evaluation.growSource1}</#if></td>
+	<td align="right"><#if edit><input type="text" name="growSource1" class="easyui-numberbox grow" data-options="min:0,max:20,precision:0,width:60,value:'${evaluation.growSource1}'" /><#else>${evaluation.growSource1}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="growContent1" value=evaluation.growContent1 edit=edit ></@m.filesupload><#if edit><textarea name="growRemark1" style="width: 100%">${evaluation.growRemark1}</textarea><#else><p>${evaluation.growRemark1?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -220,7 +221,7 @@
 注：上述项目可重复加分，具体分数由各级负责人协商决定，最终由教师教育学院全体辅导员老师审核，有权酌情加减分；<br>
 
 </td>
-	<td align="right"><#if edit><input type="text" name="growSource2" class="easyui-numberbox grow" data-options="min:0,max:30,precision:0,width:40,value:'${evaluation.growSource2}'" /><#else>${evaluation.growSource2}</#if></td>
+	<td align="right"><#if edit><input type="text" name="growSource2" class="easyui-numberbox grow" data-options="min:0,max:30,precision:0,width:60,value:'${evaluation.growSource2}'" /><#else>${evaluation.growSource2}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="growContent2" value=evaluation.growContent2 edit=edit ></@m.filesupload><#if edit><textarea name="growRemark2" style="width: 100%">${evaluation.growRemark2}</textarea><#else><p>${evaluation.growRemark2?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -234,7 +235,7 @@
 注：鉴定依据为有创业基地、拥有合作投资协议、实体店面或网络官方平台认定的虚拟店铺；
 
 </td>
-	<td align="right"><#if edit><input type="text" name="growSource3" class="easyui-numberbox grow" data-options="min:0,max:10,precision:0,width:40,value:'${evaluation.growSource3}'" /><#else>${evaluation.growSource3}</#if></td>
+	<td align="right"><#if edit><input type="text" name="growSource3" class="easyui-numberbox grow" data-options="min:0,max:10,precision:0,width:60,value:'${evaluation.growSource3}'" /><#else>${evaluation.growSource3}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="growContent3" value=evaluation.growContent3 edit=edit ></@m.filesupload><#if edit><textarea name="growRemark3" style="width: 100%">${evaluation.growRemark3}</textarea><#else><p>${evaluation.growRemark3?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -246,7 +247,7 @@
 5、在各级各类文艺演出活动中，表演节目每人每次加2分，主持每人每次加3分<br/>
 注：竞赛类活动含有：辩论赛、运动会、马拉松比赛、广播操、合唱比赛、球类比赛等。
 </td>
-	<td align="right"><#if edit><input type="text" name="growSource4" class="easyui-numberbox grow" data-options="min:0,max:20,precision:0,width:40,value:'${evaluation.growSource4}'" /><#else>${evaluation.growSource4}</#if></td>
+	<td align="right"><#if edit><input type="text" name="growSource4" class="easyui-numberbox grow" data-options="min:0,max:20,precision:0,width:60,value:'${evaluation.growSource4}'" /><#else>${evaluation.growSource4}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="growContent4" value=evaluation.growContent4 edit=edit ></@m.filesupload><#if edit><textarea name="growRemark4" style="width: 100%">${evaluation.growRemark4}</textarea><#else><p>${evaluation.growRemark4?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -256,16 +257,16 @@
 3、校级“优秀学生干部”“优秀学生”“优秀团员”“优秀团干部”每人加2分；省级“优秀学生干部”“优秀学生”“优秀团员”“优秀团干部”每人加3分；校级“先进班集体”班级成员每人加1分，校级“先进团支部”班级成员每人加1分；省级“先进班集体”班级成员每人加3分；省级“先进团支部”班级成员每人加3分；<br>
 4、技能展示（黑板字、毛笔字、硬笔字、简笔画等），一经展示，每次加2分；以《学习部展览作品名单》为准；
 </td>
-	<td align="right"><#if edit><input type="text" name="growSource5" class="easyui-numberbox grow" data-options="min:0,max:20,precision:0,width:40,value:'${evaluation.growSource5}'" /><#else>${evaluation.growSource5}</#if></td>
+	<td align="right"><#if edit><input type="text" name="growSource5" class="easyui-numberbox grow" data-options="min:0,max:20,precision:0,width:60,value:'${evaluation.growSource5}'" /><#else>${evaluation.growSource5}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="growContent5" value=evaluation.growContent5 edit=edit ></@m.filesupload><#if edit><textarea name="growRemark5" style="width: 100%">${evaluation.growRemark5}</textarea><#else><p>${evaluation.growRemark5?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
-	<th colspan="8">凡是获得一项省级（及以上）荣誉、在省级（及以上）刊物发表作品的学生，发展性素质测评成绩为满分</th>
-	<td colspan="4" align="right"><#if edit><input type="text" id="growFull" name="growFull" class="easyui-checkbox" value="true" <#if evaluation.growFull>checked</#if>/><#else>${evaluation.growFull}</#if></td>
+	<th colspan="10">凡是获得一项省级（及以上）荣誉、在省级（及以上）刊物发表作品的学生，发展性素质测评成绩为满分</th>
+	<td colspan="2" align="right"><#if edit><input type="text" id="growFull" name="growFull" class="easyui-checkbox" value="true" <#if evaluation.growFull>checked</#if>/><#else>${evaluation.growFull}</#if></td>
 </tr>
 <tr>
 	<th colspan="4">发展性素质测评成绩</th>
-	<td colspan="4" align="right"><#if edit><input type="text" id="growEvaluationSorce" name="growEvaluationSorce" class="easyui-numberbox" data-options="min:0,max:20,precision:2,width:40,value:'${evaluation.growEvaluationSorce?string("#.##")}',readonly:true"/><#else>${evaluation.growEvaluationSorce?string("#.#")}</#if></td>
+	<td colspan="4" align="right"><#if edit><input type="text" id="growEvaluationSorce" name="growEvaluationSorce" class="easyui-numberbox" data-options="min:0,max:20,precision:2,width:60,value:'${evaluation.growEvaluationSorce?string("#.##")}',readonly:true"/><#else>${evaluation.growEvaluationSorce?string("#.#")}</#if></td>
 	<td colspan="4" align="left"><@m.filesupload label="编辑材料" name="growEvaluation" value=evaluation.growEvaluation edit=edit ></@m.filesupload></td>
 </tr>
 <tr>
@@ -280,7 +281,7 @@
 	<th class="th">学习成绩</th>
 	<td colspan="6" align="left">
 </td>
-	<td align="right"><#if edit><input type="text" id="studySorce" name="studySorce" class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:40,value:'${evaluation.studySorce?string("#.##")}'" /><#else>${evaluation.studySorce?string("#.##")}</#if></td>
+	<td align="right"><#if edit><input type="text" id="studySorce" name="studySorce" class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:60,value:'${evaluation.studySorce?string("#.##")}'" /><#else>${evaluation.studySorce?string("#.##")}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="studyContent" value=evaluation.studyContent edit=edit ></@m.filesupload><#if edit><textarea name="studyRemark" style="width: 100%">${evaluation.studyRemark}</textarea><#else><p>${evaluation.studyRemark?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -291,22 +292,22 @@
 4、通过国家英语四级加10分、六级加20分；通过托福、雅思者加30分；计算机二级加10分、三级加15分；
 5、获得教师资格证书加10分；其他专业技能需获劳动技术鉴定部门颁发或行业认定的各类专业技能资格证书可加10分；
 </td>
-	<td align="right"><#if edit><input type="text" id="otherSource" name="otherSource" class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:40,value:'${evaluation.otherSource}'" /><#else>${evaluation.otherSource}</#if></td>
+	<td align="right"><#if edit><input type="text" id="otherSource" name="otherSource" class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:60,value:'${evaluation.otherSource}'" /><#else>${evaluation.otherSource}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="otherContent" value=evaluation.otherContent edit=edit ></@m.filesupload><#if edit><textarea name="otherRemark" style="width: 100%">${evaluation.growRemark5}</textarea><#else><p>${evaluation.otherRemark?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
 	<th colspan="6">学业成绩=【（学习成绩×80%）+（其他×20%）】×60%</th>
 	<td colspan="1">得分</td>
-	<td colspan="5" align="right"><#if edit><input type="text" id="studySum" name="studySum" class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:40,value:'${evaluation.studySum?string("#.##")}',readonly:true" /><#else>${evaluation.studySorce?string("#.##")}</#if></td>
+	<td colspan="5" align="right"><#if edit><input type="text" id="studySum" name="studySum" class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:60,value:'${evaluation.studySum?string("#.##")}',readonly:true" /><#else>${evaluation.studySorce?string("#.##")}</#if></td>
 </tr>
 <tr>
 	<th colspan="12">综合测评成绩=思想政治与道德素质测评成绩+发展性素质测评成绩+学业成绩</th>
 </tr>
 <tr>
 	<th colspan="3">综合测评成绩</th>
-	<td colspan="3" align="right"><#if edit><input type="text" name="sumSorce" id="sumSorce"  class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:40,value:'${evaluation.sumSorce?string("#.##")}',readonly:true" /><#else>${evaluation.sumSorce?string("#.##")}</#if></td>
+	<td colspan="3" align="right"><#if edit><input type="text" name="sumSorce" id="sumSorce"  class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:60,value:'${evaluation.sumSorce?string("#.##")}',readonly:true" /><#else>${evaluation.sumSorce?string("#.##")}</#if></td>
 	<th colspan="3">总排名</th>
-	<td colspan="3" align="right"><#if edit><input type="text" id="gsIndex" name="gsIndex"  class="easyui-numberbox" data-options="min:0,precision:0,width:40,value:'${evaluation.gsIndex},readonly:true'" /><#else>${evaluation.gsIndex}</#if></td>
+	<td colspan="3" align="right"><#if edit><input type="text" id="gsIndex" name="gsIndex"  class="easyui-numberbox" data-options="min:0,precision:0,width:60,value:'${evaluation.gsIndex},readonly:true'" /><#else>${evaluation.gsIndex}</#if></td>
 </tr>
 </table>
 <table class="table" style="border-top:0px;">
