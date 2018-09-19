@@ -118,7 +118,7 @@
 6、学习了解中华民族的优良传统，继承与发扬中华优秀传统文化，得3分；<br>
 7、积极参加学校组织的普法活动；积极参加消防及安全知识的学习和培训，得2分
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource1" class="easyui-numberbox base" data-options="min:0,max:20,precision:2,width:60,value:'${evaluation.baseSource1?string("#.##")}'" /><#else>${evaluation.baseSource1}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource1" class="easyui-numberbox base" data-options="min:0,max:20,precision:2,width:60,value:'${evaluation.baseSource1?string("#.##")}'" /><#else>${evaluation.baseSource1?string("#.##")}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent1" value=evaluation.baseContent1 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark1" style="width: 100%">${evaluation.baseRemark1}</textarea><#else><p>${evaluation.baseRemark1?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -130,7 +130,7 @@
 5、宿舍卫生合格，成员每人加4分，优秀宿舍每人次加0.5分，通报宿舍每人次扣0.5分；<br>
 6、教室卫生合格，班级每人加4分，优秀班级每人次加1分，通报班级每人次扣0.5分
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource2" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:60,value:'${evaluation.baseSource2?string("#.##")}'" /><#else>${evaluation.baseSource2}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource2" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:60,value:'${evaluation.baseSource2?string("#.##")}'" /><#else>${evaluation.baseSource2?string("#.##")}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent2" value=evaluation.baseContent2 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark2" style="width: 100%">${evaluation.baseRemark2}</textarea><#else><p>${evaluation.baseRemark2?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -139,7 +139,7 @@
 2、有见义勇为、同违法分子作斗争的行为，凭相关证明，加5分；<br>
 3、积极参加社会实践，具有积极的社会服务和奉献意识，加3分；
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource3" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:60,value:'${evaluation.baseSource3?string("#.##")}'" /><#else>${evaluation.baseSource3}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource3" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:60,value:'${evaluation.baseSource3?string("#.##")}'" /><#else>${evaluation.baseSource3?string("#.##")}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent3" value=evaluation.baseContent3 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark3" style="width: 100%">${evaluation.baseRemark3}</textarea><#else><p>${evaluation.baseRemark3?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -152,7 +152,7 @@
 6、学生手册考试不合格者扣2分；<br>
 7、抄袭、剽窃他人作业、文章或论文，一次扣15分；
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource4" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:60,value:'${evaluation.baseSource4?string("#.##")}'" /><#else>${evaluation.baseSource4}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource4" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:60,value:'${evaluation.baseSource4?string("#.##")}'" /><#else>${evaluation.baseSource4?string("#.##")}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent4" value=evaluation.baseContent4 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark4" style="width: 100%">${evaluation.baseRemark4}</textarea><#else><p>${evaluation.baseRemark4?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -173,7 +173,7 @@
 14、在禁烟区吸烟者，一次扣3分；<br>
 15、隐瞒自身健康状况，拒不配合学校或社会有关机构进行健康调查的，一次扣20分；
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource5" class="easyui-numberbox base" data-options="min:0,max:35,precision:2,width:60,value:'${evaluation.baseSource5?string("#.##")}'" /><#else>${evaluation.baseSource5}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource5" class="easyui-numberbox base" data-options="min:0,max:35,precision:2,width:60,value:'${evaluation.baseSource5?string("#.##")}'" /><#else>${evaluation.baseSource5?string("#.##")}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent5" value=evaluation.baseContent5 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark5" style="width: 100%">${evaluation.baseRemark5}</textarea><#else><p>${evaluation.baseRemark5?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -188,7 +188,7 @@
 </tr>
 <tr>
 	<th colspan="5">思想政治与道德素质测评成绩</th>
-	<td colspan="7" align="right"><#if edit><input type="text" id="baseEvaluationSorce" name="baseEvaluationSorce" class="easyui-numberbox" data-options="min:0,max:35,precision:2,width:60,readonly:true,value:'${evaluation.baseEvaluationSorce?string("#.##")}'" /><#else>${evaluation.baseEvaluationSorce}</#if></td>
+	<td colspan="7" align="right"><#if edit><input type="text" id="baseEvaluationSorce" name="baseEvaluationSorce" class="easyui-numberbox" data-options="min:0,max:35,precision:2,width:60,readonly:true,value:'${evaluation.baseEvaluationSorce?string("#.##")}'" /><#else>${evaluation.baseEvaluationSorce?string("#.##")}</#if></td>
 </tr>
 <tr>
 	<th colspan="12">发　 展　性　素　 质　 测　 评　 （20分）</th>
@@ -266,7 +266,7 @@
 </tr>
 <tr>
 	<th colspan="4">发展性素质测评成绩</th>
-	<td colspan="4" align="right"><#if edit><input type="text" id="growEvaluationSorce" name="growEvaluationSorce" class="easyui-numberbox" data-options="min:0,max:20,precision:2,width:60,value:'${evaluation.growEvaluationSorce?string("#.##")}',readonly:true"/><#else>${evaluation.growEvaluationSorce?string("#.#")}</#if></td>
+	<td colspan="4" align="right"><#if edit><input type="text" id="growEvaluationSorce" name="growEvaluationSorce" class="easyui-numberbox" data-options="min:0,max:20,precision:2,width:60,value:'${evaluation.growEvaluationSorce?string("#.##")}',readonly:true"/><#else>${evaluation.growEvaluationSorce?string("#.##")}</#if></td>
 	<td colspan="4" align="left"><@m.filesupload label="编辑材料" name="growEvaluation" value=evaluation.growEvaluation edit=edit ></@m.filesupload></td>
 </tr>
 <tr>
@@ -292,7 +292,7 @@
 4、通过国家英语四级加10分、六级加20分；通过托福、雅思者加30分；计算机二级加10分、三级加15分；
 5、获得教师资格证书加10分；其他专业技能需获劳动技术鉴定部门颁发或行业认定的各类专业技能资格证书可加10分；
 </td>
-	<td align="right"><#if edit><input type="text" id="otherSource" name="otherSource" class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:60,value:'${evaluation.otherSource}'" /><#else>${evaluation.otherSource}</#if></td>
+	<td align="right"><#if edit><input type="text" id="otherSource" name="otherSource" class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:60,value:'${evaluation.otherSource?string("#.##")}'" /><#else>${evaluation.otherSource?string("#.##")}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="otherContent" value=evaluation.otherContent edit=edit ></@m.filesupload><#if edit><textarea name="otherRemark" style="width: 100%">${evaluation.growRemark5}</textarea><#else><p>${evaluation.otherRemark?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
@@ -373,10 +373,12 @@
         </div>
 </body>
 <script>
-
+window.vetoSource=${evaluation.vetoSource?string};
+window.growFull=${evaluation.growFull?string};
 $(function(){
 
 	$("#vetoSource").checkbox({"onChange":function(checked){
+		window.vetoSource = checked;
 		var count = 0;
 		if(!checked){
 			$('.base').each(function(){
@@ -388,6 +390,7 @@ $(function(){
 	}});
 	
 	$("#growFull").checkbox({"onChange":function(checked){
+		window.growFull = checked;
 		var count = 0;
 		if(checked){
 			count = 100;
@@ -416,7 +419,7 @@ $(function(){
 					$('.base').each(function(){
 						count += parseFloat($(this).val());
 					});
-					if($("#vetoSource").attr('checked'))count=0;
+					if(window.vetoSource)count=0;
 					$("#baseEvaluationSorce").numberbox("setValue", count/5);
 					//$("#baseEvaluationLevel").combobox("select", ""+Number(Number($("#baseEvaluationSorce").numberbox("getValue"))/10));
 					sumAll();
@@ -432,7 +435,7 @@ $(function(){
 			$('.grow').each(function(){
 				count += Number($(this).numberbox("getValue"));
 			});
-			if($("#growFull").attr("checked"))count=100
+			if(window.growFull)count=100
 				$("#growEvaluationSorce").numberbox("setValue", count/5);
 				sumAll();
 			}});
@@ -476,8 +479,8 @@ $(function(){
 			data[this.name]=this.value;
 		}});
 		
-		data["growFull"]=data["growFull"]?true:false;
-		data["vetoSource"]=data["vetoSource"]?true:false;
+		data["growFull"]=window.growFull;
+		data["vetoSource"]=window.vetoSource;
 		$.ajax({
 	url:"${base}/evaluation2",
 	method:"post",
