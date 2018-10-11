@@ -50,11 +50,10 @@ public class AssistantController {
 	}
 	
 	@Auth
-	@DeleteMapping(value="/assistant/grade/{id}")
+	@PostMapping(value="/assistant/grade/{id}/del")
 	@ResponseBody
-	public boolean deleteGrade(@RequestBody Dict grade,@PathVariable String id){
+	public void deleteGrade(@RequestBody Dict grade,@PathVariable String id){
 		assistantService.deleteGrade(id,grade);
-		return true;
 	}
 	
 	@Auth

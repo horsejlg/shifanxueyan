@@ -62,6 +62,13 @@ public class AssistantService {
 	@Transactional
 	public void saveGrade(String id,Dict grades) {
 		Assistant ass = assistantDao.load(id);
+		if(null == ass) {
+			User u = userDao.load(id);
+			ass = new Assistant();
+			ass.setUser(u);
+			ass.setId(id);
+			assistantDao.save(ass);
+		}
 		ass.getGrades().add(grades);
 		assistantDao.save(ass);
 	}
@@ -69,18 +76,33 @@ public class AssistantService {
 	@Transactional
 	public void deleteGrade(String id,Dict grades) {
 		Assistant ass = assistantDao.load(id);
+		System.out.println(ass.getGrades());
+		
 		ass.getGrades().remove(grades);
+		
+		System.out.println(ass.getGrades());
 		assistantDao.save(ass);
 	}
 
+	@Transactional
 	public void saveClassTeam(String id, ClassTeam classTeam) {
-		// TODO Auto-generated method stub
-		
+		Assistant ass = assistantDao.load(id);
+		if(null == ass) {
+			User u = userDao.load(id);
+			ass = new Assistant();
+			ass.setUser(u);
+			ass.setId(id);
+			assistantDao.save(ass);
+		}
+		ass.getClassess().add(classTeam);
+		assistantDao.save(ass);
 	}
 
+	@Transactional
 	public void deleteClassTeam(String id, ClassTeam classTeam) {
-		// TODO Auto-generated method stub
-		
+		Assistant ass = assistantDao.load(id);
+		ass.getClassess().remove(classTeam);
+		assistantDao.save(ass);
 	}
 
 }
