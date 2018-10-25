@@ -172,7 +172,7 @@ public class TopicController {
 	 * @param topicWork
 	 */
 	@PostMapping(value="/topicWork")
-	public void addTopicWork(TopicWork topicWork){
+	public void addTopicWork(@RequestBody TopicWork topicWork){
 		topicService.addTopicWork(topicWork);
 	}
 	

@@ -232,6 +232,8 @@ public class TopicService {
 		//topic.getVisibleUsers().addAll(topic.getParticipants());//把参与人员加到可见人员里面
 		
 		topic.setAuthor(topicOld.getAuthor());
+		topic.setParticipants(topicOld.getParticipants());
+		topic.setVisibleUsers(topicOld.getVisibleUsers());
 		if(topicOld.getAuthor().getId().equals(opUser.getId())){//作者,什么都能改
 			//记录个修改记录
 			TopicLog log = saveTopicLog(topic, opUser, topicOld);
