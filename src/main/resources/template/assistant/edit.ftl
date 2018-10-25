@@ -78,11 +78,12 @@
                     labelWidth:32,
                     label: '年级:'
                     ">
-    <input class="easyui-combobox" name="classess_specialty" data-options="
+    <input class="easyui-combobox" id="classess_specialty" data-options="
                     url:'${base}/dicts/specialty',
                     valueField:'code',
                     textField:'label', 
                     panelHeight:'auto',
+                    labelWidth:32,
                     label: '专业:'
                     ">
     <input class="easyui-combobox" id="classess_classes" data-options="
@@ -171,17 +172,17 @@ function addClassess(){
 	var classessvalue = $('#classess_classes').combobox('getValue');
 	var classesslabel = $('#classess_classes').combobox('getText');
 	
-	if(gradvalue){
+	if(!gradvalue){
 		$.messager.alert('警告','请选择一个年级','warning');
 		return;
 	}
 	
-	if(specialtyvalue){
+	if(!specialtyvalue){
 		$.messager.alert('警告','请选择一个专业','warning');
 		return;
 	}
 	
-	if(classessvalue){
+	if(!classessvalue){
 		$.messager.alert('警告','请选择一个班级','warning');
 		return;
 	}
@@ -216,15 +217,15 @@ function addGrades(){
 }
 
 function deleteGrades(){
-	var row = $('#awardsList').datagrid('getSelected');
-	var index = $('#awardsList').datagrid('getRowIndex', row);
+	var row = $('#gradesList').datagrid('getSelected');
+	var index = $('#gradesList').datagrid('getRowIndex', row);
 	$.ajax({
-	url:"${base}/assistant/grade/"+row.id,
-	method:"DELETE",
+	url:"${base}/assistant/grade/${assistant.user.id}/del",
+	method:"POST",
+	data:JSON.stringify({code:row.code,label:row.label}),
+	contentType: "application/json; charset=utf-8",
 	success: function (data) {
-		if(data){
-			$('#awardsList').datagrid('deleteRow', index);
-		}
+		$('#gradesList').datagrid('deleteRow', index);
 	}});
 }
 

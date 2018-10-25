@@ -28,4 +28,7 @@ public interface EvaluationDao extends BaseRepository<Evaluation,String>{
 	@Transactional
 	@Query("update Evaluation2 set gsIndex = ?1 where id = ?2")
 	public void saveGsIndex(int gsIndex, String id);
+	
+	@Query("from Evaluation2 where id = ?1")
+	public Evaluation2 findEvaluation2ById(String id);
 }
