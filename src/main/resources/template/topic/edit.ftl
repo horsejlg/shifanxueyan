@@ -240,7 +240,7 @@ function loadHomeWork(){
 		$.get("${base}/topicWork/${topic.id}",function(data){
 			window.homeworks.data={};
 			$(data).each(function(){
-				window.homeworks.data[this['topicId']] = this;
+				window.homeworks.data[this['author']['id']] = this;
 			});
 			window.homeworks.state = true;
 			$("#participants").datagrid('reload');
@@ -271,7 +271,17 @@ function uploadWork(id){
 	url: "${base}/console/info/fileUpload2",
 	success: function(data){
 	var item = $.parseJSON(data);
-		$.post("${base}/topicWork",{title:item.label,topicId:"${topic.id}", url:item.path, author:{id:id}});
+		$.ajax({
+			url:"${base}/topicWork",
+			type: "POST",
+			contentType: "application/json; charset=utf-8",
+        	data: JSON.stringify({title:item.label,topicId:"${topic.id}", url:item.path, author:{id:id}}),
+        	success: function (retval){
+        		$('#filesuploadWindow').dialog('close');
+        		loadHomeWork();
+        	}
+		});
+		//$.post("${base}/topicWork",,"json");
 		$.messager.progress('close');	// hide progress bar while submit successfully
 	}
 	});
