@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import cn.qlt.utils.ManagedIdentityDomainObject;
 
 /**
@@ -36,10 +38,12 @@ public class ClassTeam extends ManagedIdentityDomainObject<ClassTeam>{
 	@JoinColumn(name="classes",nullable=true)
 	private Dict classes;
 	
-	@ManyToMany(mappedBy="classess")
+	@JsonIgnore
+	@ManyToMany(mappedBy="classess", fetch = FetchType.LAZY)
 	private List<Assistant> assistants;
 	
-	@OneToMany(mappedBy="classTeam", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@JsonIgnore
+	@OneToMany(mappedBy="classTeam", fetch = FetchType.LAZY, cascade=CascadeType.DETACH)
 	private List<Student> students = new ArrayList<Student>();
 
 	public Dict getSpecialty() {
@@ -90,5 +94,16 @@ public class ClassTeam extends ManagedIdentityDomainObject<ClassTeam>{
 	public String toString() {
 		return "ClassTeam [specialty=" + specialty + ", grade=" + grade + ", classes=" + classes + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+	
 	
 }

@@ -43,7 +43,7 @@
 <div style="margin:auto; width:882px">
 <table id="gradesList" class="easyui-datagrid" data-options="title:'管理的年级',singleSelect:true,fit:false,toolbar:'#gradesBtn'">
 <thead><tr>
-<th width="287" align="center" field="label",required:true">年级</td>
+<th width="287" align="center" field="label">年级</td>
 </tr></thead>
 </table>
 </div>
@@ -64,8 +64,9 @@
 <div style="margin:auto; width:882px">
 <table id="classessList" class="easyui-datagrid" data-options="title:'管理的班级',singleSelect:true,fit:false,toolbar:'#classessBtn'">
 <thead><tr>
-<th width="287" align="center" field="awards" data-options="editor:'textbox',required:true">年级</td>
-<th width="282" align="center"  field="level" data-options="editor:'textbox',required:true">班级</td>
+<th width="287" align="center" field="grade" formatter="lableformatter">年级</td>
+<th width="287" align="center" field="specialty" formatter="lableformatter">专业</td>
+<th width="282" align="center"  field="classes" formatter="lableformatter">班级</td>
 </tr></thead>
 </table>
 </div>
@@ -147,13 +148,21 @@ return new Date();
  
 };
 
+function lableformatter(value,row,index){
+	return value.label;
+}
 
 function formatDate(value,row,index){
 	if(value instanceof String){
 		return value;
 	}else{
-		var date = new Date(value);
-		return date.toJSON().substr(0,10); 
+		if(value != undefined){
+			var date = new Date(value);
+			return date.toJSON().substr(0,10); 
+		}else{
+			return '';
+		}
+		
 	}
 }
 $(function(){
@@ -187,15 +196,31 @@ function addClassess(){
 		return;
 	}
 	
+	var classTeam = {grade:{code:gradvalue,label:gradlabel},specialty:{code:specialtyvalue,label:specialtylabel},classes:{code:classessvalue,label:classesslabel}};
+	console.log(classTeam);
+	
 	$.ajax({
-		url:"${base}/assistant/grade/${assistant.user.id}",
+		url:"${base}/assistant/classTeam/${assistant.user.id}",
 		method:"post",
 		contentType: "application/json; charset=utf-8",
-		data:JSON.stringify({code:grad,label:label}),
+		data:JSON.stringify(classTeam),
 		success: function (data) {
-			$('#gradesList').datagrid('appendRow',{code:grad,label:label});
+			$('#classessList').datagrid('appendRow',classTeam);
 		}
 	});
+}
+
+function deleteClassess(){
+	var row = $('#classessList').datagrid('getSelected');
+	var index = $('#classessList').datagrid('getRowIndex', row);
+	$.ajax({
+	url:"${base}/assistant/classTeam/${assistant.user.id}/del",
+	method:"POST",
+	data:JSON.stringify({id:row.id}),
+	contentType: "application/json; charset=utf-8",
+	success: function (data) {
+		$('#classessList').datagrid('deleteRow', index);
+	}});
 }
 
 function addGrades(){
@@ -231,10 +256,10 @@ function deleteGrades(){
 
 var awardsIndex = undefined;
 function addawards(){
-var tmp = awardsIndex;
+	var tmp = awardsIndex;
 	if(awardsIndex != undefined){
-	if(endawardsEdit()){
-		saveawards(tmp,$('#awardsList').datagrid('getRows')[tmp]);
+		if(endawardsEdit()){
+			saveawards(tmp,$('#awardsList').datagrid('getRows')[tmp]);
 		}else{
 			$.messager.alert('警告','请先完成或取消之前的修改操作','warning');
 			return;
@@ -273,7 +298,7 @@ function saveawards(){
 	if(endawardsEdit()){
 	var row = $('#awardsList').datagrid('getRows')[tmp];
 	$.ajax({
-	url:"${base}/student/awards/${assistant.user.id}",
+	url:"${base}/assistant/awards/${assistant.user.id}",
 	method:"post",
 	contentType: "application/json; charset=utf-8",
 	data:JSON.stringify(row),
@@ -292,7 +317,7 @@ function deleteawards(){
 	var row = $('#awardsList').datagrid('getSelected');
 	var index = $('#awardsList').datagrid('getRowIndex', row);
 	$.ajax({
-	url:"${base}/student/awards/"+row.id,
+	url:"${base}/assistant/awards/"+row.id,
 	method:"DELETE",
 	success: function (data) {
 		if(data){

@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.qlt.domain.Assistant;
+import cn.qlt.domain.Awards;
 import cn.qlt.domain.ClassTeam;
 import cn.qlt.domain.Dict;
+import cn.qlt.domain.User;
 import cn.qlt.service.AssistantService;
 import cn.qlt.utils.web.Auth;
 
@@ -64,13 +66,14 @@ public class AssistantController {
 	}
 	
 	@Auth
-	@DeleteMapping(value="/assistant/classTeam/{id}")
+	@PostMapping(value="/assistant/classTeam/{id}/del")
 	@ResponseBody
 	public boolean deleteClassTeam(@RequestBody ClassTeam classTeam,@PathVariable String id){
 		assistantService.deleteClassTeam(id,classTeam);
 		return true;
 	}
-	/*@Auth
+	
+	@Auth
 	@PostMapping(value="/assistant/awards/{id}")
 	@ResponseBody
 	public boolean saveAwards(@RequestBody Awards awards, @PathVariable String id){
@@ -85,5 +88,5 @@ public class AssistantController {
 	public boolean deleteAwards(@PathVariable String id){
 		assistantService.deleteAwards(id);
 		return true;
-	}*/
+	}
 }
