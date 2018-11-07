@@ -59,7 +59,7 @@ public class StudentService {
 	
 	public PageResult find(Map<String,String> params, PageInfo page) {
 		PageResult result = new PageResult();
-		result.find(page, "select new User(st.user.id, st.user.loginname, ' ', st.user.nickName, st.user.specialty, st.user.grade, st.user.classes, st.user.year, 1) from Student st where st.user.status=1 /~userId: and st.user.id = {userId}~//~name: and st.user.nickName like '%[name]%'~//~grade: and st.user.grade.code = {grade} ~//~specialty: and st.user.specialty.code = {specialty} ~//~classes: and st.user.classes.code = {classes} ~//~year: and st.user.code = {year} ~/", params, studentDao);
+		result.find(page, "select new User(st.user.id, st.user.loginname, ' ', st.user.nickName, st.user.specialty, st.user.grade, st.user.classes, st.user.year, 1) from Student st where st.user.status=1 /~userId: and st.user.id = {userId}~//~name: and st.user.nickName like '%[name]%'~//~grade: and st.user.grade.code = {grade} ~//~specialty: and st.user.specialty.code = {specialty} ~/ /~classesTeam: and st.classTeam.id = {classesTeam} ~/  /~classes: and st.user.classes.code = {classes} ~//~year: and st.user.code = {year} ~/", params, studentDao);
 		return result;
 	}
 	
