@@ -13,18 +13,21 @@
 	</#if>
 	<#if student>
 		<div title="个人信息" href="${base}/student/show/${user.id}.html" style="padding:10px;border-top:1px"></div>
+		<div title="我参与的专题" href="/topic/my.html" style="padding:10px;border-top:1px"></div>
 	<#else>
 		<div title="个人信息" href="${base}/userInfo.html" style="padding:10px;border-top:1px"></div>
 	</#if>
 		
-	<#if user.classes??>
+	<#--
+	<#if user.classes??>-->
 		<#-- 暂时不用这种判断 放到下面用角色判断了 -->
 		<#-- 
 			<div title="我的评测表" href="/evaluations/my.html" style="padding:10px;border-top:1px"></div>
 		-->
 		<#-- 暂时不用这种判断 -->
-		<div title="我参与的专题" href="/topic/my.html" style="padding:10px;border-top:1px"></div>
+	<#--	
 	</#if>
+	-->
 		
 	<#if user.roles?size gt 0 >
 		<#list user.roles as role>
