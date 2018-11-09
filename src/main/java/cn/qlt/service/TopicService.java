@@ -31,6 +31,8 @@ import cn.qlt.domain.dto.TopicEdit;
 import cn.qlt.utils.CompareUtils;
 import cn.qlt.utils.SQLUtils.PageInfo;
 import cn.qlt.utils.SQLUtils.PageResult;
+import cn.qlt.utils.web.AuthUtil;
+import cn.qlt.utils.web.BusinessException;
 
 /**
  * @author zp
@@ -200,7 +202,13 @@ public class TopicService {
 	}
 	
 	public void deleteTopic(String topicId){
-		topicDao.delete(topicId);
+		Topic topic = topicDao.load(topicId);
+		User user = AuthUtil.getCurrentUser();
+		if(user.getId().equals(topic.getAuthor().getId())){
+			topicDao.delete(topicId);
+		}else{
+			throw new BusinessException(403, "你不是专题创建者，删除失败。");
+		}
 	}
 	
 	@Transactional

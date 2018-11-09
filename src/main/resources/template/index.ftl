@@ -23,13 +23,13 @@
 			<div title="我的评测表" href="/evaluations/my.html" style="padding:10px;border-top:1px"></div>
 		-->
 		<#-- 暂时不用这种判断 -->
-		<div title="我参与的专题" href="/topic/my.html" style="padding:10px;border-top:1px"></div>
+		<div title="我参与的专题" href="/topic/my.html?participants=true" style="padding:10px;border-top:1px"></div>
 	</#if>
 		
 	<#if user.roles?size gt 0 >
 		<#list user.roles as role>
 			<#if role.code == "assistant">
-				<div title="我创建的专题" href="/topic/my.html" style="padding:10px;border-top:1px"></div>
+				<div title="我创建的专题" href="/topic/my.html?auth=true" style="padding:10px;border-top:1px"></div>
 				<div title="我管理的学生" href="/student/tree/list.html" style="padding:10px;border-top:1px"></div>
 			</#if>
 			<#if role.code == "master">
@@ -41,9 +41,11 @@
 				<div title="学院审核" href="/evaluations/group.html" style="padding:10px;border-top:1px"></div>
 			</#if>
 			<#if role.code == "class">
-				<div title="我的辅导员" href="/assistant/my.html" style="padding:10px;border-top:1px"></div>
-				<div title="我的评测表" href="/evaluations/my.html" style="padding:10px;border-top:1px"></div>
 				<div title="班级初步审核" href="/evaluations/class.html" style="padding:10px;border-top:1px"></div>
+			</#if>
+			<#if role.code == "student">
+				<div title="我的评测表" href="/evaluations/my.html" style="padding:10px;border-top:1px"></div>
+				<div title="我的辅导员" href="/assistant/my.html" style="padding:10px;border-top:1px"></div>
 			</#if>
 		</#list>
 	<#else>

@@ -35,7 +35,7 @@ public class UserController {
 			AuthUtil.login(request,user);
 		return true;
 	}
-	@Auth(role="master")
+	@Auth
 	@PostMapping(value="/console/users")
 	public PageResult findUser(HttpServletRequest request){
 		Map<String, String> params = RequestUtil.getParams(request);
