@@ -1,5 +1,8 @@
 package cn.qlt.mvc;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,17 +20,28 @@ import cn.qlt.domain.Dict;
 import cn.qlt.domain.User;
 import cn.qlt.service.AssistantService;
 import cn.qlt.utils.web.Auth;
+import cn.qlt.utils.web.AuthUtil;
 
 @Controller
 public class AssistantController {
 	
 	@Autowired
 	private AssistantService assistantService;
-
+	
 	@GetMapping("/assistant/show/{id}.html")
 	public String showAssistant(@PathVariable("id")String id, ModelMap map){
 		map.put("assistant", assistantService.loadAssistantById(id));
 		return "assistant/show.ftl";
+	}
+
+	@GetMapping("/assistant/my.html")
+	public String showMyAssistant(ModelMap map){
+		String userId = AuthUtil.getCurrentUser().getId();
+		
+		Set<Assistant> ass = assistantService.findAssistantByStdId(userId);
+		map.put("assistants", ass);
+		
+		return "assistant/my.ftl";
 	}
 	
 	@GetMapping("/assistant/edit/{id}.html")

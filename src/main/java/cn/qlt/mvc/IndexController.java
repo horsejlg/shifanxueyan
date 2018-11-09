@@ -1,14 +1,11 @@
 package cn.qlt.mvc;
 
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import cn.qlt.domain.Role;
 import cn.qlt.domain.Topic;
 import cn.qlt.domain.User;
 import cn.qlt.domain.dto.TopicEdit;
