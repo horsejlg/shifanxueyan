@@ -18,10 +18,12 @@ import cn.qlt.domain.Awards;
 import cn.qlt.domain.Sociogram;
 import cn.qlt.domain.Student;
 import cn.qlt.domain.User;
+import cn.qlt.service.AssistantService;
 import cn.qlt.service.StudentService;
 import cn.qlt.utils.SQLUtils;
 import cn.qlt.utils.SQLUtils.PageResult;
 import cn.qlt.utils.web.Auth;
+import cn.qlt.utils.web.AuthUtil;
 import cn.qlt.utils.web.RequestUtil;
 
 @Controller
@@ -30,9 +32,15 @@ public class StudentController {
 	@Autowired
 	private StudentService studentService;
 	
-	@GetMapping("student/tree/list")
-	public String list(){
-		return "student/tree.ftl";
+	@Autowired
+	private AssistantService assistantService;
+	
+	@Auth
+	@GetMapping("student/list.html")
+	public String list(ModelMap map){
+		User user = AuthUtil.getCurrentUser();
+		map.put("assistant", assistantService.loadAssistantById(user.getId()));
+		return "student/list.ftl";
 	}
 
 	@GetMapping("/student/show/{id}.html")

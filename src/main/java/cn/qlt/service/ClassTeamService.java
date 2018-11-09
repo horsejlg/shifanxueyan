@@ -44,7 +44,7 @@ public class ClassTeamService {
 		
 	}
 
-	private ClassTeam checkAndSave(ClassTeam t) {
+	public ClassTeam checkAndSave(ClassTeam t) {
 		List<ClassTeam> classTeams = classTeamDao.find("from ClassTeam where grade=? and specialty=? and classes=?",t.getGrade(),t.getSpecialty(),t.getClasses());
 		if(null==classTeams || classTeams.isEmpty()) {//如果对应的班级没有
 			t = classTeamDao.save(t);//就新增

@@ -54,6 +54,58 @@
 </tr>
 </table>
 
+<#if assistant.grades?? && assistant.grades?size gt 0>
+<table class="infotable" align="center">
+<tr>
+<td width="884" align="center" style="border-top: 0px;">管理的年级</td>
+</tr>
+<#list assistant.grades as grade>
+<tr>
+	<td align="center" >${grade.label}</td>
+</tr>
+</#list>
+</table>
+<#else>
+<table class="infotable" align="center">
+<tr>
+<td width="884" align="center" style="border-top: 0px;">年级</td>
+</tr>
+<tr>
+	<td align="center" >&nbsp;</td>
+</tr>
+</table>
+</#if>
+
+<#if assistant.classess?? && assistant.classess?size gt 0>
+<table class="infotable" align="center">
+<tr>
+<td width="299" colspan=3 align="center" style="border-top: 1px;">管理的班级</td>
+</tr>
+
+<#list assistant.classess as cl>
+<tr>
+	<td width="299"  align="center" >${cl.grade.label}</td>
+	<td width="284"  align="center" >${cl.specialty.label}</td>
+	<td width="287"  align="center" >${cl.classes.label}</td>
+</tr>
+</#list>
+
+</table>
+<#else>
+<table class="infotable" align="center">
+<tr>
+<td width="299" align="center" style="border-top: 0px;">年级</td>
+<td width="284" align="center" style="border-top: 0px;">专业</td>
+<td width="287" align="center" style="border-top: 0px;">班级</td>
+</tr>
+<tr>
+	<td align="center" >&nbsp;</td>
+	<td align="center" >&nbsp;</td>
+	<td align="center" >&nbsp;</td>
+</tr>
+</table>
+</#if>
+
 <#if assistant.awards?? && assistant.awards?size gt 0>
 <table class="infotable" align="center">
 <tr>

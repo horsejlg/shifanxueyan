@@ -97,6 +97,7 @@
 	<bean id="jsonParser" class="cn.qlt.utils.web.freemarker.FreemarkerJsonParser" />
 	<bean id="jsonFormat" class="cn.qlt.utils.web.freemarker.FreemarkerJsonFormat" />
 	<bean id="avatarParser" class="cn.qlt.utils.web.freemarker.AvatarsParser" />
+	<bean id="classFormat" class="cn.qlt.utils.web.freemarker.ClassFormat" />
 
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
@@ -113,6 +114,7 @@
 				<entry key="jsonParser" value-ref="jsonParser"></entry>
 				<entry key="jsonFormat" value-ref="jsonFormat"></entry>
 				<entry key="avatar" value-ref="avatarParser"></entry>
+				<entry key="classFormat" value-ref="classFormat"></entry>
 			</map>
 		</property>
 		<property name="preferFileSystemAccess" value="false" />

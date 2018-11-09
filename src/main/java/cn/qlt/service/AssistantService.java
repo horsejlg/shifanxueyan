@@ -1,14 +1,16 @@
 package cn.qlt.service;
 
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.qlt.dao.AssistantDao;
+import cn.qlt.dao.AwardsDao;
 import cn.qlt.dao.UserDao;
 import cn.qlt.domain.Assistant;
+import cn.qlt.domain.Awards;
 import cn.qlt.domain.ClassTeam;
 import cn.qlt.domain.Dict;
 import cn.qlt.domain.User;
@@ -26,6 +28,12 @@ public class AssistantService {
 	@Autowired
 	private UserDao userDao;
 	
+	@Autowired
+	private ClassTeamService classteamService;
+	
+	@Autowired
+	private AwardsDao awardsDao;
+	
 	@Transactional
 	public Assistant loadAssistantById(String id){
 		Assistant a = assistantDao.findOne(id);
@@ -33,6 +41,11 @@ public class AssistantService {
 			a = new Assistant();
 			a.setId(id);
 			a.setUser(userDao.load(id));
+		}
+		
+		if(null!=a) {
+			List<Awards> findByUser2 = awardsDao.findByUser(a.getUser());
+			a.setAwards(findByUser2);
 		}
 		
 		return a;
@@ -76,11 +89,7 @@ public class AssistantService {
 	@Transactional
 	public void deleteGrade(String id,Dict grades) {
 		Assistant ass = assistantDao.load(id);
-		System.out.println(ass.getGrades());
-		
 		ass.getGrades().remove(grades);
-		
-		System.out.println(ass.getGrades());
 		assistantDao.save(ass);
 	}
 
@@ -94,6 +103,9 @@ public class AssistantService {
 			ass.setId(id);
 			assistantDao.save(ass);
 		}
+		
+		classTeam = classteamService.checkAndSave(classTeam);
+		
 		ass.getClassess().add(classTeam);
 		assistantDao.save(ass);
 	}
@@ -104,5 +116,14 @@ public class AssistantService {
 		ass.getClassess().remove(classTeam);
 		assistantDao.save(ass);
 	}
+	
+	public void saveAwards(Awards awards) {
+		awardsDao.save(awards);
+	}
+	
+	public void deleteAwards(String id) {
+		awardsDao.delete(id);
+	}
+
 
 }

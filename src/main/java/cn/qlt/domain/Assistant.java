@@ -303,5 +303,15 @@ public class Assistant extends DomainObject<Assistant>{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	@Override
+	public String toString() {
+		return "Assistant [id=" + id + ", user=" + user + ", birthday=" + birthday + ", nation=" + nation
+				+ ", birthplace=" + birthplace + ", address=" + address + ", economy=" + economy + ", idCode=" + idCode
+				+ ", politics=" + politics + ", phone=" + phone + ", qq=" + qq + ", sex=" + sex + ", awards=" + awards
+				+ ", researchResults=" + researchResults + ", createTime=" + createTime + ", updateTime=" + updateTime
+				+ ", grades=" + grades + ", classess=" + classess + ", helpers=" + helpers + "]";
+	}
+	
 	
 }

@@ -59,7 +59,7 @@ public class IndexController {
 	public String userInfo(ModelMap map) throws Exception{
 		map.put("cuser", userService.loadUser(AuthUtil.getCurrentUser().getId()));
 		return "userInfo.ftl";
-	}	
+	}
 	
 	@Auth
 	@GetMapping("/topic/my.html")
