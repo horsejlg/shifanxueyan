@@ -30,7 +30,7 @@
 		<#list user.roles as role>
 			<#if role.code == "assistant">
 				<div title="我创建的专题" href="/topic/my.html?auth=true" style="padding:10px;border-top:1px"></div>
-				<div title="我管理的学生" href="/student/tree/list.html" style="padding:10px;border-top:1px"></div>
+				<div title="我管理的学生" href="/student/list.html" style="padding:10px;border-top:1px"></div>
 			</#if>
 			<#if role.code == "master">
 				<div title="用户管理" href="${base}/users.html" style="padding:10px;border-top:1px"></div>
