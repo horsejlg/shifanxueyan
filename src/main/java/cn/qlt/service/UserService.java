@@ -168,6 +168,20 @@ public class UserService {
 		}
 		if(StringUtils.isEmpty(user.getJob().getCode())){
 			user.setJob(null);
+		}else{
+			Role e = new Role();
+			switch (user.getJob().getCode()) {
+			case "assistant":
+				e.setCode("assistant");
+				user.getRoles().add(e);
+				break;
+			/*case "student":
+				e.setCode("student");
+				user.getRoles().add(e);
+				break;*/
+			default:
+				break;
+			}
 		}
 		userDao.save(user);
 		
