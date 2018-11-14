@@ -1,6 +1,11 @@
 package cn.qlt.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +18,10 @@ import cn.qlt.domain.Assistant;
 import cn.qlt.domain.Awards;
 import cn.qlt.domain.ClassTeam;
 import cn.qlt.domain.Dict;
+import cn.qlt.domain.Student;
 import cn.qlt.domain.User;
+import cn.qlt.utils.SQLUtils.PageInfo;
+import cn.qlt.utils.SQLUtils.PageResult;
 
 /**
  * @author zp
@@ -33,6 +41,9 @@ public class AssistantService {
 	
 	@Autowired
 	private AwardsDao awardsDao;
+	
+	@Autowired
+	private StudentService studentService;
 	
 	@Transactional
 	public Assistant loadAssistantById(String id){
@@ -123,6 +134,21 @@ public class AssistantService {
 	
 	public void deleteAwards(String id) {
 		awardsDao.delete(id);
+	}
+
+	@Transactional
+	public Set<Assistant> findAssistantByStdId(String userId) {
+		List<Assistant> assList = new ArrayList<Assistant>();
+		
+		Student stu = studentService.loadFullStudent(userId);
+		assList.addAll(stu.getClassTeam().getAssistants());
+		
+		List p = assistantDao.find("select ass from Assistant ass join ass.grades grad where grad.code = ?", stu.getClassTeam().getGrade().getCode());
+		
+		assList.addAll(p);
+		
+		Set set = new HashSet(assList);
+		return set;
 	}
 
 
