@@ -145,7 +145,7 @@ public class UserService {
 	@Transactional
 	public PageResult find(Map<String,String> params, PageInfo page) {
 		PageResult result = new PageResult();
-		result.find(page, "from User user where 1=1 /~id: and user.id={id}~//~loginname: and user.loginname ={loginname}~//~nickName: and user.nickName like '%[nickName]%'~//~specialty: and specialty.code={specialty} ~//~grade: and grade.code={grade} ~//~classes: and classes.code={classes} ~//~classes: and classes.code={classes} ~/", params, userDao);
+		result.find(page, "select user from User user /~roles: join user.roles role ~/ where 1=1 /~id: and user.id={id}~//~loginname: and user.loginname ={loginname}~//~nickName: and user.nickName like '%[nickName]%'~//~specialty: and specialty.code={specialty} ~//~grade: and grade.code={grade} ~//~classes: and classes.code={classes} ~//~roles: and role.code={roles} ~/", params, userDao);
 		return result;
 	}
 	

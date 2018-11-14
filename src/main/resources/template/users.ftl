@@ -49,7 +49,16 @@
                     labelWidth:32,
                     label: '班级:'
                     ">
-	<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="$('#usersTable').datagrid('load',{loginname: $('#loginname').val(),nickName: $('#nickName').val(), specialty:$('#qspecialty').combobox('getValue'), grade:$('#qgrade').combobox('getValue'), classes:$('#qclasses').combobox('getValue')});">查询</a>
+                <input class="easyui-combobox" id="qrole" data-options="
+                    url:'${base}/console/roles',
+                    method:'GET',
+                    valueField:'code',
+                    textField:'label', 
+                    panelHeight:'auto',
+                    labelWidth:32,
+                    label: '角色:'
+                    ">
+	<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="$('#usersTable').datagrid('load',{loginname: $('#loginname').val(),nickName: $('#nickName').val(), specialty:$('#qspecialty').combobox('getValue'), grade:$('#qgrade').combobox('getValue'), classes:$('#qclasses').combobox('getValue'), roles:$('#qrole').combobox('getValue')});">查询</a>
 </form>
 </div>
 <div>
@@ -121,6 +130,13 @@
                     textField:'label', 
                     panelHeight:'auto',
                     label: '职务:'
+                    ">
+                <input class="easyui-combobox" name="role" style="width:100%;" data-options="
+                    url:'${base}/console/roles',
+                    valueField:'code',
+                    textField:'label', 
+                    panelHeight:'auto',
+                    label: '角色:'
                     ">
             </div>
             <div style="margin-bottom:20px">
