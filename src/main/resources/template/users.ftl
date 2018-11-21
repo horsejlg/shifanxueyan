@@ -67,6 +67,7 @@
 	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cut" plain="true" onclick="deleteUser()">删除</a>
 	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-man" plain="true" onclick="setRole()">设置角色</a>
 	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-config" plain="true" onclick="updatePwd()">修改密码</a>
+	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-config" plain="true" onclick="toSendMessage()">发消息</a>
 	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-config" plain="true" onclick="$('#userImport').window('open');">用户导入</a>
 </div>
 </div>
@@ -130,13 +131,6 @@
                     textField:'label', 
                     panelHeight:'auto',
                     label: '职务:'
-                    ">
-                <input class="easyui-combobox" name="role" style="width:100%;" data-options="
-                    url:'${base}/console/roles',
-                    valueField:'code',
-                    textField:'label', 
-                    panelHeight:'auto',
-                    label: '角色:'
                     ">
             </div>
             <div style="margin-bottom:20px">
@@ -283,6 +277,13 @@ function saveRoles(){
  $.post("${base}/console/roles",{"id":id,"roles":roles.toString()},function(data){if(data){
  $("#role-dialog").dialog('close');
  $("#usersTable").datagrid('reload');}})
+}
+
+function toSendMessage(){
+	var date = $("#usersTable").datagrid('getSelected');
+	if(date){
+		sendMessage({id:data.id, name:data.nickName});
+	}
 }
 
 function saveUser(){
