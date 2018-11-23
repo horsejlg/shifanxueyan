@@ -11,6 +11,7 @@
  	height: 1.5em;
  	padding: 3px;
  }
+ a{text-decoration:none; color: silver;}
 </style>
 </@override>
 <@override name="body">
@@ -30,17 +31,17 @@
 </tr>
 <tr>
 	<td align="right">地点:</td>
-	<td colspan="3"><input type="text" class="easyui-textbox" data-options="value:'${topic.location}',width:500" name="location" /></td>
+	<td colspan="3"><input type="text" class="easyui-textbox" data-options="value:'${topic.location}',width:500<#if permissions lt 1>,readonly:true</#if>" name="location" /></td>
 	<td><#if permissions == 2 ><input class="easyui-checkbox" id="homework" name="homework" value="true" label="要求交作业:" <#if topic.homework == 1>checked</#if>><#else><#if topic.homework != 2>要求交作业</#if></#if></td>
 </tr>
 <tr>
 	<td align="right" valign="top">备注:</td>
-	<td colspan="4"><input class="easyui-textbox" name="remark" data-options="value:'${topic.remark}',width:600,multiline:true,height:50<#if permissions lt 0>,readonly:true</#if>" ></td>
+	<td colspan="4"><input class="easyui-textbox" name="remark" data-options="value:'${topic.remark}',width:600,multiline:true,height:50<#if permissions lt 1>,readonly:true</#if>" ></td>
 </tr>
 <tr>
-	<td colspan="6"><textarea id="content" name="content" style="width:100%;height:300px;">
+	<td colspan="6"><#if permissions != 0><textarea id="content" name="content" style="width:100%;height:300px;">
 	${topic.content}
-</textarea></td>
+</textarea><#else><p style="min-height: 120px;">${topic.content}</p></#if></td>
 </tr>
 </table><#if permissions != 0>
 <div style="margin:20px auto; width:882px" align="center">
@@ -50,10 +51,11 @@
 <input type="hidden" name="id" id="topicId" value="${topic.id}" />
 </form>
 <div align="center">
+<#if permissions != 0 || topic.homework>
 <table id="participants" class="easyui-datagrid" data-options="url:'${base}/topic/participants/${topic.id}',method:'get',toolbar:'#participantsButton',width:800,title:'参与人员',onBeforeLoad:loadHomeWork">
 	<thead>
 		<tr>
-			<th data-options="field:'id',checkbox:true"></th>
+			<#if permissions = 2><th data-options="field:'id',checkbox:true"></th></#if>
 			<th data-options="field:'loginname',width:100">学号</th>
 			<th data-options="field:'nickName',width:100,align:'right'">姓名</th>
 			<th data-options="field:'specialty',width:100,align:'right',formatter:function(value,row,index){if(value)return value.label;}">专业</th>
@@ -63,6 +65,8 @@
 		</tr>
 	</thead>
 </table>
+</#if>
+<#if permissions == 2>
 <table id="visibleUsers" class="easyui-datagrid" data-options="url:'${base}/topic/visibleUsers/${topic.id}',method:'get',toolbar:'#visibleUsersButton',width:800,title:'可见人员'">
 	<thead>
 		<tr>
@@ -75,7 +79,9 @@
 		</tr>
 	</thead>
 </table>
+</#if>
 </div>
+<#include "/topic/reply.ftl">
 <div id="visibleUsersButton" >
 <#if permissions == 2>	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addUser('visibleUsers')">添加</a>
 	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cut" plain="true" onclick="deleteUser('visibleUsers')">删除</a>
@@ -144,9 +150,11 @@
 </div>
 </@override>
 <@override name="script">
+<#if permissions gt 0>
 KindEditor.ready(function(K) {
                 window.editor = K.create('#content');
         });
+        </#if>
 function saveTopic(){
 <#if permissions gt 0>
 editor.sync();
@@ -251,14 +259,16 @@ function loadHomeWork(){
 
 function showWork(value,row,index){
 var content="";
-	<#if topic.homework gt 0 && permissions !=0 >
+	<#if topic.homework gt 0  >
 	if(window.homeworks.data[row.id]){
 		var work = window.homeworks.data[row.id]
 		content+="<a href='${base}"+work.url+"' target='_blank' >"+work.title+"</a>";
 	}
+	<#if permissions !=0>
 	if(row['id']=='${user.id}'){
 		content += "&nbsp;<a href='javascript:void(0)' onclick=uploadWork('"+row['id']+"') >上传作业</a>";
-	}</#if>
+	}
+	</#if></#if>
 	return content;
 }
 

@@ -19,6 +19,7 @@ import cn.qlt.domain.ClassTeam;
 import cn.qlt.domain.Student;
 import cn.qlt.domain.Topic;
 import cn.qlt.domain.TopicLog;
+import cn.qlt.domain.TopicReply;
 import cn.qlt.domain.TopicWork;
 import cn.qlt.domain.User;
 import cn.qlt.service.StudentService;
@@ -131,6 +132,13 @@ public class TopicController {
 	 * @return
 	 */
 	@Auth
+	@PostMapping(value = "/topicReply")
+	public boolean saveTopicReply(TopicReply topicReply){
+		topicReply.setAuthor(AuthUtil.getCurrentUser());
+		return topicService.addTopicReply(topicReply);		
+	}
+	
+	@Auth
 	@PostMapping(value = "/topics")
 	public PageResult findTopic(HttpServletRequest request) {
 		Map<String, String> params = RequestUtil.getParams(request);
@@ -139,16 +147,16 @@ public class TopicController {
 		if (params.containsKey("author_id")) {
 			params.put("author_id", user.getId());
 		} else {
-			Student t = studentService.getStudentById(user.getId());
-			if (null != t) {
+/*			Student t = studentService.getStudentById(user.getId());
+			if (null != t) {*/
 				if (params.containsKey("participants")) {
 					params.put("participants", user.getId());
 				} else {// 如果是学生 那就使用可见范围这个限制
 					params.put("visibleUsers", user.getId());
 				}
-			} else {
+/*			} else {
 				params.put("participants", user.getId());
-			}
+			}*/
 		}
 		return topicService.find(params, pageinfo);
 	}
@@ -161,7 +169,7 @@ public class TopicController {
 	 * @param pageSize
 	 * @return
 	 */
-	@PostMapping(value = "/topicReply")
+	@PostMapping(value = "/topicReplys")
 	public PageResult findTopicReply(Map<String, String> params) {
 		PageInfo pageinfo = SQLUtils.getPageInfo(params);
 		return topicService.findTopicReply(params, pageinfo);

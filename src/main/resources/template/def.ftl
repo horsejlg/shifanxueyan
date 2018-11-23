@@ -75,6 +75,38 @@ $("clearButton").click(function(){
 <#if user??>
 $("#logon").window('close');
 </#if>
+<#if user??>
+<#-- function loadMessage(){
+	$.get("/console/message/news",function(rows){
+		if(rows && rows.length){
+			$(rows).each(function(data){
+				$.messager.show({
+					title:'来自'+data.from.nickName+'的消息',
+					msg:data.content,
+					timeout:20000,
+					showType:'slide',
+					onClose:function(){
+						$.post("/console/message/state",{id:data.id,state:2})
+					}
+				});
+			});
+		}
+	});
+}
+function sendMessage(to){
+	$.messager.prompt("发送消息","请输入你要发送给"+to.name+"的消息",function(r){
+		if(r){
+			$.post("/console/message",{to:{id:to.id},content:r},function(data){
+				if(data){
+					$.messager.alert('发送成功','已成功将消息发送给'+to.name,'info');
+				}else{
+					$.messager.alert('发送失败','向'+to.name+'消息失败！'+,'warning');
+				}
+			})
+		}
+	})
+} -->
+</#if>
 });
 </script>
   </body>
