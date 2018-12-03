@@ -51,6 +51,7 @@
 <input type="hidden" name="id" id="topicId" value="${topic.id}" />
 </form>
 <div align="center">
+<#if topic.id ??>
 <#if permissions != 0 || topic.homework>
 <table id="participants" class="easyui-datagrid" data-options="url:'${base}/topic/participants/${topic.id}',method:'get',toolbar:'#participantsButton',width:800,title:'参与人员',onBeforeLoad:loadHomeWork">
 	<thead>
@@ -79,6 +80,7 @@
 		</tr>
 	</thead>
 </table>
+</#if>
 </#if>
 </div>
 <#include "/topic/reply.ftl">
