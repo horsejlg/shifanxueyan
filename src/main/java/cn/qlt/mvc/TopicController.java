@@ -105,8 +105,8 @@ public class TopicController {
 	}
 
 	/*
-	 * @GetMapping(value="/topic/{id}") public Topic getTopicByid(String id){
-	 * return topicService.getTopicByid(id); }
+	 * @GetMapping(value="/topic/{id}") public Topic getTopicByid(String id){ return
+	 * topicService.getTopicByid(id); }
 	 */
 
 	@DeleteMapping(value = "/topic/{topicId}")
@@ -133,11 +133,11 @@ public class TopicController {
 	 */
 	@Auth
 	@PostMapping(value = "/topicReply")
-	public boolean saveTopicReply(TopicReply topicReply){
+	public boolean saveTopicReply(TopicReply topicReply) {
 		topicReply.setAuthor(AuthUtil.getCurrentUser());
-		return topicService.addTopicReply(topicReply);		
+		return topicService.addTopicReply(topicReply);
 	}
-	
+
 	@Auth
 	@PostMapping(value = "/topics")
 	public PageResult findTopic(HttpServletRequest request) {
@@ -147,16 +147,17 @@ public class TopicController {
 		if (params.containsKey("author_id")) {
 			params.put("author_id", user.getId());
 		} else {
-/*			Student t = studentService.getStudentById(user.getId());
-			if (null != t) {*/
-				if (params.containsKey("participants")) {
-					params.put("participants", user.getId());
-				} else {// 如果是学生 那就使用可见范围这个限制
-					params.put("visibleUsers", user.getId());
-				}
-/*			} else {
+			/*
+			 * Student t = studentService.getStudentById(user.getId()); if (null != t) {
+			 */
+			if (params.containsKey("participants")) {
 				params.put("participants", user.getId());
-			}*/
+			} else {// 如果是学生 那就使用可见范围这个限制
+				params.put("visibleUsers", user.getId());
+			}
+			/*
+			 * } else { params.put("participants", user.getId()); }
+			 */
 		}
 		return topicService.find(params, pageinfo);
 	}
@@ -170,7 +171,10 @@ public class TopicController {
 	 * @return
 	 */
 	@PostMapping(value = "/topicReplys")
-	public PageResult findTopicReply(Map<String, String> params) {
+	public PageResult findTopicReply(HttpServletRequest request) {
+
+		Map<String, String> params = RequestUtil.getParams(request);
+
 		PageInfo pageinfo = SQLUtils.getPageInfo(params);
 		return topicService.findTopicReply(params, pageinfo);
 	}
