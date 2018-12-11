@@ -1,7 +1,6 @@
 package cn.qlt.domain;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,9 +10,12 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -118,6 +120,19 @@ public class Topic extends ManagedIdentityDomainObject<Topic>{
 	@Column(name="update_time")
 	private Date updateTime = new Date();
 	
+	@ManyToOne(cascade=CascadeType.DETACH, fetch=FetchType.EAGER)
+	@JoinColumn(name="work_type",nullable=true)
+	@NotFound(action=NotFoundAction.IGNORE)
+	private Dict type;
+	
+	public Dict getType() {
+		return type;
+	}
+
+	public void setType(Dict type) {
+		this.type = type;
+	}
+
 	public Date getUpdateTime() {
 		return updateTime;
 	}

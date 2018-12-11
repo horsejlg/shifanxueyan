@@ -61,7 +61,7 @@ public class IndexController {
 	@Auth
 	@GetMapping("/topic/my.html")
 	public String myTopic() {
-		return "topic/list.ftl";
+		return "topic/tree.ftl";
 	}
 	
 	@Auth

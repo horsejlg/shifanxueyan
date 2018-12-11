@@ -17,7 +17,7 @@ public class MessageService {
 	private MessageDao messageDao;
 	
 	public List<Message> findMessageByUser(User to){
-		return messageDao.findByToAndState(to, 1);
+		return messageDao.findByTosAndState(to, 1);
 	}
 	
 	public void saveMessage(Message message){
@@ -30,7 +30,7 @@ public class MessageService {
 
 	public boolean updateState(String id, int state) {
 		Message message = messageDao.load(id);
-		if(message.getTo().equals(AuthUtil.getCurrentUser())){
+		if(message.getTos().equals(AuthUtil.getCurrentUser())){
 			message.setState(state);
 			messageDao.save(message);
 			return true;

@@ -49,6 +49,7 @@
 	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#topicForm').from('reset');" style="width:80px">重置</a>
 </div></#if>
 <input type="hidden" name="id" id="topicId" value="${topic.id}" />
+
 </form>
 <div align="center">
 <#if topic.id ??>
@@ -83,6 +84,7 @@
 </#if>
 </#if>
 </div>
+<#if topic.id ??>
 <#include "/topic/reply.ftl">
 <div id="visibleUsersButton" >
 <#if permissions == 2>	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addUser('visibleUsers')">添加</a>
@@ -96,6 +98,7 @@
 </#if></div>
 </div>
 </div>
+</#if>
 <div id="userSelect" class="easyui-window" title="用户信息" data-options="iconCls:'icon-man',minimizable:false,maximizable:false,collapsible:false,modal:true,resizable:false,draggable:false,closed:true" style="width:850px;padding:20px;">
 <table id="userList" class="easyui-datagrid" data-options="url:'/console/users',toolbar:'#userTools'">
 	<thead>
@@ -162,6 +165,12 @@ function saveTopic(){
 editor.sync();
 var formdata = $("#topicForm").serializeArray();
 var topic = {};
+<#if topic.type ??>
+topic["type"]= {code: "${topic.type}"}
+<#elseif RequestParameters["type"] ?? >
+topic["type"]= {code: "${RequestParameters["type"]}"};
+</#if>
+
 $(formdata).each(function(){
 	if(this.value){
 		topic[this.name] = this.value;
@@ -246,7 +255,12 @@ function loadHomeWork(){
 			return false;
 		}
 	}else{
-		window.homeworks = {state:false};
+		reloadWork();
+	}
+}
+
+function reloadWork(){
+window.homeworks = {state:false};
 		$.get("${base}/topicWork/${topic.id}",function(data){
 			window.homeworks.data={};
 			$(data).each(function(){
@@ -256,7 +270,6 @@ function loadHomeWork(){
 			$("#participants").datagrid('reload');
 		});
 		return false;
-	}
 }
 
 function showWork(value,row,index){
@@ -295,6 +308,7 @@ function uploadWork(id){
 		});
 		//$.post("${base}/topicWork",,"json");
 		$.messager.progress('close');	// hide progress bar while submit successfully
+		$("#participants").datagrid('reload');
 	}
 	});
 	}}});

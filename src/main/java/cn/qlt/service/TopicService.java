@@ -191,6 +191,7 @@ public class TopicService {
 		PageResult result = new PageResult();
 		result.find(page, "select t from Topic t /~visibleUsers: join t.visibleUsers v ~/ /~participants: join t.participants p ~/ where 1=1 /~id: and t.id={id}~/"
 				+ "/~title: and t.title like '%[title]%'~/"
+				+ "/~type: and t.type.code = {type} ~/"
 				+ "/~promiseTime: and t.promiseTime between {promiseTimeBegin} and {promiseTimeEnd}~/"
 				+ "/~endTime: and t.promiseTime between {endTimeBegin} and {endTimeEnd}~/"
 				+ "/~publish: and t.publish = {publish} ~/"

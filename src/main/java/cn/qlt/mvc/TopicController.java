@@ -170,7 +170,8 @@ public class TopicController {
 	 * @return
 	 */
 	@PostMapping(value = "/topicReplys")
-	public PageResult findTopicReply(Map<String, String> params) {
+	public PageResult findTopicReply(HttpServletRequest request) {
+		Map<String, String> params = RequestUtil.getParams(request);
 		PageInfo pageinfo = SQLUtils.getPageInfo(params);
 		return topicService.findTopicReply(params, pageinfo);
 	}

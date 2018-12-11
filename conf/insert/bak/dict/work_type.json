@@ -1,0 +1,12 @@
+[
+{"code":"topic_type", "label":"专题模块","type":"type"},
+{"code":"ttype01", "label":"思想理论教育和价值引领","type":"topic_type"},
+{"code":"ttype02", "label":"党团和班级建设","type":"topic_type"},
+{"code":"ttype03", "label":"学风建设","type":"topic_type"},
+{"code":"ttype04", "label":"学生日常事务管理","type":"topic_type"},
+{"code":"ttype05", "label":"心理健康教育与咨询工作","type":"topic_type"},
+{"code":"ttype06", "label":"网络思想政治教育","type":"topic_type"},
+{"code":"ttype07", "label":"校园危机事件应对","type":"topic_type"},
+{"code":"ttype08", "label":"职业规划与就业创业指导","type":"topic_type"},
+{"code":"ttype09", "label":"理论和实践研究","type":"topic_type"}
+]

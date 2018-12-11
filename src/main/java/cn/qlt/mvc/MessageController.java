@@ -23,7 +23,7 @@ public class MessageController {
 	@Auth
 	@PostMapping("/console/message")
 	public boolean saveMessage(@RequestBody Message message){
-		message.setFrom(AuthUtil.getCurrentUser());
+		message.setFroms(AuthUtil.getCurrentUser());
 		message.setState(1);
 		messageService.saveMessage(message);
 		return true;

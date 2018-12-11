@@ -27,10 +27,10 @@ public class Message extends ManagedIdentityDomainObject<Message>{
 	}
 
 
-	public Message(User from, User to, int state, String content) {
+	public Message(User froms, User to, int state, String content) {
 		super();
-		this.from = from;
-		this.to = to;
+		this.froms = froms;
+		this.tos = to;
 		this.state = state;
 		this.content = content;
 	}
@@ -38,11 +38,11 @@ public class Message extends ManagedIdentityDomainObject<Message>{
 
 	@ManyToOne(cascade=CascadeType.DETACH, fetch=FetchType.LAZY)
 	@JoinColumn(name="from_id",nullable=false)
-	private User from;
+	private User froms;
 	
 	@ManyToOne(cascade=CascadeType.DETACH, fetch=FetchType.LAZY)
 	@JoinColumn(name="to_id",nullable=false)
-	private User to;
+	private User tos;
 	
 	
 	@Column(name="state")
@@ -53,23 +53,23 @@ public class Message extends ManagedIdentityDomainObject<Message>{
 	private String content;
 
 
-	public User getFrom() {
-		return from;
+	public User getFroms() {
+		return froms;
 	}
 
 
-	public void setFrom(User from) {
-		this.from = from;
+	public void setFroms(User froms) {
+		this.froms = froms;
 	}
 
 
-	public User getTo() {
-		return to;
+	public User getTos() {
+		return tos;
 	}
 
 
-	public void setTo(User to) {
-		this.to = to;
+	public void setTos(User to) {
+		this.tos = to;
 	}
 
 
