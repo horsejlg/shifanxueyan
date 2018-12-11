@@ -228,14 +228,19 @@ return new Date();
  
 };
 
-
+function isValidDate(d) {
+  return d instanceof Date && !isNaN(d);
+}
 
 function formatDate(value,row,index){
 	if(value instanceof String){
 		return value;
 	}else{
 		var date = new Date(value);
-		return date.toJSON().substr(0,10); 
+		if(isValidDate(date)){
+			return date.toJSON().substr(0,10); 
+		}
+		
 	}
 }
 $(function(){

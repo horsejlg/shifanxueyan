@@ -24,9 +24,9 @@ import cn.qlt.domain.UserAttribute;
 import cn.qlt.service.UserService;
 import cn.qlt.utils.ObjectId;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+/*@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:META-INF/conf-spring/spring-db.xml" })
-@Transactional
+@Transactional*/
 public class UserTest {
 
 	
