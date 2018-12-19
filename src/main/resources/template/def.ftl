@@ -99,7 +99,7 @@ function loadMessage(){
 				}
 			});
 		}
-		setTimeout("loadMessage();",60000);
+		setTimeout("loadMessage();",300000);
 	});
 }
 loadMessage();
