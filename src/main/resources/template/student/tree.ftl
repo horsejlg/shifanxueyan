@@ -10,7 +10,7 @@
 		<thead>
 			<tr>
 				<th data-options="field:'loginname',width:120">学号</th>
-				<th data-options="field:'nickName',width:120,align:'right'">姓名</th>
+				<th data-options="field:'nickName',width:120,align:'right',formatter:showName">姓名</th>
 				<th data-options="field:'status',width:40,align:'center',formatter: function(value,row,index){return value==1?'启用':'禁用'}">状态</th>
 				<th data-options="field:'id',width:100,formatter:optionFormatter">操作</th>
 			</tr>
@@ -52,6 +52,10 @@ function onclick(node){
 		queryParams['classes']= node["id"];
 		$("#studentTable").datagrid({url:'${base}/students',queryParams:queryParams});
 	} 
+}
+
+function showName(value,row,index){
+	return "<a href='javascript:void(0)' onclick='sendMessage(\""+row.id+"\", \""+value+"\")'>"+value+"</a>"
 }
 
 </script>

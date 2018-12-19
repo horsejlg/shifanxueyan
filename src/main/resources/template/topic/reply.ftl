@@ -42,9 +42,9 @@
 <script>
 function showReply(value,row,index){
 	var hash = hashCode(row.id);
-	return "<div style='height:auto;width: 100px;display: table-cell;'><div ><p><img width='60' height='80' src='${base}/avatars/"
+	return "<div style='height:auto;width: 100px;display: table-cell;'><div ><p><a href='javascript:void(0)' onclick='sendMessage(\""+row.author.id+"\", \""+row.author.nickName+"\")'><img width='60' height='80' src='${base}/avatars/"
 	+ (hash%100) + "/" + parseInt(hash/100) + "/"+ row.id + 
-	".jpg' /></p><p ><a href='javascript:void(0)'><span>"
+	".jpg' /></a></p><p ><a href='javascript:void(0)' onclick='sendMessage(\""+row.author.id+"\", \""+row.author.nickName+"\")'><span>"
 	+ row.author.nickName +
 	"</span></a></p><p>"
 	+ (row.author.grade?row.author.grade.label:"") + (row.author.classes?row.author.classes.label:"") +

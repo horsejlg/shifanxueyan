@@ -75,39 +75,54 @@ $("clearButton").click(function(){
 <#if user??>
 $("#logon").window('close');
 </#if>
+});
 <#if user??>
-<#-- function loadMessage(){
+window.messageData={}
+function loadMessage(){
 	$.get("/console/message/news",function(rows){
 		if(rows && rows.length){
-			$(rows).each(function(data){
+			$(rows).each(function(index, data){
+				if(!window.messageData[data.id]){
+				window.messageData[data.id]=true;
 				$.messager.show({
-					title:'来自'+data.from.nickName+'的消息',
+					title:'来自'+data.userName+'的消息',
 					msg:data.content,
-					timeout:20000,
 					showType:'slide',
+					timeout:0,
 					onClose:function(){
-						$.post("/console/message/state",{id:data.id,state:2})
+						$.post("/console/message/state",{id:data.id,state:2},function(){
+							delete window.messageData[data.id];
+						})
+						
 					}
 				});
+				}
 			});
 		}
+		setTimeout("loadMessage();",60000);
 	});
 }
-function sendMessage(to){
-	$.messager.prompt("发送消息","请输入你要发送给"+to.name+"的消息",function(r){
+loadMessage();
+function sendMessage(id, name){
+	$.messager.prompt("发送消息","请输入你要发送给"+name+"的消息",function(r){
 		if(r){
-			$.post("/console/message",{to:{id:to.id},content:r},function(data){
+			$.ajax({
+			url: "/console/message",
+			method:"post",
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			data:JSON.stringify({tos:{id:id},content:r}),
+			success:function(data){
 				if(data){
-					$.messager.alert('发送成功','已成功将消息发送给'+to.name,'info');
+					$.messager.alert('发送成功','已成功将消息发送给'+name,'info');
 				}else{
-					$.messager.alert('发送失败','向'+to.name+'消息失败！'+,'warning');
+					$.messager.alert('发送失败','向'+name+'消息失败！','warning');
 				}
-			})
+			}})
 		}
 	})
-} -->
+}
 </#if>
-});
 </script>
   </body>
 </html>

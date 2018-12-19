@@ -4,7 +4,7 @@
 			<tr>
 				<th data-options="field:'id',width:100">ID</th>
 				<th data-options="field:'loginname',width:120">学号</th>
-				<th data-options="field:'nickName',width:120,align:'right'">姓名</th>
+				<th data-options="field:'nickName',width:120,align:'right',formatter:showName">姓名</th>
 				<th data-options="field:'specialty',width:120,align:'right',formatter:function(value,row,index){if(value)return value.label;}">专业</th>
 				<th data-options="field:'grade',width:120,align:'right',formatter:function(value,row,index){if(value)return value.label}">年级</th>
 				<th data-options="field:'classes',width:120,align:'right',formatter:function(value,row,index){if(value)return value.label}">班级</th>
@@ -284,6 +284,10 @@ function toSendMessage(){
 	if(date){
 		sendMessage({id:data.id, name:data.nickName});
 	}
+}
+
+function showName(value,row,index){
+	return "<a href='javascript:void(0)' onclick='sendMessage(\""+row.id+"\", \""+value+"\")'>"+value+"</a>"
 }
 
 function saveUser(){

@@ -4,7 +4,7 @@
 			data-options="rownumbers:true,singleSelect:true,pagination:true,method:'post',emptyMsg:'暂无数据',fit:true",pagination:true">
 		<thead>
 			<tr>
-				<th data-options="field:'user.nickName',formatter:nickNameFormatter,width:100">姓名</th>
+				<th data-options="field:'user.nickName',formatter:showName,width:100">姓名</th>
 				<th data-options="field:'id',width:100,formatter:optionFormatter">操作</th>
 			</tr>
 		</thead>
@@ -29,4 +29,7 @@ function optionFormatter(value,row,index){
 
 $("#assTable").datagrid({data:${jsonFormat(assistants)}});
 
+function showName(value,row,index){
+	return "<a href='javascript:void(0)' onclick='sendMessage(\""+row.user.id+"\", \""+row.user.nickName+"\")'>"+row.user.nickName+"</a>"
+}
 </script>

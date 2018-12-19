@@ -1,6 +1,7 @@
 package cn.qlt.mvc;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,7 +32,7 @@ public class MessageController {
 	
 	@Auth
 	@GetMapping("/console/message/news")
-	public List<Message> newMyMessages(){
+	public List<Map<String,Object>> newMyMessages(){
 		return messageService.findMessageByUser(AuthUtil.getCurrentUser());
 	}
 	
