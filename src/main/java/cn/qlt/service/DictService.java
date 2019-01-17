@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cn.qlt.dao.DictDao;
 import cn.qlt.domain.Dict;
+import cn.qlt.domain.dto.DictNodeAndCount;
 import cn.qlt.utils.SQLUtils.PageInfo;
 import cn.qlt.utils.SQLUtils.PageResult;
 
@@ -46,7 +47,7 @@ public class DictService {
 		if("ALL".equals(type)){
 			return dictDao.findByParent(parent);
 		}else{
-			return dictDao.find("select distinct dict from Dict dict where dict.type = ? and (dict.parent is null or dict.parent = ?)", type,parent);
+			return dictDao.find("select distinct dict from Dict dict where dict.type = ? and (dict.parent is null or dict.parent = ? or dict.parent = '')", type,parent);
 //			return dictDao.findByTypeAndParent(type, StringUtils.isEmpty(parent)?null:parent);
 		}
 	}
@@ -83,4 +84,5 @@ public class DictService {
 	public Dict findDict(String code){
 		return dictDao.findOne(code);
 	}
+
 }

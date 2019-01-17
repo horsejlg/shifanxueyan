@@ -23,6 +23,10 @@
 	<td width="744" align="left" colspan="5"><input type="text" class="easyui-textbox" data-options="value:'${topic.title}',width:600<#if permissions lt 2>,readonly:true</#if>" name="title" /></td>
 </tr>
 <tr>
+	<td width="100" align="right">分类:</td>
+	<td width="744" align="left" colspan="5">${typeName}</td>
+</tr>
+<tr>
 	<td align="right">约定时间:</td>
 	<td ><input type="text" name="promiseTime" class="easyui-datebox" data-options="width:120,value:'<#if topic.promiseTime??>${topic.promiseTime?string("yyyy-MM-dd")}</#if>',showSeconds:false<#if permissions lt 2>,readonly:true</#if>" /></td>
 	<td align="right">截止时间:</td>

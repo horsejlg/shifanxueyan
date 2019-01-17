@@ -27,7 +27,7 @@
                     label: "管理的年级:"
                     '>
     <input style="width:300px;" class="easyui-combobox" id="qclasses" data-options='
-                    data:[${classFormat(assistant.classess)}],
+                    data:${classFormat(assistant.classess)},
                     valueField:"code",
                     textField:"label", 
                     panelHeight:"auto",

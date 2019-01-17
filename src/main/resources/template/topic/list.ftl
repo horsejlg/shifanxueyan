@@ -15,7 +15,7 @@
 <#if user.roles?size gt 0 >
 	<#list user.roles as role>
 		<#if role.code == "assistant">
-	<a href="${base}/topic/create.html" class="easyui-linkbutton" iconCls="icon-add" plain="true" target="_blank">添加</a>
+	<a href="javascript:void(0)" onclick="creatTopic()" class="easyui-linkbutton" iconCls="icon-add" plain="true" target="_blank">添加</a>
 	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cut" plain="true" onclick="deleteTopic()">删除</a>
 	<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="showTopic(1)">只看我创建的</a>
 		</#if>
@@ -25,6 +25,15 @@
 	<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="showTopic(3)">只看我可见的</a>
 </div>
 <script>
+
+function createTopic(){
+	if(undefined===queryParams['type']){
+		$.messager.alert('信息','请先选择分类!','info');
+		return;
+	}
+	window.open("${base}/topic/create.html?type="+queryParams['type']);
+}
+
 function deleteTopic(){
 var row = $('#topicList').datagrid('getSelected');
 var code = row.id;

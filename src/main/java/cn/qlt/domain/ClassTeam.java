@@ -92,18 +92,43 @@ public class ClassTeam extends ManagedIdentityDomainObject<ClassTeam>{
 
 	@Override
 	public String toString() {
-		return "ClassTeam [specialty=" + specialty + ", grade=" + grade + ", classes=" + classes + "]";
+		return "ClassTeam [id= "+id+"specialty=" + specialty + ", grade=" + grade + ", classes=" + classes + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return super.hashCode();
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((assistants == null) ? 0 : assistants.hashCode());
+		result = prime * result + ((classes == null) ? 0 : classes.hashCode());
+		result = prime * result + ((grade == null) ? 0 : grade.hashCode());
+		result = prime * result + ((specialty == null) ? 0 : specialty.hashCode());
+		result = prime * result + ((students == null) ? 0 : students.hashCode());
+		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		return super.equals(obj);
+		ClassTeam other = (ClassTeam) obj;
+		
+		if (classes == null) {
+			if (other.classes != null)
+				return false;
+		} else if (!classes.equals(other.classes))
+			return false;
+		if (grade == null) {
+			if (other.grade != null)
+				return false;
+		} else if (!grade.equals(other.grade))
+			return false;
+		if (specialty == null) {
+			if (other.specialty != null)
+				return false;
+		} else if (!specialty.equals(other.specialty))
+			return false;
+		
+		return true;
 	}
-	
+
 	
 }

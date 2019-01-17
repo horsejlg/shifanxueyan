@@ -377,4 +377,8 @@ public class TopicService {
 		participants.size();
 		return new ArrayList<>(participants);
 	}
+
+	public Long countByType(String code) {
+		return topicDao.count("from Topic where publish = 1 and type.code=?", code);
+	}
 }

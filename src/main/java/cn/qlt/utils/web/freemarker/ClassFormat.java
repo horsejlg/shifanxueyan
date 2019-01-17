@@ -1,5 +1,6 @@
 package cn.qlt.utils.web.freemarker;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,16 +24,24 @@ public class ClassFormat implements TemplateMethodModelEx{
 		
 		SimpleSequence slist = (SimpleSequence) arguments.get(0);
 		
-		Map<String,String> m = new HashMap();
+		List<Map<String,String>> l = new ArrayList<>();
+		
+		System.out.println(slist);
+		
+		System.out.println("###################");
 		
 		for(int i = 0 ; i< slist.size(); i++){
 			StringModel bean = (StringModel) slist.get(i);
+			Map<String,String> m = new HashMap<>();
 			m.put("code", bean.get("id")+"");
 			m.put("label", "["+((StringModel)bean.get("grade")).get("label")+"] "+((StringModel)bean.get("specialty")).get("label")+" - "+((StringModel)bean.get("classes")).get("label"));
+			l.add(m);
 		}
 		
+		System.out.println(l);
+		
 		try {
-			return objectMapper.writeValueAsString(m);
+			return objectMapper.writeValueAsString(l);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "{}";
