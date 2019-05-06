@@ -79,9 +79,10 @@ public class FileImportUtils {
 					File dir = new File(file,grade);
 					for(String clz: dir.list()){
 						String className = clz.replaceFirst(grade, "").replace(".xlsx", "");
-						Dict classGrade = dictDao.findByTypeAndLabel("grade", className);
+						String replace = clz.replace(".xlsx", "");
+						Dict classGrade = dictDao.findByTypeAndLabel("grade", replace);
 						if(classGrade==null){
-							classGrade=new Dict("clz_"+(index++), grade);
+							classGrade=new Dict("clz_"+(index++), replace);
 							classGrade.setType("class");
 							dictDao.save(classGrade);
 						}

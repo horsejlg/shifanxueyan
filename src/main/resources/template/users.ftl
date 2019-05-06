@@ -39,7 +39,8 @@
                     textField:'label', 
                     panelHeight:'auto',
                     labelWidth:32,
-                    label: '年级:'
+                    label: '年级:',
+                    onSelect:function(record){$('#qclasses').combobox('reload', '${base}/dicts/class?p='+record.code)}
                     ">
                 <input class="easyui-combobox" id="qclasses" data-options="
                     url:'${base}/dicts/class',
@@ -168,7 +169,9 @@
                     textField:'label', 
                     panelHeight:'auto',
                     required:true,
-                    label:'年级'
+                    label:'年级'<#-- ,
+                    onSelect:function(record){$('#classes').combobox('reload', '${base}/dicts/class?p='+record.code)}
+                     -->
                     "><input class="easyui-combobox" name="years" style="width:100%;" data-options="
                     url:'${base}/dicts/year',
                     valueField:'code',
@@ -184,7 +187,7 @@
                     panelHeight:'auto',
                     required:true,
                     label: '专业:'
-                    "><input class="easyui-combobox" name="classes" style="width:100%;" data-options="
+                    "><input class="easyui-combobox" id="classes" name="classes" style="width:100%;" data-options="
                     url:'${base}/dicts/class',
                     valueField:'code',
                     textField:'label', 

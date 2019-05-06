@@ -26,6 +26,7 @@ import cn.qlt.domain.Dict;
 import cn.qlt.domain.Evaluation;
 import cn.qlt.domain.Evaluation1;
 import cn.qlt.domain.Evaluation2;
+import cn.qlt.domain.Evaluation3;
 import cn.qlt.domain.User;
 import cn.qlt.utils.SQLUtils.PageInfo;
 import cn.qlt.utils.SQLUtils.PageResult;
@@ -238,6 +239,37 @@ public class EvaluationService {
 		outputStream.flush();
 		outputStream.close();
 		book.close();
+	}
+	
+	@Scheduled(cron="0 0 0,6,12,18 * * ?")
+	@Transactional
+	public void reloadEvaluation3Index() {
+		// TODO Auto-generated method stub
+		List<Dict> years = dictService.getDictForType("year");
+		List<Dict> specialtys = dictService.getDictForType("specialty");
+		List<Dict> grades = dictService.getDictForType("grade");
+		List<Dict> classes = dictService.getDictForType("class");
+		for(Dict year:years){
+			for(Dict specialty:specialtys){
+				for( Dict grade:grades){
+/*					List<Evaluation> list = evaluationDao.find("from Evaluation2 where status BETWEEN 1 AND 3 and year.code = ? and author.specialty.code=? and author.grade.code=? order by studySorce desc", year.getCode(), specialty.getCode(), grade.getCode());
+					for(int i=0;i<list.size();i++){
+						Evaluation2 e = (Evaluation2) (list.get(i));
+						e.setStudyRanking(i+1);
+					}
+					evaluationDao.save(list);*/
+					for( Dict clz:classes){
+					List<Evaluation3> list = evaluationDao.findEvaluation3(year.getCode(), specialty.getCode(), grade.getCode(),clz.getCode());
+					for(int i=0;i<list.size();i++){
+						Evaluation3 e = list.get(i);
+//						e.setGsIndex(i+1);
+						evaluationDao.saveGsIndex(i+1,e.getId());
+					}
+					//evaluationDao.save(list);
+					}
+				}
+			}
+		}
 	}
 	
 }

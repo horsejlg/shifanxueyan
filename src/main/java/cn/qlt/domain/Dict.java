@@ -89,7 +89,7 @@ public class Dict extends DomainObject<Dict> {
 
 	@Override
 	public String toString() {
-		return "[" + label + "]";
+		return "[".concat(code).concat(":").concat(label).concat("]");
 	}
 
 	@Override

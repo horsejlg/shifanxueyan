@@ -247,7 +247,7 @@ public class User extends DomainObject<User>{
 		try {
 			if(StringUtils.isEmpty(id))
 				id = ObjectId.get().toString();
-			password = XOR.encoder(password, id);
+			//password = XOR.encoder(password, id);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -255,7 +255,8 @@ public class User extends DomainObject<User>{
 	
 	public boolean checkPassword(String password){
 		try {
-			if(XOR.encoder(password, id).equals(this.password)){
+			if(//XOR.encoder(password, id)
+					password.equals(this.password)){
 				return true;
 			}else{
 				return false;

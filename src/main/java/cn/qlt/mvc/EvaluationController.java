@@ -26,6 +26,7 @@ import cn.qlt.domain.Dict;
 import cn.qlt.domain.Evaluation;
 import cn.qlt.domain.Evaluation1;
 import cn.qlt.domain.Evaluation2;
+import cn.qlt.domain.Evaluation3;
 import cn.qlt.domain.Role;
 import cn.qlt.domain.User;
 import cn.qlt.service.DictService;
@@ -79,6 +80,12 @@ public class EvaluationController {
 	@GetMapping("/reloadEvaluation2Index")
 	public void reloadEvaluation2Index() {
 		evaluationService.reloadEvaluation2Index();
+	}
+	
+	@Auth
+	@GetMapping("/reloadEvaluation3Index")
+	public void reloadEvaluation3Index() {
+		evaluationService.reloadEvaluation3Index();
 	}
 
 	@Auth
@@ -164,6 +171,13 @@ public class EvaluationController {
 	@PostMapping("/evaluation2")
 	@ResponseBody
 	public Evaluation saveEvaluation2(@RequestBody Evaluation2 eval) {
+		return saveEvaluation(eval);
+	}
+	
+	@Auth
+	@PostMapping("/evaluation3")
+	@ResponseBody
+	public Evaluation saveEvaluation3(@RequestBody Evaluation3 eval) {
 		return saveEvaluation(eval);
 	}
 

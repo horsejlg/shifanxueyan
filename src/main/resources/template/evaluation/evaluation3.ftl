@@ -56,7 +56,7 @@
 </style>
 </head>
 <body>
-<form id="evaluation2" action="${base}/evaluation2" method="post">
+<form id="evaluation2" action="${base}/evaluation3" method="post">
 <div style="float: right;">填表日期：<#if evaluation.createTime??>${evaluation.createTime?string("yyyy年MM月dd日")}</#if></div>
 <div align="center" style="width: 1200px;margin: 1em auto;">
 	<h1>齐鲁师范学院 教师教育学院<#if evaluation.year?? || !edit>${evaluation.year.label}<input type="hidden" name="year" value="${evaluation.year.code}" /><#else><input class="easyui-combobox" id="year" name="year" data-options="
@@ -110,13 +110,13 @@
 <tr>
 	<th class="th">爱国守法
 <br/>（20分）</th>
-	<td colspan="6" align="left">1、热爱祖国，拥护党的领导；得5分；<br>
-2、遵纪守法。遵守法律法规，无违法行为者，得3分；<br>
-3、理性爱国，以合法方式理性地表达爱国诉求，得3分；<br>
-4、维护国家尊严与声誉，敢于同有损于祖国、国格的言行作斗争，得2分；<br>
-5、关心国家大事，为祖国和家乡的建设尽义务，得2分；<br>
-6、学习了解中华民族的优良传统，继承与发扬中华优秀传统文化，得3分；<br>
-7、积极参加学校组织的普法活动；积极参加消防及安全知识的学习和培训，得2分
+	<td colspan="6" align="left">1、拥护党的领导，拥护党的路线、方针和政策，拥护社会主义制度。得4分；<br/>
+2、热爱祖国，维护国家尊严与声誉，敢于同有损于祖国、国格的言行作斗争，理性爱国，以合法方式理性地表达爱国诉求，得3分；
+<br/>3、深入理解和贯彻党和国家的教育方针和新时期的主要教育政策，得3分；<br/>
+4、遵纪守法，掌握法律法规，无违法行为，得3分；
+<br/>5、关心国家大事，为祖国和家乡的建设尽义务，得2分；
+<br/>6、学习了解中华民族的优良传统，继承与发扬中华优秀传统文化、革命文化、社会主义先进文化，得3分；
+<br/>7、积极参加学校组织的普法活动，积极参加消防及安全知识的学习和培训，得2分；
 </td>
 	<td align="right"><#if edit><input type="text" name="baseSource1" class="easyui-numberbox base" data-options="min:0,max:20,precision:2,width:60,value:'${evaluation.baseSource1?string("#.##")}'" /><#else>${evaluation.baseSource1?string("#.##")}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent1" value=evaluation.baseContent1 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark1" style="width: 100%">${evaluation.baseRemark1}</textarea><#else><p>${evaluation.baseRemark1?replace("\r","<br>")}</p></#if></td>
@@ -132,15 +132,6 @@
 </td>
 	<td align="right"><#if edit><input type="text" name="baseSource2" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:60,value:'${evaluation.baseSource2?string("#.##")}'" /><#else>${evaluation.baseSource2?string("#.##")}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent2" value=evaluation.baseContent2 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark2" style="width: 100%">${evaluation.baseRemark2}</textarea><#else><p>${evaluation.baseRemark2?replace("\r","<br>")}</p></#if></td>
-</tr>
-<tr>
-	<th class="th">社会公益<br/>（15分）</th>
-	<td colspan="6" align="left">1、参加国家级、省级、校级的义工活动者（以证书为准），每人次分别加12分、8分、5分；参加支教活动、敬老院慰问、福利院、帮扶结对、无偿献血等志愿服务的学生由爱心社（或青协等志愿者组织）审核后每项加2分；假期参加社会公益活动的同学凭相关证书、材料加2分，累计不超过12分；<br>
-2、有见义勇为、同违法分子作斗争的行为，凭相关证明，加5分；<br>
-3、积极参加社会实践，具有积极的社会服务和奉献意识，加3分；
-</td>
-	<td align="right"><#if edit><input type="text" name="baseSource3" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:60,value:'${evaluation.baseSource3?string("#.##")}'" /><#else>${evaluation.baseSource3?string("#.##")}</#if></td>
-	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent3" value=evaluation.baseContent3 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark3" style="width: 100%">${evaluation.baseRemark3}</textarea><#else><p>${evaluation.baseRemark3?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
 	<th class="th">教师师德<br/>（15分）</th>
@@ -178,36 +169,46 @@
 						</tr>
 					</table>
 </td>
-	<td align="right"><#if edit><input type="text" name="baseSource4" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:60,value:'${evaluation.baseSource4?string("#.##")}'" /><#else>${evaluation.baseSource4?string("#.##")}</#if></td>
+	<td align="right"><#if edit><input type="text" name="baseSource3" class="easyui-numberbox base" data-options="min:0,max:15,precision:2,width:60,value:'${evaluation.baseSource3?string("#.##")}'" /><#else>${evaluation.baseSource3?string("#.##")}</#if></td>
+	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent3" value=evaluation.baseContent3 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark3" style="width: 100%">${evaluation.baseRemark3}</textarea><#else><p>${evaluation.baseRemark3?replace("\r","<br>")}</p></#if></td>
+</tr>
+<tr>
+	<th class="th">日常行为<br/>（50分）</th>
+	<td colspan="6" align="left">1、严守考纪，诚信考试，杜绝作弊，真实地反映自己的学习成绩，得4分；<br/>
+2、抄袭、剽窃他人作业、文章或论文，一次扣50分；
+<br/>3、有强烈的纪律观念，自觉遵守校内各项纪律；自觉抵制各种违纪行为，得3分。<br/>
+4、、按时交学费，得3分；恶意欠缴学费，一次扣15分；
+5、隐瞒自身健康状况，拒不配合学校或社会有关机构进行健康调查的，一次扣20分；<br/>
+6、严格遵守学校作息制度，按时作息，生活有规律，生活方式健康，积极参加有益于身心健康的各种集体活动，营造风朗气清的网络环境，得3分；
+<br/>7、自尊自爱，注重仪表，行为举止文明，男女交往公共场合举止得体，得3分；<br/>
+8、热爱家庭，有家庭责任意识，孝敬父母，得3分；
+<br/>9、不使用违规电器，不出现违规现象，宿舍内禁烟禁酒，禁止带食物进入学习场所，得3分；发现一次扣0.5分；
+<br/>10、学年满勤（含早操、晚自习及其他教学活动）者加5分，每旷一次扣0.5分 ；<br/>
+11、参加班会、政治学习全勤者加5分。缺席一次扣0.5分
+12、错误观点坚决反对，不信谣不传谣，不造谣，得2分；<br/>
+13、生活简朴，不铺张浪费，学生公认的，加5分；铺张浪费，进行与自己经济情况不符的消费活动，一次扣5分；<br/>
+14、酗酒者，一次扣10分；
+<br/>15、在禁烟区吸烟者，一次扣3分；
+<br/>16、热爱学习，学习态度端正，勤奋刻苦，此项加4分；<br/>
+17、爱护教学、科研设备，得2分；<br/>
+18、尊重教师劳动，积极参与教学活动，得2分
+<br/>19、体育成绩合格、体质测试合格加3分；不合格此项分数为0；
+<br/>20、学生手册考试不合格者扣2分；
+<br/>21、夜不归宿、未经批准在校外居住者，一次扣50分；<br/>
+22、找人替课、替寝或替别人上课、替就寝者，一次扣50分；
+
+</td>
+	<td align="right"><#if edit><input type="text" name="baseSource4" class="easyui-numberbox base" data-options="min:0,max:50,precision:2,width:60,value:'${evaluation.baseSource4?string("#.##")}'" /><#else>${evaluation.baseSource4?string("#.##")}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent4" value=evaluation.baseContent4 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark4" style="width: 100%">${evaluation.baseRemark4}</textarea><#else><p>${evaluation.baseRemark4?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
-	<th class="th">日常行为<br/>（35分）</th>
-	<td colspan="6" align="left">1、严格遵守学校作息制度，按时作息，生活有规律，生活方式健康，积极参加有益于身心健康的各种集体活动，营造风朗气晴的网络环境，得3分；<br>
-2、自尊自爱，注重仪表，行为举止文明，男女交往公共场合举止得体，得3分；<br>
-3、热爱家庭，有家庭责任意识，孝敬父母，得3分；<br>
-4、不使用违规电器，不出现违规现象，宿舍内禁烟禁酒，禁止带食物进入学习场所，得3分；发现一次扣0.5分；<br>
-5、有强烈的纪律观念，自觉遵守校内各项纪律；自觉抵制各种违纪行为，得3分。<br>
-6、学年满勤（含早操、晚自习及其他教学活动）者加5分，每旷一次扣0.5分<br>
-7、参加班会、政治学习全勤者加5分。缺席一次扣0.5分<br>
-8、错误观点坚决反对，不信谣不传谣，不造谣，得2分；<br>
-9、弄虚作假骗取各类困难补助或奖学金的，扣20分； <br>
-10、生活简朴，不铺张浪费，学生公认的，加5分；铺张浪费，进行与自己经济情况不符的消费活动，一次扣5分；<br>
-11、不按时归还贷款本息的或不履行贷款约定的，一次扣10分；<br>
-12、按时交学费，得3分；恶意欠缴学费，一次扣15分；<br>
-13、酗酒者，一次扣10分；<br>
-14、在禁烟区吸烟者，一次扣3分；<br>
-15、隐瞒自身健康状况，拒不配合学校或社会有关机构进行健康调查的，一次扣20分；
-</td>
-	<td align="right"><#if edit><input type="text" name="baseSource5" class="easyui-numberbox base" data-options="min:0,max:35,precision:2,width:60,value:'${evaluation.baseSource5?string("#.##")}'" /><#else>${evaluation.baseSource5?string("#.##")}</#if></td>
-	<td colspan="4"><@m.filesupload label="编辑材料" name="baseContent5" value=evaluation.baseContent5 edit=edit ></@m.filesupload><#if edit><textarea name="baseRemark5" style="width: 100%">${evaluation.baseRemark5}</textarea><#else><p>${evaluation.baseRemark5?replace("\r","<br>")}</p></#if></td>
-</tr>
-<tr>
 	<th class="th">一票否决</th>
-	<td colspan="6" align="left">1、违法乱纪，具有严重政治问题者；<br>
-2、无视学校各项规章制度，受警告、严重警告、记过、留校察看处分者；<br>
-3、通过不良手段（作弊、协助他人作弊等）获得学年所修课程成绩者；<br>
-4、通过网络散布谣言，造成不良影响者；
+	<td colspan="6" align="left">1、违法乱纪，具有严重政治问题者；
+<br>2、无视学校各项规章制度，受严重警告、记过、留校察看处分者；
+<br>3、通过不良手段（作弊、协助他人作弊等）获得学年所修课程成绩者；
+<br>4、通过网络散布谣言，造成不良影响者；<br>
+5、违反教师职业行为十项准则者；<br>
+6、弄虚作假骗取各类困难补助或奖学金的；
 </td>
 	<td align="right"><#if edit><input type="text" id="vetoSource" name="vetoSource" class="easyui-checkbox" value="true" <#if evaluation.vetoSource >checked</#if> /><#else><#if evaluation.vetoSource>是<#else>否</#if></#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="vetoContent" value=evaluation.vetoContent edit=edit ></@m.filesupload><#if edit><textarea name="vetoRemark" style="width: 100%">${evaluation.vetoRemark}</textarea><#else><p>${evaluation.vetoRemark?replace("\r","<br>")}</p></#if></td>
@@ -217,7 +218,7 @@
 	<td colspan="7" align="right"><#if edit><input type="text" id="baseEvaluationSorce" name="baseEvaluationSorce" class="easyui-numberbox" data-options="min:0,max:35,precision:2,width:60,readonly:true,value:'${evaluation.baseEvaluationSorce?string("#.##")}'" /><#else>${evaluation.baseEvaluationSorce?string("#.##")}</#if></td>
 </tr>
 <tr>
-	<th colspan="12">发　 展　性　素　 质　 测　 评　 （20分）</th>
+	<th colspan="12">发　 展　性　素　 质　 测　 评　 （15分）</th>
 </tr>
 <tr>
 	<th colspan="7" align="center">具体内容</th>
@@ -226,26 +227,26 @@
 </tr>
 <tr>
 	<th class="th">社会实践<br/>（20分）</th>
-	<td colspan="6" align="left">获国家、省、校表彰的社会实践团队、每人次分别为10分、6分、3分；获国家、省、校表彰的社会实践先进个人，每人次分别为12分、8分、5分；获国家、省、校、系（院）奖励的社会实践调查报告，每人次分别为8分、6分、4分、2分。上述项目，按最高项计分，不重复加分。<br>
-2、获国家、省、校、系（院）表彰的优秀社团，其主要成员（5人以内，由社团自行推选）；分值分别为6分、5分、4分、3分。获国家、省、校表彰的社团先进个人，分值分别为7分、6分、5分、4分。上述项目，按最高项计分，不重复加分。所有学生参加社团活动一次加1分，依次递增，社内正常开设的课程不加分，如：书画课、舞蹈课。
+	<td colspan="6" align="left">1、获国家、省、校、系（院）表彰的优秀社团，其主要成员（5人以内，由社团自行推选）；分值分别为6分、5分、4分、3分。获国家、省、校表彰的社团先进个人，分值分别为7分、6分、5分、4分。上述项目，按最高项计分，不重复加分。所有学生参加社团活动一次加1分，依次递增，社内正常开设的课程不加分，如：书画课、舞蹈课。<br>
+2、参加国家级、省级、校级的义工活动者（以证书为准），每人次分别加12分、8分、5分；参加敬老院慰问、福利院、帮扶结对、无偿献血等志愿服务的学生由爱心社（或青协等志愿者组织）审核后每项加2分；假期参加社会公益活动的同学凭相关证书、材料加2分，累计不超过12分；<br>
+3、积极参加社会实践，具有积极的社会服务和奉献意识，加3分；
 </td>
 	<td align="right"><#if edit><input type="text" name="growSource1" class="easyui-numberbox grow" data-options="min:0,max:20,precision:0,width:60,value:'${evaluation.growSource1}'" /><#else>${evaluation.growSource1}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="growContent1" value=evaluation.growContent1 edit=edit ></@m.filesupload><#if edit><textarea name="growRemark1" style="width: 100%">${evaluation.growRemark1}</textarea><#else><p>${evaluation.growRemark1?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
 	<th class="th">社会工作<br/>（30分）</th>
-	<td colspan="6" align="left">学生会在老师的监督下由主席团和各部门负责人根据相应规章制度和实际情况酌情加减分。<br>
-1、校学生会干部及成员<br>
-须由校学生会开具证明（不提供证明者不给予加分），学生会主席团加0—10分；部长每人加0—7分；副部长每人加0—6分，干事每人加0-5分；校社联、自管会、广播站加分细则同校学生会；<br>
-2、院级学生会干部<br>
-（1）院学生会主席团加0—8分；部长每人加0—7分；副部长每人加0—6分，干事每人加0-5分；<br>
-（2）社团联合会主席团干部加0--8分；各社团社长每人加0--6分，副社长每人加0—5分；部长加0-4分，副部长加0-3分；干事每人加0--2分；<br>
-3、学年末，由辅导员班主任为班委打分，加分分值为0—8分不等；<br>
-（1）辅导员助理加0--8分；<br>
-（2）各班班长、团支书加0--6分，副班长0—4分，及其他班委（含舍长）加0--2分；<br>
-可按照实际情况酌情加分。<br>
-注：上述项目可重复加分，具体分数由各级负责人协商决定，最终由教师教育学院全体辅导员老师审核，有权酌情加减分；<br>
-
+	<td colspan="6" align="left">学生会在老师的监督下由主席团和各部门负责人根据相应规章制度和实际情况酌情加减分。
+<br/>1、校学生会干部及成员
+<br/>须由校学生会开具证明（不提供证明者不给予加分），学生会主席团加0—10分；部长每人加0—7分；副部长每人加0—6分，干事每人加0-5分；校社联、自管会、广播站加分细则同校学生会；
+<br/>2、院级学生会干部
+<br/>（1）院学生会主席团加0—10分；部长每人加0—7分；副部长每人加0—6分，干事每人加0-5分；<br/>
+（2）社团联合会主席团干部加0--8分；各社团社长每人加0--6分，副社长每人加0—5分；部长加0-4分，副部长加0-3分；干事每人加0--2分；
+<br/>3、学年末，由辅导员班主任为班委打分，加分分值为0—8分不等；
+<br/>（1）辅导员助理加0--8分；
+<br/>（2）各班班长、团支书加0--6分，副班长0—4分，及其他班委（含舍长）加0--2分；
+<br/>可按照实际情况酌情加分。<br/>
+注：上述项目可重复加分，具体分数由各级负责人协商决定，最终由教师教育学院全体辅导员老师审核，有权酌情加减分；
 </td>
 	<td align="right"><#if edit><input type="text" name="growSource2" class="easyui-numberbox grow" data-options="min:0,max:30,precision:0,width:60,value:'${evaluation.growSource2}'" /><#else>${evaluation.growSource2}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="growContent2" value=evaluation.growContent2 edit=edit ></@m.filesupload><#if edit><textarea name="growRemark2" style="width: 100%">${evaluation.growRemark2}</textarea><#else><p>${evaluation.growRemark2?replace("\r","<br>")}</p></#if></td>
@@ -265,29 +266,27 @@
 	<td colspan="4"><@m.filesupload label="编辑材料" name="growContent3" value=evaluation.growContent3 edit=edit ></@m.filesupload><#if edit><textarea name="growRemark3" style="width: 100%">${evaluation.growRemark3}</textarea><#else><p>${evaluation.growRemark3?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
-	<th class="th">竞赛活动<br/>（20分）</th>
-	<td colspan="6" align="left">1、在国家级竞赛活动中，个人奖：一等奖加20分，二等奖加18分，三等奖加16分，优秀奖14分。集体奖：一等奖加18分，二等奖加16分，三等奖加14分，优秀奖12分<br/>
-2、在省级竞赛活动中，个人奖：一等奖加16分，二等奖加14分，三等奖12分，优秀奖10分。集体奖：一等奖加14分，二等奖加12分，三等奖10分，优秀奖8分<br/>
-3、在校级竞赛活动中，个人奖：一等奖加10分，二等奖加8分，三等奖6分，优秀奖4分。集体奖：一等奖加5分，二等奖加4分，三等奖3分，优秀奖2分<br/>
-4、在院级竞赛活动中，个人奖：一等奖加8分，二等奖加6分，三等奖4分，优秀奖2分。集体奖：一等奖加4分，二等奖加3分，三等奖2分，优秀奖1分。<br/>
-5、在各级各类文艺演出活动中，表演节目每人每次加2分，主持每人每次加3分<br/>
-注：竞赛类活动含有：辩论赛、运动会、马拉松比赛、广播操、合唱比赛、球类比赛等。
+	<th class="th">文体竞赛<br/>（20分）</th>
+	<td colspan="6" align="left">1、在校级竞赛活动中，个人奖：一等奖加10分，二等奖加8分，三等奖6分，优秀奖4分。集体奖：一等奖加5分，二等奖加4分，三等奖3分，优秀奖2分
+<br/>2、在院级竞赛活动中，个人奖：一等奖加8分，二等奖加6分，三等奖4分，优秀奖2分。集体奖：一等奖加4分，二等奖加3分，三等奖2分，优秀奖1分；
+<br/>3、在各级各类文艺演出活动中，表演节目每人每次加2分，主持每人每次加3分<br/>
+注：竞赛类活动含有：辩论赛、运动会、马拉松比赛、广播操、合唱比赛、球类比赛等；<br/>
+注：此类竞赛活动不包括教学技能比赛；
 </td>
 	<td align="right"><#if edit><input type="text" name="growSource4" class="easyui-numberbox grow" data-options="min:0,max:20,precision:0,width:60,value:'${evaluation.growSource4}'" /><#else>${evaluation.growSource4}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="growContent4" value=evaluation.growContent4 edit=edit ></@m.filesupload><#if edit><textarea name="growRemark4" style="width: 100%">${evaluation.growRemark4}</textarea><#else><p>${evaluation.growRemark4?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
-	<th class="th">通报表扬、获得个人荣誉称号等加分<br/>（20分）</th>
-	<td colspan="6" align="left">1、校通报表扬者，每人次加4分，院通报表扬者，每人次加2分（有文件按文件加分）；<br>
-2、获得国家级、省级、校级和院级的个人荣誉（如各级各类奖学金和优秀党员、优秀学生干部、支教优秀青年志愿者、优秀心理健康工作者等荣誉称号）分别加16分、12分、8分、4分；<br>
-3、校级“优秀学生干部”“优秀学生”“优秀团员”“优秀团干部”每人加2分；省级“优秀学生干部”“优秀学生”“优秀团员”“优秀团干部”每人加3分；校级“先进班集体”班级成员每人加1分，校级“先进团支部”班级成员每人加1分；省级“先进班集体”班级成员每人加3分；省级“先进团支部”班级成员每人加3分；<br>
-4、技能展示（黑板字、毛笔字、硬笔字、简笔画等），一经展示，每次加2分；以《学习部展览作品名单》为准；
+	<th class="th">通报表扬、获得荣誉称号等加分<br/>（20分）</th>
+	<td colspan="6" align="left">1、获得国家级、省级、校级和院级的个人荣誉（如各级各类奖学金和优秀党员、优秀学生干部、“优秀学生”“优秀团员”“优秀团干部”、支教优秀青年志愿者、优秀心理健康工作者等荣誉称号）分别加16分、12分、8分、4分；
+<br>2、获得省级、校级和院级“先进班集体”班级成员每人加3分、2分、1分；获得省级、校级和院级“先进团支部”班级成员每人加3分、2分、1分；
+<br>3、校通报表扬者，每人次加4分，院通报表扬者，每人次加2分（有文件按文件加分）；
 </td>
 	<td align="right"><#if edit><input type="text" name="growSource5" class="easyui-numberbox grow" data-options="min:0,max:20,precision:0,width:60,value:'${evaluation.growSource5}'" /><#else>${evaluation.growSource5}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="growContent5" value=evaluation.growContent5 edit=edit ></@m.filesupload><#if edit><textarea name="growRemark5" style="width: 100%">${evaluation.growRemark5}</textarea><#else><p>${evaluation.growRemark5?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
-	<th colspan="10">凡是获得一项省级（及以上）荣誉、在省级（及以上）刊物发表作品的学生，发展性素质测评成绩为满分</th>
+	<th colspan="10">凡是个人或团体获得一项省级（及以上）竞赛类证书、在省级（及以上）刊物发表作品，发展性素质测评成绩为满分</th>
 	<td colspan="2" align="right"><#if edit><input type="text" id="growFull" name="growFull" class="easyui-checkbox" value="true" <#if evaluation.growFull>checked</#if>/><#else>${evaluation.growFull}</#if></td>
 </tr>
 <tr>
@@ -296,7 +295,7 @@
 	<td colspan="4" align="left"><@m.filesupload label="编辑材料" name="growEvaluation" value=evaluation.growEvaluation edit=edit ></@m.filesupload></td>
 </tr>
 <tr>
-	<th colspan="12">学    业   成   绩  （60分）</th>
+	<th colspan="12">学    业   成   绩  （65）</th>
 </tr>
 <tr>
 	<th colspan="7" align="center">具体内容</th>
@@ -304,25 +303,27 @@
 	<th colspan="4">根据实际情况填写支撑材料</th>
 </tr>
 <tr>
-	<th class="th">学习成绩</th>
+	<th class="th">学习成绩<br/>（100分）</th>
 	<td colspan="6" align="left">
 </td>
 	<td align="right"><#if edit><input type="text" id="studySorce" name="studySorce" class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:60,value:'${evaluation.studySorce?string("#.##")}'" /><#else>${evaluation.studySorce?string("#.##")}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="studyContent" value=evaluation.studyContent edit=edit ></@m.filesupload><#if edit><textarea name="studyRemark" style="width: 100%">${evaluation.studyRemark}</textarea><#else><p>${evaluation.studyRemark?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
-	<th class="th">其他</th>
-	<td colspan="6" align="left">1、学年总成绩位居所在班级前10%加30分，前20%加20分，前30%加10分；
-2、本学年图书借阅量30本以上每人加10分，20本以上每人加6分,20本以下不得加分；
+	<th class="th">其他<br/>（100分）</th>
+	<td colspan="6" align="left">学年总成绩位居所在班级前10%加30分，前20%加20分，前30%加10分；<br/>
+2、本学年图书借阅量30本以上每人加10分，20本以上每人加6分,20本以下不得加分；<br/>
 3、通过普通话等级考试者（二甲或二甲以上）加5分
-4、通过国家英语四级加10分、六级加20分；通过托福、雅思者加30分；计算机二级加10分、三级加15分；
-5、获得教师资格证书加10分；其他专业技能需获劳动技术鉴定部门颁发或行业认定的各类专业技能资格证书可加10分；
+4、通过国家英语四级加15分、六级加25分；计算机二级加10分；<br/>
+5、获得教师资格证书加10分；其他专业技能需获劳动技术鉴定部门颁发或行业认定的各类专业技能资格证书可加10分；<br/>
+6、技能展示（黑板字、毛笔字、硬笔字、简笔画等），一经展示，每次加2分；以《学习部展览作品名单》为准；
+<br/>7、学科技能大赛：例如教师基本功大赛、教学技能比赛、教师信息技术应用比赛等；参加比赛可加2分，获得一等奖可加15分，获得二等奖可加10分，获得三等奖可加8分；
 </td>
 	<td align="right"><#if edit><input type="text" id="otherSource" name="otherSource" class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:60,value:'${evaluation.otherSource?string("#.##")}'" /><#else>${evaluation.otherSource?string("#.##")}</#if></td>
 	<td colspan="4"><@m.filesupload label="编辑材料" name="otherContent" value=evaluation.otherContent edit=edit ></@m.filesupload><#if edit><textarea name="otherRemark" style="width: 100%">${evaluation.growRemark5}</textarea><#else><p>${evaluation.otherRemark?replace("\r","<br>")}</p></#if></td>
 </tr>
 <tr>
-	<th colspan="6">学业成绩=【（学习成绩×80%）+（其他×20%）】×60%</th>
+	<th colspan="6">学业成绩=【（学习成绩×80%）+（其他×20%）】×65%</th>
 	<td colspan="1">得分</td>
 	<td colspan="5" align="right"><#if edit><input type="text" id="studySum" name="studySum" class="easyui-numberbox" data-options="min:0,max:100,precision:2,width:60,value:'${evaluation.studySum?string("#.##")}',readonly:true" /><#else>${evaluation.studySorce?string("#.##")}</#if></td>
 </tr>
@@ -425,7 +426,7 @@ $(function(){
 				count += Number($(this).numberbox("getValue"));
 			});
 		}
-		$("#growEvaluationSorce").numberbox("setValue", count/5);
+		$("#growEvaluationSorce").numberbox("setValue", count*0.15);
 		sumAll();
 	}});
 	/*$('#evaluation1').form({
@@ -462,7 +463,7 @@ $(function(){
 				count += Number($(this).numberbox("getValue"));
 			});
 			if(window.growFull)count=100
-				$("#growEvaluationSorce").numberbox("setValue", count/5);
+				$("#growEvaluationSorce").numberbox("setValue", count*0.15);
 				sumAll();
 			}});
 	});
@@ -508,7 +509,7 @@ $(function(){
 		data["growFull"]=window.growFull;
 		data["vetoSource"]=window.vetoSource;
 		$.ajax({
-	url:"${base}/evaluation2",
+	url:"${base}/evaluation3",
 	method:"post",
 	contentType: "application/json; charset=utf-8",
 	data:JSON.stringify(data),
@@ -527,10 +528,10 @@ $(function(){
 	};
 	
 	function sumAll(){
-		$("#studySum").numberbox("setValue",(parseFloat($("#studySorce").numberbox("getValue"))*0.8+parseFloat($("#otherSource").numberbox("getValue"))*0.2)*0.6);
+		$("#studySum").numberbox("setValue",(parseFloat($("#studySorce").numberbox("getValue"))*0.8+parseFloat($("#otherSource").numberbox("getValue"))*0.2)*0.65);
 		$("#sumSorce").numberbox("setValue",parseFloat($("#growEvaluationSorce").numberbox("getValue"))+parseFloat($("#baseEvaluationSorce").numberbox("getValue"))+parseFloat($("#studySum").numberbox("getValue")));
 		var sum = $("#sumSorce").numberbox("getValue")
-		$.get("/evaluation/index/Evaluation2/sumSorce/${evaluation.author.grade.code}/<#if evaluation.year??>${evaluation.author.year.code}<#else>"+$("#year").combobox("getValue")+"</#if>/${evaluation.author.specialty.code}/${evaluation.author.classes.code}/"+
+		$.get("/evaluation/index/Evaluation3/sumSorce/${evaluation.author.grade.code}/<#if evaluation.year??>${evaluation.author.year.code}<#else>"+$("#year").combobox("getValue")+"</#if>/${evaluation.author.specialty.code}/${evaluation.author.classes.code}/"+
 		sum
 		,function(data){
 			$("#gsIndex").numberbox("setValue", data);

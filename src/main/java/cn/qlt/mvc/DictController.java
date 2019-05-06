@@ -40,8 +40,13 @@ public class DictController {
 	}
 	
 	@PostMapping("/dicts/{type}")
-	public List<Dict> findDictByType(@PathVariable("type") String type){
+	public List<Dict> findDictByType(@PathVariable("type") String type, HttpServletRequest request){
+		String parent = request.getParameter("p");
+		if(StringUtils.isEmpty(parent)){
 		return dictService.getDictForType(type);
+		}else{
+			return dictService.getDictForTypeAndParent(type, parent);
+		}
 	}
 	
 	@RequestMapping("/dictNodes")
