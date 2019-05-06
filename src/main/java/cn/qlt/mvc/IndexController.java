@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import cn.qlt.domain.Dict;
 import cn.qlt.domain.Topic;
 import cn.qlt.domain.User;
 import cn.qlt.domain.dto.TopicEdit;
@@ -76,7 +77,10 @@ public class IndexController {
 	
 	@Auth(role="assistant")
 	@GetMapping("/topic/create.html")
-	public String creatTopic(ModelMap map) {
+	public String creatTopic(String type,ModelMap map) {
+		Dict d = dictService.findDict(type);
+		
+		map.put("typeName", d.getLabel());
 		map.put("topic", new Topic());
 		map.put("permissions", 2);
 		return "topic/edit.ftl";

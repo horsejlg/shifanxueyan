@@ -1,7 +1,7 @@
 <div class="easyui-layout" data-options="fit:true,border:false">
 <div data-options="region:'west',split:true" style="width:200px;">
 <ul id="tt" class="easyui-tree"
-            data-options="url:'${base}/dictNodes', onBeforeLoad: beforeLoad, onClick:onclick" >
+            data-options="url:'${base}/dictNodesAndCount',formatter:dictAndCount, onBeforeLoad: beforeLoad, onClick:onclick" >
 </ul>
 </div>
 <div data-options="region:'center'" >
@@ -42,6 +42,10 @@ function beforeLoad(node, param){
 	return true;
 }
 
+function dictAndCount(node){
+	return node.text+"  (共"+node.count+"个)";
+}
+
 function optionFormatter(value,row,index){
 	return '<a href="${base}/student/show/'+row.id+'.html" target="_blank">查看</a>&nbsp;<a href="${base}/student/edit/'+row.id+'.html" target="_blank">编辑</a>';
 }
@@ -52,6 +56,10 @@ function onclick(node){
 		$("#topicList").datagrid({url:'${base}/topics',queryParams:queryParams});
 }
 function createTopic(){
+	if(undefined===queryParams['type']){
+		$.messager.alert('信息','请先选择分类!','info');
+		return;
+	}
 	window.open("${base}/topic/create.html?type="+queryParams['type']);
 }
 
