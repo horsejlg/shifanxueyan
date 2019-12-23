@@ -19,6 +19,26 @@ public class Violation extends DomainObject<Student> {
      */
     private static final long serialVersionUID = 6334552499056006512L;
 
+    private Student student;
+    
+    private Dict term;
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public Dict getTerm() {
+		return term;
+	}
+
+	public void setTerm(Dict term) {
+		this.term = term;
+	}
+    
     
     
 }
