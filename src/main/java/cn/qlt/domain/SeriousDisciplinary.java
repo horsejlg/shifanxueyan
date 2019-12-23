@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorColumn(name="type",discriminatorType=DiscriminatorType.INTEGER) 
-@DiscriminatorValue("3")
+@DiscriminatorValue("4")
 public class SeriousDisciplinary extends GeneralDiscipline {
 
 	/**
