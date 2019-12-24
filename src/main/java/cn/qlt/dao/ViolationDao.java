@@ -1,9 +1,9 @@
 package cn.qlt.dao;
 
-import cn.qlt.domain.Evaluation;
+import cn.qlt.domain.Violation;
 import cn.qlt.utils.BaseRepository;
 
-public interface ViolationDao extends BaseRepository<Evaluation,String>{
+public interface ViolationDao extends BaseRepository<Violation,String>{
     
 
 }
