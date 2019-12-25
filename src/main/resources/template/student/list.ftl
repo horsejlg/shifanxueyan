@@ -63,7 +63,9 @@ return true;
 }
 
 function optionFormatter(value,row,index){
-	return '<a href="${base}/student/show/'+row.id+'.html" target="_blank">查看</a>&nbsp;<a href="${base}/student/edit/'+row.id+'.html" target="_blank">编辑</a>';
+	return '<a href="${base}/student/show/'+row.id+'.html" target="_blank">查看</a>
+	&nbsp;<a href="${base}/student/edit/'+row.id+'.html" target="_blank">编辑</a>
+	&nbsp;<a href="javascript:void(0)" click="setNotPass(\\"'+row.id+'\\")">挂科</a>';
 }
 
 $('#btn').bind('click', function(){
