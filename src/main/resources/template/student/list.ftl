@@ -37,7 +37,8 @@
 	<a id="btn" href="javascript:void(0)" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'">查询</a>
 </form>
 </div>
-
+<div id="setViolation" class="easyui-window" title="设置挂科" data-options="modal:true,closed:true" style="width:500px;height:200px;padding:10px;">
+</div>
 <script type="text/javascript">
 var queryParams = {};
 function beforeLoad(node, param){
@@ -66,6 +67,10 @@ function optionFormatter(value,row,index){
 	return '<a href="${base}/student/show/'+row.id+'.html" target="_blank">查看</a>
 	&nbsp;<a href="${base}/student/edit/'+row.id+'.html" target="_blank">编辑</a>
 	&nbsp;<a href="javascript:void(0)" click="setNotPass(\\"'+row.id+'\\")">挂科</a>';
+}
+
+function setNotPass(studentId){
+
 }
 
 $('#btn').bind('click', function(){
