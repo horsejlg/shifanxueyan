@@ -1,6 +1,6 @@
-<form id="userInfo" method="post" >
+<form id="violationInfo" method="post" >
 	<input class="easyui-combobox" name="specialty" style="width:100%;" data-options="
-                    url:${jsonFormat(assistant.grades)},
+                    1url:'${base}/dicts/subject',
                     valueField:'code',
                     textField:'label', 
                     panelHeight:'auto',

@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.qlt.dao.ViolationDao;
+import cn.qlt.domain.GeneralDiscipline;
+import cn.qlt.domain.NotPass;
+import cn.qlt.domain.SeriousDisciplinary;
 import cn.qlt.domain.Violation;
 import cn.qlt.utils.SQLUtils.PageInfo;
 import cn.qlt.utils.SQLUtils.PageResult;
@@ -40,6 +43,22 @@ public class ViolationService {
 	
 	public void saveViolation(Violation violation) {
 		violationDao.save(violation);
+	}
+	
+	public NotPass getNoPass(String id) {
+	    return (NotPass) violationDao.load(id);
+	}
+	
+	public GeneralDiscipline getGeneralDiscipline(String id) {
+	    return (GeneralDiscipline) violationDao.load(id); 
+	}
+	
+	public SeriousDisciplinary getSeriousDisciplinary(String id) {
+	    return (SeriousDisciplinary) violationDao.load(id);
+	}
+	
+	public Violation getViolation(String id) {
+	    return violationDao.load(id);
 	}
 
 }

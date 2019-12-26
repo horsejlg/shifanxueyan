@@ -28,7 +28,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import cn.qlt.utils.DomainObject;
 import cn.qlt.utils.ObjectId;
-import cn.qlt.utils.XOR;
 
 @Entity
 @Table(name="users")

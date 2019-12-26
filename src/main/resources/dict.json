@@ -15,6 +15,7 @@
 {"code":"nation", "label":"民族","type":"type"},
 {"code":"grantee", "label":"受助档次","type":"type"},
 {"code":"term", "label":"学期","type":"type"},
+{"code":"subject", "label":"学科","type":"type"},
 {"code":"g_0", "label":"无","type":"grantee"},
 {"code":"mz01", "label":"汉族","type":"nation"},
 {"code":"area", "label":"地区","type":"type"},
@@ -22,5 +23,7 @@
 {"code":"a_370000", "label":"山东省","parent":"a_86","type":"area"},
 {"code":"a_370100", "label":"济南市","parent":"a_370000","type":"area"},
 {"code":"t_2019_1", "label":"2019-2020学年上学期","type":"term"},
-{"code":"t_2020_0", "label":"2019-2020学年下学期","type":"term"}
+{"code":"t_2020_0", "label":"2019-2020学年下学期","type":"term"},
+{"code":"sub_yuwen", "label":"语文","type":"subject"},
+{"code":"sub_shuxue", "label":"数学","type":"subject"}
 ]
